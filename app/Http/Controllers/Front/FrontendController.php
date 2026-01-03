@@ -602,4 +602,53 @@ class FrontendController extends Controller
         $data->update();
     }
 
+    // =============================================================
+    // START: TOOLS METHODS (Print & Photocard)
+    // =============================================================
+
+    public function loadPrintModal($id)
+    {
+        $post = \App\Models\Post::findOrFail($id);
+        $gs = \App\Models\GeneralSettings::find(1);
+        
+        // FIX: Pointing to 'frontend.tools.print' (matches the file we created)
+        return view('frontend.tools.print', compact('post', 'gs'));
+    }
+
+    public function loadPhotocardModal($id)
+    {
+        $post = \App\Models\Post::findOrFail($id);
+        $gs = \App\Models\GeneralSettings::find(1);
+        
+        // --- FETCH FRAMES FROM DATABASE ---
+        $frameModels = \App\Models\PhotocardFrame::all();
+        $frames = [];
+
+        if ($frameModels->count() > 0) {
+            foreach($frameModels as $f) {
+                $frames[] = asset('assets/images/frames/' . $f->image);
+            }
+        } else {
+            // Fallback if no frames uploaded
+            $frames[] = asset('assets/images/noimage.png');
+        }
+
+        // --- Bengali Date Logic ---
+        $eng_months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        $ben_months = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+        $eng_nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        $ben_nums = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+        
+        $formatted_date = date('d F, Y', strtotime($post->created_at));
+        $bengali_date = str_replace($eng_months, $ben_months, $formatted_date);
+        $bengali_date = str_replace($eng_nums, $ben_nums, $bengali_date);
+        
+        \View::share('bengali_date', $bengali_date);
+
+        return view('frontend.tools.photocard', compact('post', 'gs', 'frames', 'bengali_date'));
+    }
+    
+    // =============================================================
+    // END: TOOLS METHODS
+    // =============================================================
 }

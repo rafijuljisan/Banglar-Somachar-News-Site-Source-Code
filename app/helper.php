@@ -68,4 +68,17 @@ if(!function_exists('d_logo')){
     }
 }
 
-
+if (!function_exists('convert_to_bengali_date')) {
+    function convert_to_bengali_date($date) {
+        $eng_months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        $ben_months = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+        $eng_nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        $ben_nums = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+        
+        // Ensure date is formatted correctly first
+        $formatted_date = \Carbon\Carbon::parse($date)->format('d F, Y');
+        
+        $bengali_date = str_replace($eng_months, $ben_months, $formatted_date);
+        return str_replace($eng_nums, $ben_nums, $bengali_date);
+    }
+}

@@ -1,5 +1,5 @@
 @php
-	$seo=DB::table('seotools')->first();
+  $seo=DB::table('seotools')->first();
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -13,33 +13,30 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="{{$data->title}}" />
   <meta property="og:image" content="{{asset('assets/images/post/'.$data->image_big)}}" />
-    <!-- favicon -->
     <link rel="shortcut icon" href="{{asset('assets/images/'.$gs->favicon)}}" type="image/x-icon">
 
-	@if ($default_font->font_value)
-		<link href="https://fonts.googleapis.com/css?family={{ $default_font->font_value }}&display=swap" rel="stylesheet">
-	@else 
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-	@endif
-  <!--==== BASE CSS ====-->
+  @if ($default_font->font_value)
+    <link href="https://fonts.googleapis.com/css?family={{ $default_font->font_value }}&display=swap" rel="stylesheet">
+  @else 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  @endif
   <link href="{{asset('assets/frontend/asset/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('assets/frontend/asset/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/frontend/asset/css/menu.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/frontend/asset/css/owl.carousel.css')}}" rel="stylesheet">
-  <!--==== CUSTOM CSS ====-->
   <link href="{{asset('assets/frontend/asset/css/style.css')}}" rel="stylesheet">
   <link href="{{asset('assets/frontend/asset/css/responsive.css')}}" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="{{asset('assets/frontend/eror/css/style.css')}}" />
 
-	@if(DB::table('languages')->where('is_default','=',1)->first()->rtl == 1)
-		<link rel="stylesheet" href="{{asset('assets/front/css/rtl/style.css')}}">
-	@endif
-	<link rel="stylesheet" id="color" href="{{ asset('assets/front/css/color.php?base_color='.str_replace('#','', $gs->theme_color).'&'.'footer_color='.str_replace('#','',$gs->footer_color).'&'.'copyright_color='.str_replace('#','',$gs->copyright_color)) }}">
-	<link rel="stylesheet" id="color" href="{{ asset('assets/front/css/font.php?font_familly='.$default_font->font_family) }}">
+  @if(DB::table('languages')->where('is_default','=',1)->first()->rtl == 1)
+    <link rel="stylesheet" href="{{asset('assets/front/css/rtl/style.css')}}">
+  @endif
+  <link rel="stylesheet" id="color" href="{{ asset('assets/front/css/color.php?base_color='.str_replace('#','', $gs->theme_color).'&'.'footer_color='.str_replace('#','',$gs->footer_color).'&'.'copyright_color='.str_replace('#','',$gs->copyright_color)) }}">
+  <link rel="stylesheet" id="color" href="{{ asset('assets/front/css/font.php?font_familly='.$default_font->font_family) }}">
     @stack('css')
     {!!$gs->adsense_code!!}
-	 {!!$gs->adsense_code!!}
-	{!! $seo->google_analytics !!}
+   {!!$gs->adsense_code!!}
+  {!! $seo->google_analytics !!}
 </head>
 <body>
   <div id="fb-root"></div>
@@ -50,23 +47,22 @@
   .main-logo {padding: 10px 0 13px 0;text-align: center;}
 }
 </style>
-<!--/========== START SCROLLUP ============-->
 <div class="scrollup">
   <i aria-hidden="true" class="fa fa-chevron-up"></i>
-</div><!--back-to-top-->
-<!--/========== END SCROLLUP ============-->
-<header>
+</div><header>
 <script src="https://bangla.plus/scripts/bangladatetoday.min.js"></script>
 <script>dateToday('date-today', 'bangla');</script>
 @php
-    function bn_date($str)
+    // FIX: Check if function exists to prevent "Cannot redeclare" error
+    if (!function_exists('bn_date')) {
+        function bn_date($str)
         {
          $en = array(1,2,3,4,5,6,7,8,9,0);
         $bn = array('১','২','৩','৪','৫','৬','৭','৮','৯','০');
         $str = str_replace($en, $bn, $str);
         $en = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' );
         $en_short = array( 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' );
-        $bn = array( 'জানুয়ারী', 'ফেব্রুয়ারী', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'অগাস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর' );
+        $bn = array( 'জানুয়ারী', 'ফেব্রুয়ারী', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'অগাস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর' );
         $str = str_replace( $en, $bn, $str );
         $str = str_replace( $en_short, $bn, $str );
         $en = array('Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday','Friday');
@@ -84,6 +80,7 @@
         $str = str_replace( $en, $bn, $str );
          return $str;
         }
+    }
 @endphp
 <script>
                         setInterval(displayTime, 1000);
@@ -120,7 +117,7 @@ function displayTime() {
     let time = hoursOfDay + ":" + minutes + ":" + seconds + " " + period;
 
    document.getElementById('Clock').innerHTML = time ;
-    
+   
     var chars = {'1':'১','2':'২','3':'৩','4':'৪','5':'৫','6':'৬','7':'৭','8':'৮','9':'৯','0':'০','A':'এ','P':'পি','M':'এম'};
     let str = document.getElementById("Clock").innerHTML; 
     let res = str.replace(/[1234567890AMP]/g, m => chars[m]);
@@ -134,18 +131,8 @@ displayTime();
  
  
  
-     <!-- Header Part-->
-    @include('partial.front.header')
-    <!-- Header Part End-->
- 
- 
- 
- 
- 
- 
- 
-
-<div class="container custom-container">
+     @include('partial.front.header')
+    <div class="container custom-container">
    <div class="row custom-row">
      <div class="left-content-area details-left-content-area">
        <div class="col-lg-12 custom-padding">
@@ -153,8 +140,7 @@ displayTime();
          <ol class="breadcrumb details-page-breadcrumb">
            <li><a href=""><i class="fa fa-home"></i></a></li>
            <li class="active"><a href="">{{$data->category->title}} </a></li>
-         </ol><!--/.details-page-breadcrumb-->
-         <div class="details-content">
+         </ol><div class="details-content">
            <h3>{{$data->title}}</h3>
            <hr>
            <small class="small">
@@ -167,56 +153,55 @@ displayTime();
 
   <div class="writer-name">
                 {{$data->admin->name}} <br>
-              নিউজ প্রকাশের তারিখ : {{$data->createdAt()}} ইং          </div>
+               নিউজ প্রকাশের তারিখ : {{$data->createdAt()}} ইং          </div>
            </small>
            <img class="img-fluid" src="{{asset('assets/images/post/'.$data->image_big)}}" alt="ছবির ক্যাপশন: {{$data->image_caption}}">
-		    {!!$gs->header3_728!!}
-                                      @if ($data->post_type == 'audio')
-	<p style="text-align: center;"><b>&nbsp;অডিও&nbsp; ফাইল</b></p>
+        {!!$gs->header3_728!!}
+                                  @if ($data->post_type == 'audio')
+  <p style="text-align: center;"><b>&nbsp;অডিও&nbsp; ফাইল</b></p>
 <audio controls="" style="width:100%">
-				 <source src="{{asset('assets/audios/'.$data->audio)}}" type="audio/mp3">
-				</audio>
-				@endif
+         <source src="{{asset('assets/audios/'.$data->audio)}}" type="audio/mp3">
+        </audio>
+        @endif
            <p style="text-align: justify;">{!! $data->description !!}</p>
-		   <p style="text-align: justify;">{!! $data->video_embed !!}</p>
+       <p style="text-align: justify;">{!! $data->video_embed !!}</p>
+       
+       <div class="upg-print-button-wrapper" style="margin: 20px 0; border-top: 1px dashed #ddd; padding-top: 20px;">
+           <button id="upg-print-trigger" 
+                   data-postid="{{ $data->id }}" 
+                   data-url="{{ route('post.tool.print', $data->id) }}"
+                   style="padding: 8px 15px; background: #0e61d4; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+               <i class="fa fa-print"></i> সংবাদটি প্রিন্ট করুন
+           </button>
 
-
-            <ul class="tag-ul">
-              <li> সংবাদটি প্রিন্ট করুন: </li>
-                            <li><a href="{{ URL::to('print/'.$data->id.'/'.$data->slug)}}">প্রিন্ট করুন</a></li>
-                          </ul>
-         </div><!--/.details-content-->
-
-         <div class="facebook-comment-box">
+           <button id="upg-photocard-trigger" 
+                   data-postid="{{ $data->id }}" 
+                   data-url="{{ route('post.tool.photocard', $data->id) }}"
+                   style="padding: 8px 15px; background: #198754; color: #fff; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px; font-size: 16px;">
+               <i class="fa fa-camera"></i> ফটোকার্ড ডাউনলোড
+           </button>
+       </div>
+         </div><div class="facebook-comment-box">
            <h2 class="fb-h2" style="">আপনার মতামত লিখুন :</h2>
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0&appId=1716117305495236" nonce="OKS9Fdbx"></script>
 <div class="fb-comments" data-href="{{ URL::to('details/'.$data->id.'/'.$data->slug)}}" data-width="700" data-numposts="10"></div>
  
-         </div><!--/.facebook-comment-box-->
-
-
-                </div><!--/.col-lg-12-->
-     </div><!--/.left-content-area-->
-
-<div class="right-content-area details-right-content-area">
+         </div></div></div><div class="right-content-area details-right-content-area">
        <div class="col-lg-12 custom-padding">
 
          <div class="details-page-side-banner">
            {!!$gs->sidebar_ads!!}
-         </div><!--/.details-page-side-banner-->
-
- <div class="details-right-news-heading">
- 	    	    @php
-				$favourite45=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->limit(6)->get();
-				@endphp 
+         </div><div class="details-right-news-heading">
+            @php
+        $favourite45=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->limit(6)->get();
+        @endphp 
              <h2>আলোচিত শীর্ষ ১০ সংবাদ </h2>
-           </div><!--/.details-right-news-heading-->
-           <div class="row custom-row">
+           </div><div class="row custom-row">
                                
-							   
-					@foreach($favourite45 as $row)		   
-		         <div class="col-lg-6 col-md-6 col-6">
+                 
+          @foreach($favourite45 as $row)       
+             <div class="col-lg-6 col-md-6 col-6">
                     <div class="details-news-single">
                       <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
                         <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />                        <div class="details-news-single-text">
@@ -227,20 +212,16 @@ displayTime();
                     </div>
                   </div>
  @endforeach
-                           </div><!--/.row-->
-
-         </div><!--/.details-right-news-->
-
-         <div class="details-tab-container">
-		     	@php
-				$latestpost=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(10)->limit(20)->get();
-				@endphp
+                           </div></div><div class="details-tab-container">
+          @php
+        $latestpost=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(10)->limit(20)->get();
+        @endphp
            <ul class="nav nav-pills side-tab-main" id="pills-tab" role="tablist">
              <li class="nav-item">
                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">সর্বশেষ</a>
              </li>
              <li class="nav-item">
-               <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">জনপ্রিয়</a>
+               <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">জনপ্রিয়</a>
              </li>
            </ul>
 
@@ -266,20 +247,16 @@ displayTime();
   
   
  
- </ul><!--/.least-news-ul-->
-               </div><!--/.least-news-->
-             </div><!--/.tab-pane-->
-
-             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+ </ul></div></div><div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                <div class="least-news">
                  <ul class="least-news-ul detail-least-news-ul">
     
-	    			@php
-				$favourite=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(5)->limit(20)->get();
-				@endphp 
-	
-	@foreach($favourite as $row)
-	<li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
+            @php
+        $favourite=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(5)->limit(20)->get();
+        @endphp 
+  
+  @foreach($favourite as $row)
+  <li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
     <div class="least-news-left">
       <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
     </div>
@@ -292,30 +269,8 @@ displayTime();
 
 
 
-                 </ul><!--/.least-news-ul-->
-               </div><!--/.least-news-->
-             </div><!--/.tab-pane-->
-
-           </div><!--/.tab-content-->
-         </div><!--/.details-tab-container-->
-
-       </div><!--/.col-lg-12-->
-     </div><!--/.right-content-area-->
-   </div><!--/.row-->
- </div><!--/.container-->
-
-
-
-
-
-	<!-- Footer Area Start -->
-	@include('partial.front.footer')
-	<!-- Footer Area End -->
-
-
-
-<!--===== JAVASCRIPT FILES =====-->
-<script src="{{asset('assets/frontend/asset/js/jquery-2.1.4.min.js')}}"></script>
+                 </ul></div></div></div></div></div></div></div></div>@include('partial.front.footer')
+  <script src="{{asset('assets/frontend/asset/js/jquery-2.1.4.min.js')}}"></script>
 <script src="{{asset('assets/frontend/asset/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/frontend/asset/js/popper.min.js')}}"></script>
 <script src="{{asset('assets/frontend/asset/js/menu.js')}}"></script>
@@ -366,6 +321,10 @@ document.getElementById('fb-root').appendChild(e);
 //to move active class
     $('#home').addClass('active')
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="stylesheet" href="{{ asset('assets/front/css/print-tool.css') }}">
+<script src="{{ asset('assets/front/js/print-tool.js') }}"></script>
 </body>
 
 </html>

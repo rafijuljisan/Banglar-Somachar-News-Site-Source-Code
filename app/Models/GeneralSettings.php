@@ -30,6 +30,9 @@ class GeneralSettings extends Model
         'address',
         'email_address',
 		'google_map',
+        'print_logo',       // <--- ADD THIS
+        'print_header_text',
+        'photocard_frame',  // <--- ADD THIS
 
 
 'dhaka',

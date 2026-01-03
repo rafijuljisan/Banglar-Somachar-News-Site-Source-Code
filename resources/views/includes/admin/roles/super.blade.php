@@ -170,69 +170,76 @@
         </ul>
     </li>
 
+<li>
+    <a href="#msg" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
+        <i class="fas fa-fw fa-newspaper"></i>{{ __('Messages') }}
+    </a>
+    <ul class="collapse list-unstyled" id="msg" data-parent="#accordion">
+        <li>
+            <a href="{{ route('admin-message-index') }}"><span>{{ __('Tickets') }}</span></a>
+        </li>
+        <li>
+            <a href="{{ route('admin-message-dispute') }}"><span>{{ __('Disputes') }}</span></a>
+        </li>
+    </ul>
+</li>
+
+<li>
+<a href="#general" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
+    <i class="fas fa-cogs"></i>{{ __('General Settings') }}
+</a>
+<ul class="collapse list-unstyled" id="general" data-parent="#accordion">
     <li>
-        <a href="#msg" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
-            <i class="fas fa-fw fa-newspaper"></i>{{ __('Messages') }}
-        </a>
-        <ul class="collapse list-unstyled" id="msg" data-parent="#accordion">
-            <li>
-                <a href="{{ route('admin-message-index') }}"><span>{{ __('Tickets') }}</span></a>
-            </li>
-            <li>
-                <a href="{{ route('admin-message-dispute') }}"><span>{{ __('Disputes') }}</span></a>
-            </li>
-        </ul>
+        <a href="{{ route('admin-gs-logo') }}"><span>{{ __('Logo') }}</span></a>
     </li>
-
     <li>
-        <a href="#general" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
-            <i class="fas fa-cogs"></i>{{ __('General Settings') }}
-        </a>
-        <ul class="collapse list-unstyled" id="general" data-parent="#accordion">
-            <li>
-                <a href="{{ route('admin-gs-logo') }}"><span>{{ __('Logo') }}</span></a>
-            </li>
-            <li>
-                <a href="{{ route('admin-gs-fav') }}"><span>{{ __('Favicon') }}</span></a>
-            </li>
-            <li>
-                <a href="{{ route('admin-gs-load') }}"><span>{{ __('Loader') }}</span></a>
-            </li>
-            <li>
-                <a href="{{ route('admin-shipping-index') }}"><span>{{ __('Shipping Methods') }}</span></a>
-            </li>
-            <li>
-                <a href="{{ route('admin-package-index') }}"><span>{{ __('Packagings') }}</span></a>
-            </li>
-            <li>
-                <a href="{{ route('admin-pick-index') }}"><span>{{ __('Pickup Locations') }}</span></a>
-            </li>
-            <li>
-            <a href="{{ route('admin-gs-contents') }}"><span>{{ __('Website Contents') }}</span></a>
-            </li>
-            <li>
-                <a href="{{ route('admin-gs-footer') }}"><span>{{ __('Footer') }}</span></a>
-            </li>
-            <li>
-                <a href="{{ route('admin-gs-affilate') }}"><span>{{__('Affiliate Information')}}</span></a>
-            </li>
-
-            <li>
-                <a href="{{ route('admin-gs-popup') }}"><span>{{ __('Popup Banner') }}</span></a>
-            </li>
-
-
-            <li>
-                <a href="{{ route('admin-gs-error-banner') }}"><span>{{ __('Error Banner') }}</span></a>
-            </li>
-
-
-            <li>
-                <a href="{{ route('admin-gs-maintenance') }}"><span>{{ __('Website Maintenance') }}</span></a>
-            </li>
-
-        </ul>
+        <a href="{{ route('admin-gs-fav') }}"><span>{{ __('Favicon') }}</span></a>
     </li>
+    <li>
+        <a href="{{ route('admin-gs-load') }}"><span>{{ __('Loader') }}</span></a>
+    </li>
+    <li>
+        <a href="{{ route('admin-shipping-index') }}"><span>{{ __('Shipping Methods') }}</span></a>
+    </li>
+    <li>
+        <a href="{{ route('admin-package-index') }}"><span>{{ __('Packagings') }}</span></a>
+    </li>
+    <li>
+        <a href="{{ route('admin-pick-index') }}"><span>{{ __('Pickup Locations') }}</span></a>
+    </li>
+    <li>
+        <a href="{{ route('admin-gs-contents') }}"><span>{{ __('Website Contents') }}</span></a>
+    </li>
+    <li>
+        <a href="{{ route('admin-gs-footer') }}"><span>{{ __('Footer') }}</span></a>
+    </li>
+    <li>
+        <a href="{{ route('admin-gs-affilate') }}"><span>{{__('Affiliate Information')}}</span></a>
+    </li>
+    <li>
+        <a href="{{ route('admin-gs-popup') }}"><span>{{ __('Popup Banner') }}</span></a>
+    </li>
+    <li>
+        <a href="{{ route('admin-gs-error-banner') }}"><span>{{ __('Error Banner') }}</span></a>
+    </li>
+    <li>
+        <a href="{{ route('admin-gs-maintenance') }}"><span>{{ __('Website Maintenance') }}</span></a>
+    </li>
+</ul>
+</li>
+
+{{-- NEW: Photocard Tool Menu --}}
+<li>
+    <a href="#menu-photocard" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
+        <i class="fas fa-camera-retro"></i>{{ __('Photocard Tool') }}
+    </a>
+    <ul class="collapse list-unstyled" id="menu-photocard" data-parent="#accordion">
+        <li>
+            <a href="{{ route('admin.photocard.index') }}"><span>{{ __('Manage Frames') }}</span></a>
+        </li>
+    </ul>
+</li>
+    
 
     <li>
         <a href="#homepage" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
