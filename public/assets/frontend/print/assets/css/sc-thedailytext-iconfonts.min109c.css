@@ -1,0 +1,97 @@
+/*!
+ * Name			: Icon Fonts
+ * Author		: Md Maruf Adnan Sami
+ * Author URL	: https://facebook.com/RealboyAdnan
+ * Website		: https://softclever.com
+ * Version		: 7.0.0
+ * Copyright	: 2010 SoftClever Limited.
+ 
+  _______ _          _____        _ _    _______        _   
+ |__   __| |        |  __ \      (_) |  |__   __|      | |  
+    | |  | |__   ___| |  | | __ _ _| |_   _| | _____  _| |_ 
+    | |  | '_ \ / _ \ |  | |/ _` | | | | | | |/ _ \ \/ / __|
+    | |  | | | |  __/ |__| | (_| | | | |_| | |  __/>  <| |_ 
+    |_|  |_| |_|\___|_____/ \__,_|_|_|\__, |_|\___/_/\_\\__|
+                                       __/ |                
+                                      |___/                  
+ 
+ */
+
+@font-face {
+    font-family: 'icomoon';
+    src: url('https://www.bholarkhobor.com/wp-content/themes/TheDailyText/assets/fonts/icofonts/icomoon3c3e.eot?ksklqv');
+    src: url('https://www.bholarkhobor.com/wp-content/themes/TheDailyText/assets/fonts/icofonts/icomoon3c3e.eot?ksklqv#iefix') format('embedded-opentype'), url('https://www.bholarkhobor.com/wp-content/themes/TheDailyText/assets/fonts/icofonts/icomoon3c3e.ttf?ksklqv') format('truetype'), url('https://www.bholarkhobor.com/wp-content/themes/TheDailyText/assets/fonts/icofonts/icomoon3c3e.woff?ksklqv') format('woff'), url('https://www.bholarkhobor.com/wp-content/themes/TheDailyText/assets/fonts/icofonts/icomoon3c3e.svg?ksklqv#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-add:before {
+    content: "\e900";
+}
+
+.icon-arrow-left:before {
+    content: "\e901";
+}
+
+.icon-arrow-right:before {
+    content: "\e902";
+}
+
+.icon-desert:before {
+    content: "\e903";
+}
+
+.icon-drinks:before {
+    content: "\e904";
+}
+
+.icon-fastfood:before {
+    content: "\e905";
+}
+
+.icon-fire:before {
+    content: "\e906";
+}
+
+.icon-home:before {
+    content: "\e907";
+}
+
+.icon-kids:before {
+    content: "\e908";
+}
+
+.icon-paly-button-1:before {
+    content: "\e909";
+}
+
+.icon-paly-button-2:before {
+    content: "\e90a";
+}
+
+.icon-recepies:before {
+    content: "\e90b";
+}
+
+.icon-search:before {
+    content: "\e90c";
+}
+
+.icon-weather:before {
+    content: "\e90d";
+}

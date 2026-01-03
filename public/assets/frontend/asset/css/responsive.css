@@ -1,0 +1,345 @@
+/* Laptop Layout: 768px. */
+@media only screen and (min-width: 992px) and (max-width: 1110px) {
+}
+
+/* Tablet Layout: 768px. */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .top-news-middle {
+    width: 100%;
+  }
+  .top-news-right {
+    width: 100%;
+  }
+  .international-news-left {
+    width: 100%;
+  }
+  .international-news-right {
+    width: 100%;
+  }
+  .feature-news-wrapper-left {
+    width: 100%;
+  }
+  .feature-news-wrapper-right {
+    width: 100%;
+  }
+  .sports-news-left {
+    width: 100%;
+  }
+  .sports-news-right {
+    width: 100%;
+  }
+  .life-style-left {
+    width: 100%;
+  }
+  .life-style-right {
+    width: 100%;
+  }
+  .current-date li {
+    font-size: 12px;
+  }
+  .top-lead-news-single {
+    margin-bottom: 10px;
+  }
+  .marquee-container {
+    margin-top: 10px;
+  }
+  .lead-news img {
+    height: 285px;
+  }
+  .top-banner-lead {
+    margin-top: 25px;
+  }
+  .life-style-single-text h2 {
+    font-size: 17px;
+    line-height: 21px;
+  }
+  .lead-national-main-text {
+    min-height: 132px;
+    max-height: 132px;
+  }
+  .international-news-ul-right {
+    min-height: 55px;
+    max-height: 55px;
+  }
+  .international-news-ul-right h3 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .tab-heading {
+    margin-top: 20px;
+  }
+  .footer-bottom-row p {
+    margin-bottom: 0;
+    line-height: 24px;
+  }
+  .footer {
+    padding: 15px 0;
+  }
+  .feature-news-wrapper {
+    padding: 30px 0 25px;
+  }
+  .international {
+    padding: 30px 0;
+  }
+  .capital-section {
+    padding: 30px 0 30px;
+  }
+  .sports {
+    padding: 30px 0 30px;
+  }
+  .life-style-section {
+    padding: 30px 0 30px;
+  }
+  /*======= DETAILS PAGE STYLE =============*/
+  .details-news-single-text h3 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .detail-least-news-ul .least-news-right h3 {
+    font-size: 16px;
+    line-height: 21px;
+  }
+  .detail-least-news-ul .least-news-left img {
+    min-height: 60px;
+    max-height: 60px;
+  }
+  .details-right-news-heading h2 {
+    font-size: 20px;
+  }
+  /*===================  CATEGORY PAGE STYLE ==============================*/
+  .category-content-lead-left {
+    width: 100%;
+  }
+  .category-content-lead-right {
+    width: 100%;
+    padding: 10px 10px;
+  }
+  .category-content-lead-right-text {
+    max-height: 120px;
+    min-height: 120px;
+  }
+  .category-content-single-left {
+    width: 100%;
+  }
+  .category-content-single-right {
+    min-height: 70px;
+    max-height: 70px;
+    width: 100%;
+    padding: 1%;
+  }
+  .category-content-single-right h2 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .photo-gallery-left {
+    width: 100%;
+  }
+  .photo-gallery-right {
+    width: 100%;
+  }
+  .sports-banner-top-1 {
+    margin-top: 5px;
+  }
+}
+
+/* Mobile Layout: 320px. */
+@media only screen and (max-width: 767px) {
+  .header-top-area {
+    display: none;
+  }
+  .header-baner {
+    display: none;
+  }
+  .top-banner-lead {
+    display: none;
+  }
+  .main-logo {
+    padding: 10px 0 10px 0;
+  }
+  .top-lead-news-single {
+    margin-bottom: 10px;
+  }
+  .top-lead-news {
+    margin-top: 22px;
+  }
+  .marquee-container {
+    margin-top: 10px;
+  }
+  .marquee {
+    margin-bottom: 10px;
+  }
+  .lead-news img {
+    height: unset;
+  }
+  .lead-news {
+    margin-bottom: 15px;
+  }
+  .top-news-middle {
+    width: 100%;
+  }
+  .top-news-right {
+    width: 100%;
+  }
+  .international-news-left {
+    width: 100%;
+  }
+  .international-news-right {
+    width: 100%;
+  }
+  .feature-news-wrapper-left {
+    width: 100%;
+  }
+  .feature-news-wrapper-right {
+    width: 100%;
+  }
+  .sports-news-left {
+    width: 100%;
+  }
+  .sports-news-right {
+    width: 100%;
+  }
+  .life-style-left {
+    width: 100%;
+  }
+  .life-style-right {
+    width: 100%;
+  }
+  .lead-news-heading {
+    padding: 20px 10px 5px;
+  }
+  .lead-news-heading h1 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+  .feature-news-wrapper {
+    padding: 30px 0 30px;
+  }
+  .btn-vot {
+    margin-bottom: 15px;
+  }
+  .international {
+    padding: 30px 0;
+  }
+  .capital-section {
+    padding: 30px 0 30px;
+  }
+  .sports {
+    padding: 30px 0 30px;
+  }
+  .sports-lead-news img {
+    min-height: unset;
+  }
+  .sports-lead-news-text h2 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .sports-banner-1 {
+    margin-top: 0;
+  }
+  .life-style-section {
+    padding: 30px 0 30px;
+  }
+  .footer-copy-text {
+    text-align: center;
+  }
+  .footer-bottom-row p {
+    margin-bottom: 0;
+    line-height: 24px;
+  }
+  .footer {
+    padding: 15px 0;
+  }
+  .btn-date-picker {
+    margin-top: 15px;
+  }
+  .contact-details h3 {
+    margin-top: 10px;
+  }
+  .footer-new {
+    padding: 20px 0 25px 0px;
+  }
+  .international-lead {
+    margin-bottom: 25px;
+  }
+  .life-style-single-text {
+    min-height: 60px;
+    max-height: 60px;
+  }
+  .mobile-heading {
+    margin-top: 20px;
+  }
+  .top-news-section {
+    margin-top: 3px;
+  }
+  .namaj-time-table td {
+    line-height: 41px;
+  }
+  /*===================  DETAILS PAGE STYLE ==============================*/
+  .left-content-area {
+    width: 100%;
+  }
+  .right-content-area {
+    width: 100%;
+  }
+  .details-news-single-text h3 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .detail-least-news-ul .least-news-right h3 {
+    font-size: 16px;
+    line-height: 21px;
+  }
+  /*===================  CATEGORY PAGE STYLE ==============================*/
+  .category-content-lead-left {
+    width: 100%;
+  }
+  .category-content-lead-right {
+    width: 100%;
+    padding: 10px 10px;
+  }
+  .category-content-lead-right-text {
+    max-height: 120px;
+    min-height: 120px;
+  }
+  .category-content-single-right {
+    min-height: unset;
+    max-height: unset;
+  }
+  .category-content-single-right h2 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  /*===================  PHOTO GALLERY STYLE ==============================*/
+  .photo-gallery-left {
+    width: 100%;
+  }
+  .photo-gallery-right {
+    width: 100%;
+  }
+  .photo-gallery-wrapper {
+    padding: 20px 0 15px;
+  }
+  .photo-gallery-ul-right {
+    max-height: 69px;
+    min-height: 69px;
+  }
+  .sports-banner-top-1 {
+    margin-top: 5px;
+  }
+  .international-lead-detail {
+    display: none;
+  }
+  .lead-national-main-text {
+    display: none;
+  }
+  .lead-national-main-img {
+    margin-bottom: 24px;
+  }
+}
+
+/* Wide Mobile Layout: */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+}
+
+@media only screen and (min-width: 80px) and (max-width: 330px) {
+}

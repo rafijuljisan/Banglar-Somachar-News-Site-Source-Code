@@ -1,0 +1,341 @@
+/*!
+ * Name			: News Ticker
+ * Author		: Md Maruf Adnan Sami
+ * Author URL	: https://facebook.com/RealboyAdnan
+ * Website		: https://softclever.com
+ * Version		: 7.0.0
+ * Copyright	: 2010 SoftClever Limited.
+ 
+  _______ _          _____        _ _    _______        _   
+ |__   __| |        |  __ \      (_) |  |__   __|      | |  
+    | |  | |__   ___| |  | | __ _ _| |_   _| | _____  _| |_ 
+    | |  | '_ \ / _ \ |  | |/ _` | | | | | | |/ _ \ \/ / __|
+    | |  | | | |  __/ |__| | (_| | | | |_| | |  __/>  <| |_ 
+    |_|  |_| |_|\___|_____/ \__,_|_|_|\__, |_|\___/_/\_\\__|
+                                       __/ |                
+                                      |___/                  
+ 
+ */
+
+.section-container {
+    width: 100%;
+    margin: 0 auto;
+    min-width: 100%;
+    padding: 12px;
+}
+
+.thedailytext-breaking-news-ticker {
+    display: block;
+    width: 100%;
+    background: #FFF;
+    height: 46px;
+    box-sizing: border-box;
+    position: relative;
+    line-height: 46px;
+    overflow: hidden;
+    text-align: auto;
+}
+
+.thedailytext-breaking-news-ticker * {
+    box-sizing: border-box;
+}
+
+.thedailytext-breaking-news-ticker.thedailytext-bn-fixed-top {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.thedailytext-breaking-news-ticker.thedailytext-bn-fixed-bottom {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.thedailytext-breaking-news-label {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    position: absolute;
+    text-align: center;
+    font-weight: bold;
+    z-index: 3;
+    padding: 0 15px;
+    white-space: nowrap;
+}
+
+.thedailytext-breaking-news-section {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    right: 0;
+    overflow: hidden;
+}
+
+.thedailytext-breaking-news-section ul {
+    display: block;
+    height: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+}
+
+.thedailytext-breaking-news-section ul li {
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    -webkit-transition: color .2s linear;
+    -moz-transition: color .2s linear;
+    -o-transition: color .2s linear;
+    transition: color .2s linear;
+    position: absolute;
+    width: 100%;
+    display: none;
+}
+
+.thedailytext-breaking-news-section ul li a {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    padding: 0 10px;
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+
+.thedailytext-breaking-loader-text {
+    padding: 0 10px;
+}
+
+.thedailytext-breaking-seperator {
+    display: inline-block;
+    float: left;
+    margin-right: 15px;
+    width: 30px;
+    height: 45px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.thedailytext-breaking-seperator.bn-news-dot {
+    margin-right: 0;
+}
+
+.thedailytext-breaking-seperator.bn-news-dot:after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #333;
+    border-radius: 50%;
+    top: 50%;
+    margin-top: -4px;
+    left: 50%;
+    margin-left: -4px;
+}
+
+.thedailytext-breaking-prefix {
+    color: #d65d7a;
+    margin-right: 15px;
+    padding-left: 10px;
+}
+
+.thedailytext-breaking-positive {
+    color: #0b8457;
+    font-weight: bold;
+}
+
+.thedailytext-breaking-negative {
+    color: #dc2f2f;
+    font-weight: bold;
+}
+
+.thedailytext-bn-controls {
+    width: auto;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    position: absolute;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.thedailytext-bn-controls button {
+    width: 30px;
+    float: left;
+    height: 100%;
+    cursor: pointer;
+    border: none;
+    border-left: solid 1px #EEE;
+    text-align: center;
+    background-color: #f6f6f6;
+    outline: none;
+}
+
+.thedailytext-bn-controls button:hover {
+    background-color: #EEE;
+}
+
+.thedailytext-bn-arrow {
+    margin: 0;
+    display: inline-block;
+    height: 8px;
+    position: relative;
+    width: 8px;
+    top: -2px;
+}
+
+.thedailytext-bn-arrow::after {
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-right-style: solid;
+    border-right-width: 2px;
+    content: '';
+    display: inline-block;
+    height: 8px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 8px;
+}
+
+.thedailytext-bn-arrow.bn-next {
+    -moz-transform: rotate(315deg);
+    -ms-transform: rotate(315deg);
+    -webkit-transform: rotate(315deg);
+    transform: rotate(315deg);
+    left: -3px;
+}
+
+.thedailytext-bn-arrow.bn-prev {
+    -moz-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    left: 3px;
+}
+
+.thedailytext-bn-arrow::after {
+    border-color: #999999;
+}
+
+.thedailytext-bn-arrow::before {
+    background-color: #999999;
+}
+
+.thedailytext-breaking-play {
+    position: relative;
+    background: #999999;
+    width: 0;
+    height: 12px;
+    display: inline-block;
+    margin-left: -5px;
+}
+
+.thedailytext-breaking-play::after {
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(136, 183, 213, 0);
+    border-left-color: #999999;
+    border-width: 8px;
+    margin-top: -8px;
+}
+
+.thedailytext-breaking-pause {
+    position: relative;
+    width: 0;
+    height: 14px;
+    display: inline-block;
+    top: 1px;
+    left: -1px;
+}
+
+.thedailytext-breaking-pause::before {
+    position: absolute;
+    content: "";
+    width: 2px;
+    height: 100%;
+    left: 3px;
+    background-color: #999999;
+}
+
+.thedailytext-breaking-pause::after {
+    position: absolute;
+    content: "";
+    width: 2px;
+    height: 100%;
+    left: -3px;
+    background-color: #999999;
+}
+
+.thedailytext-breaking-direction-rtl {
+    direction: rtl;
+}
+
+.thedailytext-breaking-direction-rtl .thedailytext-breaking-news-label {
+    left: auto;
+    right: 0;
+}
+
+.thedailytext-breaking-direction-rtl .thedailytext-bn-controls {
+    right: auto;
+    left: 0;
+}
+
+.thedailytext-breaking-direction-rtl .thedailytext-breaking-seperator {
+    margin-left: 15px;
+    margin-right: 0;
+    float: right;
+}
+
+.thedailytext-breaking-direction-rtl .thedailytext-breaking-prefix {
+    margin-left: 15px;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 10px;
+}
+
+.thedailytext-breaking-direction-rtl .thedailytext-bn-controls button {
+    border-left: none;
+    border-right: solid 1px #EEE;
+}
+
+.thedailytext-breaking-effect-scroll .thedailytext-breaking-news-section ul {
+    display: block;
+    width: 100%;
+    position: relative;
+}
+
+.thedailytext-breaking-effect-scroll .thedailytext-breaking-news-section ul li {
+    display: list-item;
+    float: left;
+    position: relative;
+    width: auto;
+}
+
+.thedailytext-breaking-effect-scroll.thedailytext-breaking-direction-rtl .thedailytext-breaking-news-section ul li {
+    float: right;
+}
