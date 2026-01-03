@@ -15,7 +15,7 @@
             width: 800px;
             max-width: 800px;
             margin: 40px auto;
-            background: #fffdf8;
+            background: #ffffffff;
             padding: 20px 25px;
             box-sizing: border-box;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
@@ -148,12 +148,14 @@
         .upg-print-credit { text-align: center; color: #aaa; font-size: 12px; margin-top: -30px; margin-bottom: 30px; font-family: sans-serif; }
         .upg-print-credit a { color: #fff; text-decoration: none; }
 
-        @media print {
+        /*@media print {
             body { background: #fff; }
             #upg-print-area { margin: 0; box-shadow: none; width: 100%; max-width: 100%; padding: 0; }
             .upg-action-buttons, .upg-print-credit { display: none; }
-        }
+        }*/
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -230,7 +232,7 @@
 
     <div class="upg-action-buttons">
         <button id="upg-save-jpg"><i class="fa fa-image"></i> Save Image</button>
-        <button id="upg-print-pdf"><i class="fa fa-print"></i> Print / PDF</button>
+        <button id="upg-print-pdf"><i class="fa fa-file-pdf"></i> Download PDF</button>
     </div>
 
     <div class='upg-print-credit'>

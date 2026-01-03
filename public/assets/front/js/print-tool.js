@@ -65,9 +65,46 @@ jQuery(document).ready(function($) {
         });
     });
 
-    // --- 4. Print PDF ---
+    // --- 4. Save as PDF ---
     $('body').on('click', '#upg-print-pdf', function() {
-        window.print();
+        const printArea = document.getElementById('upg-print-area');
+        const title = $('.upg-title').text().trim() || 'post';
+        const btn = $(this);
+        
+        btn.text('Generating PDF...').prop('disabled', true);
+
+        html2canvas(printArea, { 
+            scale: 2,
+            useCORS: true,
+            backgroundColor: '#ffffff'
+        }).then(canvas => {
+            const imgData = canvas.toDataURL('image/jpeg', 0.95);
+            const imgWidth = 210; // A4 width in mm
+            const pageHeight = 297; // A4 height in mm
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            
+            let heightLeft = imgHeight;
+            let position = 0;
+
+            // Add first page
+            pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+
+            // Add additional pages if content is longer
+            while (heightLeft > 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+
+            pdf.save(title + '.pdf');
+        }).finally(() => {
+            btn.text('Print / PDF').prop('disabled', false);
+        });
     });
 
     // --- 5. Close Modal ---

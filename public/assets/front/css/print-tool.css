@@ -19,7 +19,7 @@
     margin: 0 auto;
     background: #fff;
     /* This border matches your sample image */
-    border: 8px solid #0163c5; 
+    border: 4px solid #034d06; 
     border-radius: 0;
     overflow: hidden; /* Helps contain child elements */
     /* MOVED PADDING HERE: This applies padding to the main container */
