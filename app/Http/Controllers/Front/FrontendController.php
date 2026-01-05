@@ -651,4 +651,100 @@ class FrontendController extends Controller
     // =============================================================
     // END: TOOLS METHODS
     // =============================================================
+    public function socialImage($id)
+    {
+        $post = \App\Models\Post::findOrFail($id);
+        $gs = \App\Models\GeneralSettings::first();
+
+        // 1. Setup Paths
+        $postImagePath = public_path('assets/images/post/' . $post->image_big);
+        $bannerPath = public_path('assets/images/' . $gs->social_banner);
+
+        // 2. Define Canvas Size
+        $targetWidth = 1200;
+        $targetHeight = 630;
+
+        // 3. Create Canvas
+        $canvas = imagecreatetruecolor($targetWidth, $targetHeight);
+        $black = imagecolorallocate($canvas, 0, 0, 0);
+        imagefill($canvas, 0, 0, $black);
+
+        // 4. Process Post Image
+        if (file_exists($postImagePath) && $post->image_big) {
+            $info = getimagesize($postImagePath);
+            $mime = $info['mime'];
+
+            switch ($mime) {
+                case 'image/jpeg': $source = imagecreatefromjpeg($postImagePath); break;
+                case 'image/png':  $source = imagecreatefrompng($postImagePath); break;
+                case 'image/webp': $source = imagecreatefromwebp($postImagePath); break;
+                default: $source = null;
+            }
+
+            if ($source) {
+                $srcW = imagesx($source);
+                $srcH = imagesy($source);
+                
+                $srcAspect = $srcW / $srcH;
+                $targetAspect = $targetWidth / $targetHeight;
+
+                if ($srcAspect > $targetAspect) {
+                    $cropH = $srcH;
+                    $cropW = $srcH * $targetAspect;
+                    $cropX = ($srcW - $cropW) / 2;
+                    $cropY = 0;
+                } else {
+                    $cropW = $srcW;
+                    $cropH = $srcW / $targetAspect;
+                    $cropX = 0;
+                    $cropY = ($srcH - $cropH) / 2;
+                }
+
+                imagecopyresampled($canvas, $source, 0, 0, $cropX, $cropY, $targetWidth, $targetHeight, $cropW, $cropH);
+                imagedestroy($source);
+            }
+        }
+
+        // 5. Overlay Banner
+        if (file_exists($bannerPath) && $gs->social_banner) {
+            $bInfo = getimagesize($bannerPath);
+            $bMime = $bInfo['mime'];
+
+            switch ($bMime) {
+                case 'image/png':  $banner = imagecreatefrompng($bannerPath); break;
+                case 'image/jpeg': $banner = imagecreatefromjpeg($bannerPath); break;
+                case 'image/webp': $banner = imagecreatefromwebp($bannerPath); break;
+                default: $banner = null;
+            }
+
+            if ($banner) {
+                $banW = imagesx($banner);
+                $banH = imagesy($banner);
+                $newBanHeight = ($banH / $banW) * $targetWidth;
+
+                $resizedBanner = imagecreatetruecolor($targetWidth, $newBanHeight);
+                imagealphablending($resizedBanner, false);
+                imagesavealpha($resizedBanner, true);
+                $transparent = imagecolorallocatealpha($resizedBanner, 255, 255, 255, 127);
+                imagefilledrectangle($resizedBanner, 0, 0, $targetWidth, $newBanHeight, $transparent);
+                
+                imagecopyresampled($resizedBanner, $banner, 0, 0, 0, 0, $targetWidth, $newBanHeight, $banW, $banH);
+
+                $destY = $targetHeight - $newBanHeight;
+                imagecopy($canvas, $resizedBanner, 0, $destY, 0, 0, $targetWidth, $newBanHeight);
+
+                imagedestroy($banner);
+                imagedestroy($resizedBanner);
+            }
+        }
+
+        // 6. Output (THE FIX IS HERE)
+        // This clears any accidental spaces/text before sending the image
+        if (ob_get_length()) ob_end_clean(); 
+        
+        header('Content-Type: image/jpeg');
+        imagejpeg($canvas, null, 90);
+        imagedestroy($canvas);
+        exit;
+    }
 }

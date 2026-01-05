@@ -33,6 +33,7 @@ class GeneralSettings extends Model
         'print_logo',       // <--- ADD THIS
         'print_header_text',
         'photocard_frame',  // <--- ADD THIS
+        'social_banner',
 
 
 'dhaka',

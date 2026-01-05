@@ -123,6 +123,17 @@ class GeneralSettingsController extends Controller
             $input['photocard_frame'] = $name;
         }
         // ---------------------------------
+        // --- Social Banner Upload Logic ---
+        if($request->hasFile('social_banner')){
+            $image = $request->file('social_banner');
+            $name = 'social_banner_'.time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('assets/images'), $name);
+            
+            if($data->social_banner && file_exists(public_path('assets/images/'.$data->social_banner))){
+                @unlink(public_path('assets/images/'.$data->social_banner));
+            }
+            $input['social_banner'] = $name;
+        }
         $data->update($input);
         $msg = 'Data Updated Successfully';
         return response()->json($msg);
@@ -156,7 +167,7 @@ class GeneralSettingsController extends Controller
         // Add this line to fetch frames
         $frames = \App\Models\PhotocardFrame::all();
 
-        return view('admin.generalsettings.websitecontent', compact('data', 'gs', 'frames'));
+        return view('admin.generalsettings.websiteContent', compact('data', 'gs', 'frames'));
     }
     public function popularTags()
     {

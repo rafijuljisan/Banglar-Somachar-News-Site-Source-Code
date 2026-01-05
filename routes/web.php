@@ -620,10 +620,6 @@ Route::get('/click/count/{id}', 'Front\FrontendController@clickCount')->name('fr
 Route::get('/tools/print/{id}', [App\Http\Controllers\Front\FrontendController::class, 'loadPrintModal'])->name('post.tool.print');
 Route::get('/tools/photocard/{id}', [App\Http\Controllers\Front\FrontendController::class, 'loadPhotocardModal'])->name('post.tool.photocard');
 
-
-
-
-
-
+Route::get('/social-share-image/{id}', 'App\Http\Controllers\Front\FrontendController@socialImage')->name('social.share.image');
 
 

@@ -9,17 +9,33 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{$data->title}}</title>
+
+  {{-- Facebook / Open Graph --}}
   <meta property="og:url" content="{{Request::fullUrl()}}" />
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content="article" />
   <meta property="og:title" content="{{$data->title}}" />
-  <meta property="og:image" content="{{asset('assets/images/post/'.$data->image_big)}}" />
-    <link rel="shortcut icon" href="{{asset('assets/images/'.$gs->favicon)}}" type="image/x-icon">
+  <meta property="og:description" content="{{ mb_substr(strip_tags($data->description), 0, 200) }}..." />
+  <meta property="fb:app_id" content="966242223397117" />
+  
+  {{-- Dynamic Social Image --}}
+  <meta property="og:image" content="{{ route('social.share.image', $data->id) }}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  {{-- Twitter --}}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{$data->title}}" />
+  <meta name="twitter:description" content="{{ mb_substr(strip_tags($data->description), 0, 200) }}..." />
+  <meta name="twitter:image" content="{{ route('social.share.image', $data->id) }}" />
+
+  <link rel="shortcut icon" href="{{asset('assets/images/'.$gs->favicon)}}" type="image/x-icon">
 
   @if ($default_font->font_value)
     <link href="https://fonts.googleapis.com/css?family={{ $default_font->font_value }}&display=swap" rel="stylesheet">
   @else 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   @endif
+
   <link href="{{asset('assets/frontend/asset/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('assets/frontend/asset/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('assets/frontend/asset/css/menu.css')}}" rel="stylesheet" type="text/css">
@@ -31,11 +47,14 @@
   @if(DB::table('languages')->where('is_default','=',1)->first()->rtl == 1)
     <link rel="stylesheet" href="{{asset('assets/front/css/rtl/style.css')}}">
   @endif
+
   <link rel="stylesheet" id="color" href="{{ asset('assets/front/css/color.php?base_color='.str_replace('#','', $gs->theme_color).'&'.'footer_color='.str_replace('#','',$gs->footer_color).'&'.'copyright_color='.str_replace('#','',$gs->copyright_color)) }}">
   <link rel="stylesheet" id="color" href="{{ asset('assets/front/css/font.php?font_familly='.$default_font->font_family) }}">
-    @stack('css')
-    {!!$gs->adsense_code!!}
-   {!!$gs->adsense_code!!}
+  
+  @stack('css')
+  
+  {{-- Scripts & Analytics --}}
+  {!! $gs->adsense_code !!}
   {!! $seo->google_analytics !!}
 </head>
 <body>

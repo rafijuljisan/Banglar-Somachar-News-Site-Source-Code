@@ -19,7 +19,7 @@
 
         {{-- Dynamic Date (Bengali) --}}
         {{-- UPDATED: Increased width (500px) and moved left (550px) to keep it on one line --}}
-        <div class="photocard-dynamic-date" style="position: absolute; top: 40px; left: 550px; width: 500px; text-align: right; color: white; font-size: 45px; font-weight: 600; font-family: 'solaiman-lipi', sans-serif; line-height: 1.2; display: flex; align-items: center; justify-content: flex-end; z-index: 10; padding-right: 30px;">
+        <div class="photocard-dynamic-date" style="position: absolute; top: 40px; left: 550px; width: 500px; text-align: right; color: black; font-size: 45px; font-weight: 600; font-family: 'solaiman-lipi', sans-serif; line-height: 1.2; display: flex; align-items: center; justify-content: flex-end; z-index: 10; padding-right: 30px;">
             {{ $bengali_date }}
         </div>
 
