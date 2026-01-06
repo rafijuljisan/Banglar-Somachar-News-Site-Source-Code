@@ -11,7 +11,7 @@ a {
   color: #1c1c1c;
 }
 a:hover {
-  color: #265196;
+  color: #ff0000; /* CHANGED FROM #265196 to RED */
   text-decoration: none;
 }
 a:focus {
@@ -20,7 +20,7 @@ a:focus {
 
 .product-heading {
   font-size: 18px;
-  border-bottom: 2px solid #265196;
+  border-bottom: 2px solid #333; /* Changed to Black or Red */
   padding-bottom: 5px;
   margin-bottom: 15px;
 }
@@ -32,10 +32,10 @@ a:focus {
   position: relative;
 }
 .section-heading::after {
-  background-color: #265196;
+  background-color: #ff0000; /* CHANGED FROM #265196 to RED */
   bottom: -7px;
   content: "";
-  height: 2px;
+  height: 3px;
   left: 0;
   margin: 0 auto;
   position: absolute;
@@ -130,230 +130,152 @@ a:focus {
 =            navigation            =
 ==================================*/
 .sticky-wrapper {
-  height: auto!important;
+  height: auto !important;
+  background: #fff; /* Ensure sticky header is white */
 }
+
+/* 1. Main Container - White Background & Borders */
 .top-nav-main {
   width: 100%;
   z-index: 99999;
-  box-shadow: 0 5px 5px -5px #000;
+  box-shadow: none; /* Remove heavy shadow */
+  border-top: 1px solid #e1e1e1;    /* Light gray top border */
+  border-bottom: 2px solid #e1e1e1; /* Light gray bottom border */
   position: relative;
+  background-color: #ffffff;
 }
 
-.top-nav-sports .dropdown-menu.active {
-  display: block;
+.top-nav-sports {
+  background-color: #ffffff !important;
 }
-.top-nav-sports .dropdown-menu.active.show {
-  display: none;
-}
-.top-nav-sports .navbar-toggler:focus {
-  outline: 0;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  -ms-box-shadow: none;
-  -o-box-shadow: none;
-  box-shadow: none;
-}
-.top-nav-sports .offcanvas-navbar .nav-item .nav-link {
-  padding: 13px 15px !important;
-}
-.top-nav-sports .offcanvas-navbar .cart-quantity {
-  position: absolute;
-  top: 3px;
-  right: 0;
-  font-size: 13px;
-}
-.top-nav-sports .offcanvas-navbar .dropdown-menu {
-  left: auto;
-  right: 0;
-  width: 230px;
-  padding: 0;
-}
-.top-nav-sports .offcanvas-navbar .dropdown-menu li {
-  border-bottom: 1px solid #dddddd;
-  padding: 14px;
-}
-.top-nav-sports .offcanvas-navbar .cart-image {
-  width: 60px;
-  float: left;
-  margin-right: 10px;
-}
-.top-nav-sports .offcanvas-navbar .cart-content {
-  float: left;
-  width: calc(100% - 70px);
-}
-.top-nav-sports .offcanvas-navbar .cart-content h6 {
-  margin-bottom: 0;
-}
-.top-nav-sports .offcanvas-navbar .dropdown-toggle::after {
-  display: none;
-}
-.top-nav-sports .price {
-  font-weight: bold;
-  font-size: 18px;
-  color: #7AA93C;
-}
-.top-nav-sports .product-dropdown-list li a {
-  display: block;
-  padding: 10px 0;
-  border-bottom: 1px dotted #fff;
-  transition: all 0.5s ease 0s;
-}
-.top-nav-sports .product-dropdown-list li:last-child a {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-.top-nav-sports .dropdown-item {
-  padding: 7px 10px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.4);
-  display: block;
-  transition: all 0.5s ease 0s;
-  font-size: 16px;
-  font-weight: 500;
-}
-.top-nav-sports .dropdown-item:focus, .top-nav-sports .dropdown-item:hover {
-  background-color: #00A651;
-  color: #fff;
-  padding-left: 20px;
-}
-.top-nav-sports .carousel-control-next, .top-nav-sports .carousel-control-prev {
-  opacity: 1;
-  color: #ffffff;
-}
-.top-nav-sports .carousel-control-next:hover, .top-nav-sports .carousel-control-prev:hover {
-  background-color: transparent !important;
-}
-.top-nav-sports .carousel {
-  padding-bottom: 10px;
-}
-.top-nav-sports .dropdown-heading {
-  padding-top: 10px;
-}
-.top-nav-sports .navbar-brand {
-  color: #265196;
-  font-size: 24px;
-  font-weight: bold;
-}
-.top-nav-sports .iconbar {
-  color: #265196;
-}
-.top-nav-sports .product-dropdown-menu .product-heading {
-  color: #265196;
-  font-size: 20px;
-  font-weight: 600;
-}
-.top-nav-sports .product-dropdown-menu ul li {
-  border-bottom: 1px solid #dddddd;
-}
-.top-nav-sports .product-dropdown-menu ul li:last-child {
-  border-bottom: none;
-}
-.top-nav-sports .product-dropdown-menu ul li a {
-  padding: 10px;
-  display: block;
-}
-.top-nav-sports .product-dropdown-menu ul li a:hover {
-  background-color: #265196;
-  color: #ffffff;
-}
+
+/* 2. Nav Links - Black Text & Clean Look */
 .top-nav-sports .navbar-nav .nav-item .nav-link {
-  color: #fff;
-  padding: 11px 11px 11px 11px;
-  font-size: 18px;
-  font-weight: 500;
-  text-transform: uppercase;
-  transition: all 0.5s ease 0s;
-  position: relative;
+  white-space: nowrap;
+  color: #111111 !important;
+  
+  /* UPDATED: Reduced padding to bring items closer */
+  padding: 12px 10px !important; 
+  
+  font-family: 'SolaimanLipi', 'Noto Sans Bengali', sans-serif !important;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: capitalize;
+  transition: all 0.3s ease;
+  background: transparent !important;
 }
+
+/* 3. Home Icon Specifics */
+.top-nav-sports .navbar-nav .nav-item#home .nav-link i {
+  font-size: 20px;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+/* 4. Hover & Active States (Text & Icons) */
+
+/* General Text Links: Turn Red on Hover or Active */
+.top-nav-sports .navbar-nav .nav-item:hover .nav-link,
+.top-nav-sports .navbar-nav .nav-item.active .nav-link,
+.top-nav-sports .navbar-nav .nav-item .nav-link.active {
+    color: #ff0000 !important;
+    background-color: transparent !important;
+}
+
+/* Home Icon Specific: Turn Red on Hover or Active */
+.top-nav-sports .navbar-nav .nav-item#home:hover .nav-link i,
+.top-nav-sports .navbar-nav .nav-item.active#home .nav-link i,
+.top-nav-sports .navbar-nav .nav-item#home .nav-link.active i {
+    color: #ff0000 !important;
+}
+
+/* Bottom Underline: Ensure it appears on Active too */
+.top-nav-sports .navbar-nav .nav-item.active:after,
+.top-nav-sports .navbar-nav .nav-item:hover:after {
+    transform: scaleX(1);
+    background-color: #ff0000;
+}
+
+/* 5. Bottom Underline Animation (Red) */
 .top-nav-sports .navbar-nav .nav-item {
   position: relative;
 }
 .top-nav-sports .navbar-nav .nav-item:after {
   content: '';
   position: absolute;
-  /* top: 0; */
   bottom: 0;
   left: 0;
   right: 0;
   width: 100%;
   height: 3px;
   transform: scaleX(0);
-  /* background-color: #ed1c24; */
-  background-color: #ED1C24;
-  transition: transform 0.5s;
+  background-color: #ff0000; /* Red underline */
+  transition: transform 0.3s ease;
 }
-.top-nav-sports .navbar-nav .nav-item:hover:after {
-    transform: scaleX(1);
-}
+.top-nav-sports .navbar-nav .nav-item:hover:after,
 .top-nav-sports .navbar-nav .nav-item.active:after {
-    transform: scaleX(1);
-}
-.top-nav-sports .navbar-nav .nav-item.active a {
-  background: #ff0000;
-}
-.top-nav-sports .navbar-nav .nav-item:last-child .nav-link {
-  padding-right: 20px;
+  transform: scaleX(1);
 }
 
+/* 6. Dropdown Menu Styling */
 .top-nav-sports .dropdown-menu {
-  border: none;
-  /* background-color: #ffffff !important; */
-  background-color: transparent !important;
-  font-size: 14px;
+  border: 1px solid #eee;
+  background-color: #ffffff !important;
+  border-top: 3px solid #ff0000; /* Red top border for dropdown */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  border-radius: 0;
+  padding: 0;
 }
+
 .top-nav-sports .dropdown-menu .nav-item .nav-link {
-  color: #1c1c1c;
-  padding: 6px 0;
+  color: #333 !important;
+  padding: 10px 20px !important;
+  border-bottom: 1px solid #f1f1f1;
+  font-size: 16px;
 }
-.top-nav-mega-menu-title {
-  margin: 5px 0 0px;
-  line-height: 21px;
-  font-size: 18px;
-  min-height: 22px;
-  overflow: hidden;
-  max-height: 42px;
+
+.top-nav-sports .dropdown-menu .nav-item:hover .nav-link {
+  background-color: #f9f9f9 !important;
+  color: #ff0000 !important;
+  padding-left: 25px !important; /* Slide effect */
 }
+
+/* 7. Dropdown Arrow (Chevron) */
 .dropdown-toggle::after {
-  content: "\f107";
-  float: right;
+  content: "\f107"; /* FontAwesome Down Arrow */
   font-family: fontawesome;
-  line-height: 49px;
-  position: absolute;
-  right: 0;
-  margin-left: 0;
-  border-top: 0;
-  top: 0;
-  vertical-align: 0;
-  border-right: 0;
-  margin-right: 15px;
-  border-left: 0;
-  display: inline-block;
+  border: none;
+  font-size: 14px;
+  margin-left: 6px;
+  vertical-align: middle;
+  color: #888; /* Grey arrow color */
 }
-.mega-nav-link {
-  display: block;
-  padding-top: 15px;
-  padding-bottom: 10px;
+.nav-item:hover .dropdown-toggle::after {
+  color: #ff0000; /* Red arrow on hover */
 }
+
+/* Mobile Toggler */
+.top-nav-sports .navbar-toggler {
+  color: #000;
+  border-color: #000;
+}
+.top-nav-sports .iconbar {
+  color: #000 !important;
+}
+
+/* Mega Menu & Submenu Adjustments */
 .dropdown-menu .container {
-  /* background: #fbc02d; */
   background: #fff;
-  border-bottom: 2px solid #6a3;
-  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.22);
-  -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.22);
-  -ms-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.22);
-  -o-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.22);
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.22);
+  border: none;
+  box-shadow: none;
 }
 .dropdown-item {
-  /* background-color: #fbc02d; */
   background-color: #fff;
+  color: #333;
 }
-.navbar-nav .nav-item .dropdown-toggle::after {
-  line-height: 55px;
-}
-.dropdown-menu .dropdown-submenu .dropdown-toggle::after {
-  line-height: 40px;
-  margin-right: 20px;
+.dropdown-item:hover {
+  background-color: #f4f4f4;
+  color: #ff0000;
 }
 /*=====  End of navigation  ======*/
 /*=========== TOP NAV START SEARCH BAR TOGGLE STYLE ===============*/
@@ -408,12 +330,15 @@ a:focus {
   line-height: 30px;
   padding: 2px 6px;
   color: #fff;
-  background: #00A651;
+  background: #333333; /* CHANGED FROM #00A651 to BLACK */
+  /* OR use background: #ff0000; for Red */
   transition: all 0.5s ease 0s;
   cursor: pointer;
 }
+
 .top-search .input-group-addon .fa:hover {
-  color: #000;
+  background: #ff0000; /* Red on hover */
+  color: #fff;
 }
 .top-search .input-group-addon.close-search {
   cursor: pointer;
@@ -431,16 +356,18 @@ a:focus {
   list-style: none;
 }
 .attr-nav ul li a {
-  color: #fff;
-  font-size: 22px;
-  line-height: 35px;
-  margin-top: 1px;
-  display: inline-block;
-  padding-right: 5px;
-  transition: all 0.5s ease 0s;
+    color: #000 !important; /* Changed from #fff to #000 */
+    font-size: 22px;
+    line-height: 35px;
+    margin-top: 1px;
+    display: inline-block;
+    padding-right: 5px;
+    transition: all 0.3s ease;
 }
+
+/* Keep Red on Hover */
 .attr-nav ul li a:hover {
-  color: #000;
+    color: #ff0000 !important;
 }
 .top-search input.form-control:focus {
   box-shadow: 0 0 0 0.2rem rgba(0,123,255,.01);
@@ -455,108 +382,99 @@ a:focus {
     padding-top: 0px;
     padding-bottom: 0px;
   }
+
+  /* --- FIX: Full Width Justified Menu --- */
+  .top-nav-sports .navbar-collapse {
+    width: 100%;
+    display: flex;
+    flex-grow: 1; /* Forces the container to fill empty space */
+  }
+
+  .top-nav-sports .navbar-nav {
+    width: 100%;                    /* Take full width of collapse container */
+    display: flex;                  /* Enable Flexbox */
+    justify-content: space-between; /* Spread items evenly to edges */
+    align-items: center;            /* Vertically center items */
+  }
+  /* --------------------------------------- */
+
+  /* Dropdown Menu Animation & Style */
   .navbar .dropdown-menu {
     background-color: #fff;
     border-radius: 0;
-    border: none;
+    border: 1px solid #eee;
+    border-top: 3px solid #ff0000;
     display: block;
     left: 0;
     opacity: 0;
     padding: 0;
     right: 0;
-    top: 96%;
+    top: 100%;
     transform-origin: 0 0;
-    -webkit-transform: rotateY(75deg);
-    -moz-transform: rotateY(75deg);
-    -ms-transform: rotateY(75deg);
-    -o-transform: rotateY(75deg);
     transform: rotateY(75deg);
-    -webkit-transition: 0.3s linear all;
-    -moz-transition: 0.3s linear all;
-    -ms-transition: 0.3s linear all;
-    -o-transition: 0.3s linear all;
     transition: 0.3s linear all;
     visibility: hidden;
     width: 100%;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
   }
-  .navbar .dropdown {
-    position: static;
-  }
+  
   .navbar .dropdown:hover > .dropdown-menu {
     opacity: 1;
     transform: none;
-    -webkit-transition: 0.3s linear all;
-    -moz-transition: 0.3s linear all;
-    -ms-transition: 0.3s linear all;
-    -o-transition: 0.3s linear all;
-    transition: 0.3s linear all;
     visibility: visible;
   }
+  
   .navbar .dropdown-submenu {
     position: relative;
   }
+  
   .navbar .dropdown-submenu .dropdown-menu {
     left: 100%;
     top: -2px;
-    -webkit-transform: none;
-    -moz-transform: none;
-    -ms-transform: none;
-    -o-transform: none;
-    transform: none;
-    transform-origin: 0 0;
-    -webkit-transform: scaleY(0);
-    -moz-transform: scaleY(0);
-    -ms-transform: scaleY(0);
-    -o-transform: scaleY(0);
     transform: scaleY(0);
   }
+  
   .navbar .dropdown-submenu:hover > .dropdown-menu {
     opacity: 1;
     visibility: visible;
-    -webkit-transition: 0.3s linear all;
-    -moz-transition: 0.3s linear all;
-    -ms-transition: 0.3s linear all;
-    -o-transition: 0.3s linear all;
-    transition: 0.3s linear all;
-    -webkit-transform: scaleY(1);
-    -moz-transform: scaleY(1);
-    -ms-transform: scaleY(1);
-    -o-transform: scaleY(1);
     transform: scaleY(1);
   }
+  
   .dropdown-sub-menu li:last-child a {
-    border-bottom: 0;
-    border-bottom: 2px solid #00A651;
+    border-bottom: 1px solid #eee;
   }
+  
   .dropdown-sub-menu {
-    -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.22);
-    -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.22);
-    -ms-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.22);
-    -o-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.22);
      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.22);
   }
+  
+  /* Reset Background for Active Items on Desktop */
   .top-nav-sports .navbar-nav .nav-item .active {
-    background: #06823a;
+    background: transparent !important;
   }
+  
   .dropdown-sub-menu li a {
-    border-bottom: 0;
+    border-bottom: 1px solid #eee;
   }
+  
+  /* Green border for last item in sub-menu (optional, can be changed to red if desired) */
   .dropdown-sub-menu li:last-child a {
     border-bottom: 2px solid #00A651;
   }
-
 }
 @media screen and (max-width: 992px) {
   #navbarSupportedContent {
     position: absolute;
-    top: 33px;
+    top: 100%; /* Align below header */
     background-color: #ffffff;
-    padding-left: 20px;
-    padding-right: 20px;
-    left: -20px;
-    right: -20px;
-    height: 80vh !important;
+    padding: 10px 20px;
+    left: 0;
+    right: 0;
+    height: auto !important;
+    max-height: 80vh;
     overflow-y: auto;
+    border-top: 1px solid #eee;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
   }
 
   .top-nav-sports .navbar-container {
@@ -570,15 +488,20 @@ a:focus {
     flex-direction: unset;
   }
   .top-nav-sports .navbar-collapse .navbar-nav .nav-item .nav-link {
-    padding: 10px;
-    border-bottom: 1px solid #dddddd;
+    width: 100%;
+    padding: 12px 10px;
+    border-bottom: 1px solid #f1f1f1;
     font-size: 17px;
-    color: #000;
+    color: #111; /* Black Text */
   }
   .top-nav-sports .navbar-nav .nav-item .nav-link:hover {
-    background: #4f8605;
-    color: #fff;
-}
+    width: 100%;                  /* Force full width */
+    justify-content: space-between; /* Distribute space evenly between items */
+    display: flex;
+    background: #f9f9f9; /* Light Gray Background */
+    color: #ff0000; /* Red Text */
+    padding-left: 15px; /* Slide effect */
+  }
   .top-nav-sports .navbar-collapse .navbar-nav .nav-item .nav-link:last-child {
     /* border-bottom: none; */
   }
@@ -592,12 +515,11 @@ a:focus {
   .attr-nav {
     position: absolute;
     float: right;
-    right: 0;
+    right: 15px;
+    top: 5px;
   }
   .attr-nav ul li a {
-    color: #fff;
-    margin-top: 0px;
-    padding-right: 0px;
+    color: #333; /* Dark icon for mobile */
   }
   .dropdown-item {
     background-color: #fff;
@@ -679,3 +601,6 @@ a:focus {
 .sticky-wrapper {
     z-index: 9999;
 }
+/* =========================================
+   SOCIAL ICONS BLACK & WHITE STYLING
+========================================= */

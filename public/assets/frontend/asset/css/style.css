@@ -121,11 +121,10 @@ input:-webkit-autofill:focus {
   transition: width 2s;
 }
 /*================================================
-  3. HEADER STYLE
+  3. HEADER STYLE (Black Icons, Smaller Circle)
 ==================================================*/
 .header-top-area {
-  background: #f0f0ed;
-  /* padding: 5px 0; */
+  background: #ffffff;
 }
 .current-date {
   margin: 0;
@@ -167,9 +166,10 @@ input:-webkit-autofill:focus {
 .other-link li a i {
   padding-right: 3px;
 }
+
+/* --- SOCIAL ICON AREA --- */
 .top_socail_icon_area {
   float: right;
-  position: relative;
 }
 .top_socail_icon_area .list-inline {
   padding: 0;
@@ -177,108 +177,69 @@ input:-webkit-autofill:focus {
 }
 .top_socail_icon_area .list-inline li {
   display: inline-block;
-  padding-left: 5px;
-  list-style: none;
-  position: relative;
-  height: 30px;
-  width: 30px;
-}
-.top_socail_icon_area .list-inline li a {
-  display: inline-block;
-  text-align: center;
-  line-height: 30px;
-  cursor: pointer;
-}
-.top_socail_icon_area .list-inline li a i {
-  color: #ffffff;
-  font-size: 17px;
-  line-height: 32px;
-  text-align: center;
-}
-.cube,
-.cube span {
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  position: absolute;
-  transform-style: preserve-3d;
-  transition: transform 0.5s ease-in-out;
-  text-align: center;
-}
-.cube-top {
-  background: transparent;
-  background-size: 100%;
-}
-.cube-front {
-  background-size: 100%;
-  transform: translate(0, -100%) rotateX(90deg);
-  transform-origin: bottom;
-  border-radius: 50px;
-}
-.top_socail_icon_area .list-inline li a .cube-front i {
-  line-height: 30px;
-}
-.top_socail_icon_area .list-inline li:hover .cube {
-  transform: translate(0, 50%) rotateX(-90deg);
-}
-.top_socail_icon_area .list-inline li .facebook .cube-top {
-  background: #3b5998;
-}
-.top_socail_icon_area .list-inline li .twitter .cube-top {
-  background: #1da1f2;
-}
-.top_socail_icon_area .list-inline li .instagram .cube-top {
-  background: linear-gradient(
-    45deg,
-    #f09433 0%,
-    #e6683c 25%,
-    #dc2743 50%,
-    #cc2366 75%,
-    #bc1888 100%
-  );
-}
-.top_socail_icon_area .list-inline li .linkedin .cube-top {
-  background: #007bb5;
-}
-.top_socail_icon_area .list-inline li .youtube .cube-top {
-  background: #ff0000;
-}
-.top_socail_icon_area .list-inline li .pinterest .cube-top {
-  background: #cb2027;
-}
-.top_socail_icon_area .list-inline li .rss .cube-top {
-  background: #f26522;
+  margin-left: 6px; /* Reduced margin slightly */
 }
 
-.top_socail_icon_area .list-inline li .facebook .cube-front {
-  background: #3b5998;
+/* 1. MAIN BUTTON STYLE (Default State: Black) */
+.top_socail_icon_area .list-inline li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;            /* Reduced Circle Size */
+  height: 30px;           /* Reduced Circle Size */
+  border: 1px solid #000; /* Full Black Border */
+  border-radius: 50%;     
+  color: #000;            /* Full Black Icon */
+  background: transparent;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
 }
-.top_socail_icon_area .list-inline li .twitter .cube-front {
-  background: #1da1f2;
+
+/* 2. REMOVE 3D CUBE EFFECTS (Flatten structure) */
+.cube {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: static !important;
+  transform: none !important;
 }
-.top_socail_icon_area .list-inline li .instagram .cube-front {
-  background: linear-gradient(
-    45deg,
-    #f09433 0%,
-    #e6683c 25%,
-    #dc2743 50%,
-    #cc2366 75%,
-    #bc1888 100%
-  );
+.cube-top {
+  display: none !important; 
 }
-.top_socail_icon_area .list-inline li .linkedin .cube-front {
-  background: #007bb5;
+.cube-front {
+  position: static !important;
+  transform: none !important;
+  background: transparent !important;
+  display: block;
+  border-radius: 0 !important;
 }
-.top_socail_icon_area .list-inline li .youtube .cube-front {
-  background: #ff0000;
+
+/* 3. ICON SIZING */
+.cube-front i {
+  line-height: 0; 
+  font-size: 16px;        /* Increased Icon Size */
 }
-.top_socail_icon_area .list-inline li .pinterest .cube-front {
-  background: #cb2027;
+
+/* 4. HOVER STATE (White Icon + No Border) */
+.top_socail_icon_area .list-inline li a:hover {
+  color: #fff; 
+  border-color: transparent;
 }
-.top_socail_icon_area .list-inline li .rss .cube-front {
-  background: #f26522;
+
+/* 5. BRAND COLORS ON HOVER */
+.top_socail_icon_area .list-inline li a.facebook:hover { background: #3b5998; }
+.top_socail_icon_area .list-inline li a.twitter:hover { background: #1da1f2; }
+.top_socail_icon_area .list-inline li a.instagram:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
 }
+.top_socail_icon_area .list-inline li a.linkedin:hover { background: #007bb5; }
+.top_socail_icon_area .list-inline li a.youtube:hover { background: #ff0000; }
+.top_socail_icon_area .list-inline li a.pinterest:hover { background: #cb2027; }
+.top_socail_icon_area .list-inline li a.rss:hover { background: #f26522; }
+
+/* --- LOGO & BANNER --- */
 .main-logo {
   padding: 25px 0 20px 0;
 }
@@ -1903,7 +1864,67 @@ input:-webkit-autofill:focus {
 }
 .category-content-btn {
 }
+/* --- Tool Bar CSS --- */
+.tool-bar-area {
+    display: flex;
+    justify-content: flex-end; /* Aligns to right like the image */
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
 
+.tool-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+    text-decoration: none !important;
+}
+
+.tool-btn:hover {
+    background: #f0f0f0;
+    color: #000;
+    border-color: #bbb;
+}
+
+/* Specific colors for specific buttons if you want */
+.tool-btn.fb-share:hover { color: #1877f2; border-color: #1877f2; }
+.tool-btn.link-copy:hover { color: #28a745; border-color: #28a745; }
+.tool-btn.text-size:hover { background: #333; color: #fff; }
+
+/* Ensure the article body has a default transition for smooth resizing */
+#article-body-content {
+    transition: font-size 0.2s ease;
+    line-height: 1.6; /* Good readability */
+}
+/* FIX: Force inner elements to inherit the font size */
+    #article-body-content p, 
+    #article-body-content span, 
+    #article-body-content div, 
+    #article-body-content font,
+    #article-body-content b,
+    #article-body-content strong {
+        font-size: inherit !important;
+        line-height: inherit !important;
+    }
+
+    /* Optional: Ensure headers don't get messed up, or let them scale too */
+    #article-body-content h1, 
+    #article-body-content h2, 
+    #article-body-content h3, 
+    #article-body-content h4 {
+        line-height: 1.4 !important;
+    }
 /*====================== CATAGORY PAGE TAB ==========================*/
 .right-category-tab {
   margin-bottom: 27px;

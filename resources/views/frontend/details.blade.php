@@ -176,13 +176,41 @@ displayTime();
            </small>
            <img class="img-fluid" src="{{asset('assets/images/post/'.$data->image_big)}}" alt="ছবির ক্যাপশন: {{$data->image_caption}}">
         {!!$gs->header3_728!!}
+        {{-- START: Text Resizer & Social Tools --}}
+            <div class="tool-bar-area">
+                <button class="tool-btn text-size" id="btn-increase" title="Increase Font Size">
+                    <i class="fa fa-plus"></i>
+                </button>
+                <button class="tool-btn text-size" id="btn-decrease" title="Decrease Font Size">
+                    <i class="fa fa-minus"></i>
+                </button>
+
+                <div style="width: 10px; border-right: 1px solid #ddd; height: 20px;"></div>
+
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}" 
+                  target="_blank" class="tool-btn fb-share" title="Share on Facebook">
+                    <i class="fa fa-facebook"></i>
+                </a>
+
+                <button class="tool-btn link-copy" id="btn-copy-link" title="Copy Link">
+                    <i class="fa fa-link"></i>
+                </button>
+
+                <button class="tool-btn" id="btn-native-share" title="Share">
+                    <i class="fa fa-share-alt"></i>
+                </button>
+            </div>
+            {{-- END: Text Resizer & Social Tools --}}
                                   @if ($data->post_type == 'audio')
   <p style="text-align: center;"><b>&nbsp;অডিও&nbsp; ফাইল</b></p>
 <audio controls="" style="width:100%">
          <source src="{{asset('assets/audios/'.$data->audio)}}" type="audio/mp3">
         </audio>
         @endif
-           <p style="text-align: justify;">{!! $data->description !!}</p>
+           {{-- Wrapped in ID for resizing --}}
+      <div id="article-body-content" style="text-align: justify; font-size: 18px;">
+          {!! $data->description !!}
+      </div>
        <p style="text-align: justify;">{!! $data->video_embed !!}</p>
        
        <div class="upg-print-button-wrapper" style="margin: 20px 0; border-top: 1px dashed #ddd; padding-top: 20px;">
@@ -344,6 +372,71 @@ document.getElementById('fb-root').appendChild(e);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="stylesheet" href="{{ asset('assets/front/css/print-tool.css') }}">
 <script src="{{ asset('assets/front/js/print-tool.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        
+        // Default start size
+        var currentFontSize = 18; 
+
+        $('#btn-increase').click(function() {
+            if(currentFontSize < 30) {
+                currentFontSize += 2;
+                updateArticleStyle(currentFontSize);
+            }
+        });
+
+        $('#btn-decrease').click(function() {
+            if(currentFontSize > 14) {
+                currentFontSize -= 2;
+                updateArticleStyle(currentFontSize);
+            }
+        });
+
+        function updateArticleStyle(size) {
+            // Set font size on the main container
+            $('#article-body-content').css('font-size', size + 'px');
+            
+            // Set line height (e.g., 1.6 times the font size for good reading)
+            var newLineHeight = size * 1.6;
+            $('#article-body-content').css('line-height', newLineHeight + 'px');
+        }
+
+        // --- 2. Copy Link Logic ---
+        $('#btn-copy-link').click(function() {
+            var dummy = document.createElement('input'),
+                text = window.location.href;
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            
+            // Visual Feedback
+            var originalIcon = $(this).html();
+            $(this).html('<i class="fa fa-check" style="color:green"></i>');
+            setTimeout(() => {
+                $(this).html(originalIcon);
+            }, 2000);
+        });
+
+        // --- 3. Native Share (Mobile) Logic ---
+        $('#btn-native-share').click(function() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '{{ $data->title }}',
+                    url: window.location.href
+                }).then(() => {
+                    console.log('Thanks for sharing!');
+                })
+                .catch(console.error);
+            } else {
+                // Fallback for desktop if native share not supported
+                alert('URL copied to clipboard!');
+                $('#btn-copy-link').click(); 
+            }
+        });
+    });
+</script>
 </body>
 
 </html>

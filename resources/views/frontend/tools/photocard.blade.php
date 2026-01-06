@@ -25,7 +25,7 @@
 
         {{-- Headline --}}
         <div class="photocard-headline-container" style="position: absolute; bottom: 160px; left: 50px; right: 50px; height: 150px; display: flex; align-items: center; justify-content: center; text-align: center; z-index: 10;">
-            <h1 id="photocard-headline-text" style="text-align: center; font-family: 'Hind Siliguri', sans-serif; font-weight: 700; color: black; font-size: 60px; line-height: 1.3; padding: 0; margin: 0;">
+            <h1 id="photocard-headline-text" style="text-align: center; font-family: 'solaiman-lipi', sans-serif; font-weight: 700; color: black; font-size: 60px; line-height: 1.3; padding: 0; margin: 0;">
                 {{ $post->title }}
             </h1>
         </div>

@@ -8,7 +8,7 @@
     	<meta name="author" content="EliteDesign">
     	<meta name="csrf-token" content="{{ csrf_token() }}">
 		<!-- Title -->
-		<title>{{ $gs->title }} | Newspaper Website By: FUTURE IT</title>
+		<title>{{ $gs->title }} | Newspaper Website By: Jisan Sheikh</title>
 		<!-- favicon -->
 		<link rel="shortcut icon" href="{{asset('assets/images/'.$gs->favicon)}}" type="image/x-icon">
 		<!-- Bootstrap -->

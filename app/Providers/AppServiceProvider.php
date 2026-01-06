@@ -33,15 +33,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*
+        
         // --- ADD THESE 4 LINES AT THE TOP ---
         // This forces Laravel to use your local settings, ignoring the "stuck" config
         \Config::set('database.connections.mysql.host', '127.0.0.1');
         \Config::set('database.connections.mysql.database', 'laranews');
         \Config::set('database.connections.mysql.username', 'root');
-        \Config::set('database.connections.mysql.password', '');
+        \Config::set('database.connections.mysql.password', 'root');
         // ------------------------------------
-        */
+        
 
         // Now your original code (Uncommented):
         view()->composer(['*'],function($view){

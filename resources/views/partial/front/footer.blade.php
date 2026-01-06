@@ -116,7 +116,7 @@
         </div>
         <div class="col-md-4">
           <div class="design-link">
-            <p>সকল কারিগরী সহযোগিতায়  <a href="htps://futureitlimited.com/ target="_blank" title="Elitedesign.com.bd"> FUTURE IT</a></p>
+            <p>সকল কারিগরী সহযোগিতায়  <a href="https://jisan.technomenia.com/" target="_blank" title="Jisan Sheikh"> Md Jisan</a></p>
           </div>
         </div>
     </div><!--/.custom-row-->
