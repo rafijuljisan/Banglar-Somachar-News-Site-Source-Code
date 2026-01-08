@@ -2594,6 +2594,213 @@ Logo Header Area Start
         margin-top: 10px;
     }
 }
+
+/*-----------------------------
+** Old Footer Area Start
+------------------------------*/
+/*
+.footer {
+  overflow: hidden;
+  position: relative;
+  padding: 40px 0px 0px;
+  margin-top: 20px;
+  background: #101d29;
+}
+.footer .footer-logo {
+  margin-top: -10px;
+  margin-bottom: 25px;
+}
+.footer .footer-widget .title {
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.footer .footer-widget ul {
+  padding-left: 0px;
+  margin-bottom: 0px;
+}
+
+.footer .footer-widget ul li {
+  list-style: none;
+}
+
+.footer .footer-widget ul li a {
+  -webkit-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+  line-height: 36px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.footer .footer-widget ul li a:hover {
+  color: #9C27B0;
+}
+
+.footer .footer-widget ul li i {
+  font-size: 12px;
+  padding-right: 4px;
+  -webkit-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+}
+
+.footer .about-widget .text {
+  margin-bottom: -2px;
+}
+
+.footer .about-widget .text p {
+  font-size: 14px;
+  color: #fff;
+}
+
+.footer .about-widget .social-links {
+  margin-top: 36px;
+  margin-bottom: 23px;
+}
+
+.footer .about-widget .social-links .title {
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.footer .fotter-social-links ul {
+  padding-left: 0px;
+  margin-left: 0px;
+}
+
+.footer .fotter-social-links ul li {
+  display: inline-block;
+}
+
+.footer .fotter-social-links ul li a {
+  font-size: 16px;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  text-align: center;
+  line-height: 40px;
+  margin: 0px 3px;
+  padding: 0px;
+  color: #fff;
+  background: #213649;
+  -webkit-transition: 0.3s ease-in;
+  -moz-transition: 0.3s ease-in;
+  -o-transition: 0.3s ease-in;
+  transition: 0.3s ease-in;
+}
+
+.footer .fotter-social-links ul li a:hover {
+  background: #9C27B0;
+  color: #fff;
+}
+
+.footer .fotter-social-links ul li:first-child {
+  margin-left: 0px;
+}
+
+.footer .blog-widget .title {
+  padding-bottom: 12px;
+}
+
+.footer .blog-widget .post-list li {
+  margin-bottom: 20px;
+}
+
+.footer .blog-widget .post-list li:last-child {
+  border-bottom: 0px;
+}
+
+.footer .blog-widget .post-list li .post {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.footer .blog-widget .post-list li .post .post-img {
+  margin-right: 15px;
+}
+
+.footer .blog-widget .post-list li .post .post-img img {
+  width: 75px;
+}
+
+.footer .blog-widget .post-list li .post .post-details {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.footer .blog-widget .post-list li .post .post-details .post-title {
+  font-size: 14px;
+  line-height: 20px;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 0px;
+  -webkit-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+}
+
+.footer .tags-widget .tag-list {
+  margin-top: 22px;
+}
+
+.footer .tags-widget .tag-list li {
+  display: inline-block;
+  margin: 4px;
+}
+
+.footer .tags-widget .tag-list li a {
+  font-size: 14px;
+  line-height: 24px;
+  border: 1px solid #fff;
+  padding: 0px 10px;
+  display: inline-block;
+  color: #fff;
+}
+
+.footer .tags-widget .tag-list li a:hover {
+  background: #9C27B0;
+  border-color: #9C27B0;
+  color: #fff !important;
+}
+
+.footer .copy-bg {
+  background: #060f16;
+  margin-top: 30px;
+  padding: 10px 15px 10px;
+}
+
+.footer .copy-bg .content {
+  text-align: center;
+}
+
+.footer .copy-bg .content .content p {
+  font-size: 14px;
+  line-height: 24px;
+  color: #fff;
+  margin-bottom: 0px;
+}
+
+.footer .copy-bg .content .content p a {
+  font-size: 14px;
+  line-height: 24px;
+  margin-bottom: 0px;
+  color: #101d29;
+}
+*/
+/*-----------------------------
+
+** Old Footer Area End
+
+------------------------------*/
+
 /*-------------------------------
   Categori Area CSS
 --------------------------------*/
