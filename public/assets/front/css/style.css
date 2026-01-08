@@ -2440,210 +2440,160 @@ Logo Header Area Start
   margin-bottom: 0px;
 }
 
-/*-----------------------------
-** Footer Area Start
-------------------------------*/
-.footer {
-  overflow: hidden;
-  position: relative;
-  padding: 40px 0px 0px;
-  margin-top: 20px;
-  background: #101d29;
+  /* --- Footer Main Layout --- */
+.footer-new {
+    background-color: #111827; /* Very Dark Blue/Grey */
+    color: #e5e7eb;
+    padding: 60px 0 40px;
+    font-family: 'SolaimanLipi', sans-serif; /* Ensure Bangla font is loaded */
+    font-size: 15px;
+    line-height: 1.6;
 }
 
-.footer .footer-logo {
-  margin-top: -10px;
-  margin-bottom: 25px;
+/* --- Widget Titles --- */
+.footer-widget .widget-title {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #374151;
 }
 
-.footer .footer-widget .title {
-  text-transform: uppercase;
-  font-size: 20px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #fff;
+.footer-widget .widget-title span {
+    border-bottom: 3px solid #ef4444; /* Professional Red Accent */
+    padding-bottom: 10px;
 }
 
-.footer .footer-widget ul {
-  padding-left: 0px;
-  margin-bottom: 0px;
+/* --- Editor List Styling (Column 1) --- */
+.editor-list .editor-item {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #374151; /* Subtle divider */
+    display: flex;
+    flex-direction: column;
 }
 
-.footer .footer-widget ul li {
-  list-style: none;
+.editor-list .editor-item:last-child {
+    border-bottom: none;
 }
 
-.footer .footer-widget ul li a {
-  -webkit-transition: all 0.3s ease-in;
-  -o-transition: all 0.3s ease-in;
-  transition: all 0.3s ease-in;
-  line-height: 36px;
-  font-size: 14px;
-  color: #fff;
+.editor-list .role {
+    color: #9ca3af; /* Muted gray for titles */
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 2px;
 }
 
-.footer .footer-widget ul li a:hover {
-  color: #9C27B0;
+.editor-list .name {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
 }
 
-.footer .footer-widget ul li i {
-  font-size: 12px;
-  padding-right: 4px;
-  -webkit-transition: all 0.3s ease-in;
-  -o-transition: all 0.3s ease-in;
-  transition: all 0.3s ease-in;
+/* --- Social Icons --- */
+.social-area .follow-text {
+    font-size: 14px;
+    color: #9ca3af;
+    margin-bottom: 10px;
+    margin-top: 15px;
 }
 
-.footer .about-widget .text {
-  margin-bottom: -2px;
+.footer-social {
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
-.footer .about-widget .text p {
-  font-size: 14px;
-  color: #fff;
+.footer-social li {
+    display: inline-block;
+    margin-right: 8px;
 }
 
-.footer .about-widget .social-links {
-  margin-top: 36px;
-  margin-bottom: 23px;
+.footer-social li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    background: #1f2937;
+    color: #fff;
+    border-radius: 4px;
+    transition: all 0.3s;
+    font-size: 14px;
 }
 
-.footer .about-widget .social-links .title {
-  font-size: 20px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #fff;
+.footer-social li a:hover {
+    background: #ef4444; /* Hover Color */
+    transform: translateY(-3px);
 }
 
-.footer .fotter-social-links ul {
-  padding-left: 0px;
-  margin-left: 0px;
+/* --- Address Lists (Columns 2 & 3) --- */
+.address-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
-.footer .fotter-social-links ul li {
-  display: inline-block;
+.address-list li {
+    display: flex; /* Flexbox aligns icon and text perfectly */
+    align-items: flex-start;
+    margin-bottom: 15px;
 }
 
-.footer .fotter-social-links ul li a {
-  font-size: 16px;
-  width: 40px;
-  height: 40px;
-  display: inline-block;
-  text-align: center;
-  line-height: 40px;
-  margin: 0px 3px;
-  padding: 0px;
-  color: #fff;
-  background: #213649;
-  -webkit-transition: 0.3s ease-in;
-  -moz-transition: 0.3s ease-in;
-  -o-transition: 0.3s ease-in;
-  transition: 0.3s ease-in;
+.address-list .icon-box {
+    min-width: 30px;
+    color: #ef4444; /* Red Icons */
+    font-size: 16px;
+    padding-top: 3px; /* Align with first line of text */
 }
 
-.footer .fotter-social-links ul li a:hover {
-  background: #9C27B0;
-  color: #fff;
+.address-list .text-box {
+    word-break: break-all;
 }
 
-.footer .fotter-social-links ul li:first-child {
-  margin-left: 0px;
+/* --- Map --- */
+.google-map-wrapper iframe {
+    width: 100% !important;
+    height: 200px;
+    border-radius: 6px;
+    border: 2px solid #374151;
 }
 
-.footer .blog-widget .title {
-  padding-bottom: 12px;
+/* --- Footer Bottom (Copyright) --- */
+.footer-bottom {
+    background: #000;
+    padding: 20px 0;
+    border-top: 1px solid #1f2937;
+    color: #9ca3af;
+    font-size: 14px;
 }
 
-.footer .blog-widget .post-list li {
-  margin-bottom: 20px;
+.footer-bottom p {
+    margin: 0;
 }
 
-.footer .blog-widget .post-list li:last-child {
-  border-bottom: 0px;
+.footer-bottom a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
 }
 
-.footer .blog-widget .post-list li .post {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.footer-bottom .text-right {
+    text-align: right;
 }
 
-.footer .blog-widget .post-list li .post .post-img {
-  margin-right: 15px;
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .footer-widget {
+        margin-bottom: 30px;
+    }
+    .footer-bottom .text-right {
+        text-align: left;
+        margin-top: 10px;
+    }
 }
-
-.footer .blog-widget .post-list li .post .post-img img {
-  width: 75px;
-}
-
-.footer .blog-widget .post-list li .post .post-details {
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.footer .blog-widget .post-list li .post .post-details .post-title {
-  font-size: 14px;
-  line-height: 20px;
-  color: #fff;
-  font-weight: 600;
-  margin-bottom: 0px;
-  -webkit-transition: all 0.3s ease-in;
-  -o-transition: all 0.3s ease-in;
-  transition: all 0.3s ease-in;
-}
-
-.footer .tags-widget .tag-list {
-  margin-top: 22px;
-}
-
-.footer .tags-widget .tag-list li {
-  display: inline-block;
-  margin: 4px;
-}
-
-.footer .tags-widget .tag-list li a {
-  font-size: 14px;
-  line-height: 24px;
-  border: 1px solid #fff;
-  padding: 0px 10px;
-  display: inline-block;
-  color: #fff;
-}
-
-.footer .tags-widget .tag-list li a:hover {
-  background: #9C27B0;
-  border-color: #9C27B0;
-  color: #fff !important;
-}
-
-.footer .copy-bg {
-  background: #060f16;
-  margin-top: 30px;
-  padding: 10px 15px 10px;
-}
-
-.footer .copy-bg .content {
-  text-align: center;
-}
-
-.footer .copy-bg .content .content p {
-  font-size: 14px;
-  line-height: 24px;
-  color: #fff;
-  margin-bottom: 0px;
-}
-
-.footer .copy-bg .content .content p a {
-  font-size: 14px;
-  line-height: 24px;
-  margin-bottom: 0px;
-  color: #101d29;
-}
-
-/*-----------------------------
-** Footer Area End
-------------------------------*/
 /*-------------------------------
   Categori Area CSS
 --------------------------------*/
