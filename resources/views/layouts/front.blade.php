@@ -216,6 +216,18 @@ document.getElementById('fb-root').appendChild(e);
 //to move active class
     $('#home').addClass('active')
 </script>
+<script>
+  $(function () {
+    $('.marquee-bottom').marquee({
+        duration: 40000,  // Changed from 15000 to 40000 (Slower)
+        gap: 50,
+        delayBeforeStart: 0,
+        direction: 'left',
+        duplicated: true,
+        pauseOnHover: true
+    });
+  });
+</script>
 </body>
 
 </html>
