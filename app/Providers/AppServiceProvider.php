@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
         \Config::set('database.connections.mysql.host', '127.0.0.1');
         \Config::set('database.connections.mysql.database', 'laranews');
         \Config::set('database.connections.mysql.username', 'root');
-        \Config::set('database.connections.mysql.password', 'root');
+        \Config::set('database.connections.mysql.password', '');
         // ------------------------------------
         
 

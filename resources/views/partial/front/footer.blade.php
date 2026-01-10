@@ -1,6 +1,4 @@
-<style>
-
-</style>
+<link href="{{asset('assets/front/css/style.css')}}" rel="stylesheet">
 <footer class="footer-new">
   <div class="container jagaran-container">
     <div class="row custom-row">
