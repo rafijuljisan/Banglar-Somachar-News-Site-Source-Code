@@ -160,57 +160,62 @@ displayTime();
            <li><a href=""><i class="fa fa-home"></i></a></li>
            <li class="active"><a href="">{{$data->category->title}} </a></li>
          </ol><div class="details-content">
-           <h3>{{$data->title}}</h3>
-           <hr>
-           <small class="small">
+           <h3 class="details-title">{{$data->title}}</h3>
+          <hr>
+
+          <img class="img-fluid mb-3" src="{{asset('assets/images/post/'.$data->image_big)}}" alt="ছবির ক্যাপশন: {{$data->image_caption}}">
 
 
-    <img style="width: 50px;
-    height: 50px;
-    border-radius: 21px;float: left;margin-right: 9px;" class="img-fluid writer-image" src="{{asset('assets/images/admin/'.$data->admin->photo)}}" alt="FavIcon">
- 
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center my-3 py-2 border-top border-bottom">
 
-  <div class="writer-name">
-                {{$data->admin->name}} <br>
-               নিউজ প্রকাশের তারিখ : {{$data->createdAt()}} ইং          </div>
-           </small>
-           <img class="img-fluid" src="{{asset('assets/images/post/'.$data->image_big)}}" alt="ছবির ক্যাপশন: {{$data->image_caption}}">
-        {!!$gs->header3_728!!}
-        {{-- START: Text Resizer & Social Tools --}}
-            <div class="tool-bar-area">
-                <button class="tool-btn text-size" id="btn-increase" title="Increase Font Size">
-                    <i class="fa fa-plus"></i>
-                </button>
-                <button class="tool-btn text-size" id="btn-decrease" title="Decrease Font Size">
-                    <i class="fa fa-minus"></i>
-                </button>
+              <div class="d-flex align-items-center mb-3 mb-md-0">
+                  <img style="width: 45px; height: 45px; border-radius: 50%; margin-right: 10px; object-fit: cover;" 
+                        class="img-fluid" 
+                        src="{{asset('assets/images/admin/'.$data->admin->photo)}}" 
+                        alt="{{$data->admin->name}}">
+                  
+                  <div style="line-height: 1.3;">
+                      <strong style="font-size: 15px;">{{$data->admin->name}}</strong> <br>
+                      <small style="color: #666; font-size: 12px;">প্রকাশ: {{$data->createdAt()}} ইং</small>
+                  </div>
+              </div>
 
-                <div style="width: 10px; border-right: 1px solid #ddd; height: 20px;"></div>
+              <div class="tool-bar-area m-0 p-0 d-flex align-items-center">
+                  <button class="tool-btn text-size" id="btn-increase" title="Increase Font Size">
+                      <i class="fa fa-plus"></i>
+                  </button>
+                  <button class="tool-btn text-size" id="btn-decrease" title="Decrease Font Size">
+                      <i class="fa fa-minus"></i>
+                  </button>
 
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}" 
-                  target="_blank" class="tool-btn fb-share" title="Share on Facebook">
-                    <i class="fa fa-facebook"></i>
-                </a>
+                  <div style="width: 1px; background: #ddd; height: 20px; display: inline-block; vertical-align: middle; margin: 0 8px;"></div>
 
-                <button class="tool-btn link-copy" id="btn-copy-link" title="Copy Link">
-                    <i class="fa fa-link"></i>
-                </button>
+                  <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}" 
+                      target="_blank" class="tool-btn fb-share" title="Share on Facebook">
+                      <i class="fa fa-facebook"></i>
+                  </a>
 
-                <button class="tool-btn" id="btn-native-share" title="Share">
-                    <i class="fa fa-share-alt"></i>
-                </button>
-            </div>
-            {{-- END: Text Resizer & Social Tools --}}
-                                  @if ($data->post_type == 'audio')
-  <p style="text-align: center;"><b>&nbsp;অডিও&nbsp; ফাইল</b></p>
-<audio controls="" style="width:100%">
-         <source src="{{asset('assets/audios/'.$data->audio)}}" type="audio/mp3">
-        </audio>
-        @endif
-           {{-- Wrapped in ID for resizing --}}
-      <div id="article-body-content" style="text-align: justify; font-size: 18px;">
-          {!! $data->description !!}
-      </div>
+                  <button class="tool-btn link-copy" id="btn-copy-link" title="Copy Link">
+                      <i class="fa fa-link"></i>
+                  </button>
+
+                  <button class="tool-btn" id="btn-native-share" title="Share">
+                      <i class="fa fa-share-alt"></i>
+                  </button>
+              </div>
+          </div>
+          @if ($data->post_type == 'audio')
+          <p style="text-align: center;"><b>&nbsp;অডিও&nbsp; ফাইল</b></p>
+          <audio controls="" style="width:100%">
+                  <source src="{{asset('assets/audios/'.$data->audio)}}" type="audio/mp3">
+          </audio>
+          @endif
+
+          {{-- Body Content --}}
+          <div id="article-body-content" style="text-align: justify; font-size: 18px;" class="mt-4">
+              {!! $data->description !!}
+          </div>
+      {!!$gs->header3_728!!}
        <p style="text-align: justify;">{!! $data->video_embed !!}</p>
        
        <div class="upg-print-button-wrapper" style="margin: 20px 0; border-top: 1px dashed #ddd; padding-top: 20px;">
@@ -228,6 +233,51 @@ displayTime();
                <i class="fa fa-camera"></i> ফটোকার্ড ডাউনলোড
            </button>
        </div>
+       {{-- 1. TAGS SECTION --}}
+        @if($data->tags)
+        <div class="tags-area">
+            <span class="tags-label">Tags:</span>
+            @php
+                $tags = explode(',', $data->tags);
+            @endphp
+            @foreach($tags as $tag)
+                <a href="{{ route('front.news_search') }}?search={{ trim($tag) }}" class="tag-item">
+                    {{ trim($tag) }}
+                </a>
+            @endforeach
+        </div>
+        @endif
+
+
+        {{-- 2. RELATED NEWS SECTION --}}
+        @php
+            // Fetch 4 related posts from the same category, excluding the current one
+            $related_posts = DB::table('posts')
+                            ->where('category_id', $data->category_id)
+                            ->where('id', '!=', $data->id)
+                            ->inRandomOrder() // Or use orderBy('id','desc') for latest
+                            ->limit(4)
+                            ->get();
+        @endphp
+
+        @if(count($related_posts) > 0)
+        <div class="related-news-wrapper">
+            <h3 class="related-title">সম্পর্কিত খবর :</h3>
+            
+            <div class="row">
+                @foreach($related_posts as $related)
+                <div class="col-lg-3 col-md-6 col-6">
+                    <div class="related-post-item">
+                        <a href="{{ route('frontend.details',[$related->id, $related->slug]) }}">
+                            <img src="{{asset('assets/images/post/'.$related->image_big)}}" class="related-post-img" alt="{{ $related->title }}">
+                            <span class="related-post-title">{{ $related->title }}</span>
+                        </a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
          </div><div class="facebook-comment-box">
            <h2 class="fb-h2" style="">আপনার মতামত লিখুন :</h2>
 <div id="fb-root"></div>

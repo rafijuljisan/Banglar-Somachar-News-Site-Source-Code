@@ -524,6 +524,197 @@ input:-webkit-autofill:focus {
   margin-top: -4px;
 }
 /*================================================
+  5.Post Tags and Related Post
+==================================================*/
+/* --- Tags Section --- */
+.tags-area {
+    margin: 20px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.tags-label {
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 10px;
+    color: #333;
+}
+.tag-item {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #ddd;
+    color: #333;
+    padding: 5px 12px;
+    margin-right: 8px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    font-size: 14px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.tag-item:hover {
+    background: #D80000;
+    color: #fff;
+    border-color: #D80000;
+}
+
+/* --- Related News Section --- */
+.related-news-wrapper {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.related-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #eee; /* Light gray line */
+    padding-bottom: 10px;
+    display: block;
+}
+.related-post-item {
+    margin-bottom: 20px;
+}
+.related-post-img {
+    width: 100%;
+    height: 140px; /* Fixed height for uniformity */
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.related-post-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #000;
+    display: block;
+}
+.related-post-title:hover {
+    color: #D80000;
+}
+/* --- Meta & Tools Combined Bar --- */
+.meta-tools-wrapper {
+    background: #fdfdfd;
+    padding: 10px 0;
+}
+
+/* Left: Author */
+.author-area .author-text h6 {
+    line-height: 1.2;
+    color: #333;
+}
+.author-area .author-text small {
+    color: #777;
+}
+
+/* Right: Tools Buttons */
+.tool-btn-sm {
+    background: #fff;
+    border: 1px solid #ddd;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    color: #555;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.2s;
+}
+.tool-btn-sm:hover {
+    background: #eee;
+    color: #000;
+}
+
+.tool-btn-circle {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    margin-left: 5px;
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: 0.3s;
+}
+.tool-btn-circle:hover {
+    opacity: 0.8;
+    color: #fff;
+}
+
+/* Specific Colors */
+.tool-btn-circle.fb { background: #3b5998; }
+.tool-btn-circle.copy { background: #666; }
+.tool-btn-circle.share { background: #D80000; }
+
+/* Mobile Adjustments */
+@media (max-width: 576px) {
+    .meta-tools-wrapper {
+        flex-direction: column; /* Stack on very small screens if needed */
+        align-items: flex-start !important;
+        gap: 10px;
+    }
+    .tools-area {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+/* Default Title Style (Desktop) */
+.details-title {
+    font-weight: bold;
+    font-size: 28px; /* Or your preferred desktop size */
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+/* Tool Button Base Styles (Ensure consistency) */
+.tool-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%; /* Make them perfectly round */
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #555;
+    margin-right: 5px; /* Spacing between icons */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: 0.3s;
+}
+.tool-btn:hover {
+    background: #eee;
+}
+/* Specific Colors on Hover/Active */
+.fb-share:hover { background: #3b5998; color: #fff; border-color: #3b5998; }
+.link-copy:hover { background: #666; color: #fff; border-color: #666; }
+
+
+/* --- MOBILE RESPONSIVE FIXES --- */
+@media (max-width: 576px) {
+    /* 1. Decrease Title Size */
+    .details-title {
+        font-size: 20px; /* Smaller font for mobile */
+        line-height: 1.3;
+    }
+
+    /* 2. Layout Adjustments for Tools Wrapper */
+    /* This ensures icons don't touch the edge or look weird on new line */
+    .tool-bar-area {
+        width: 100%;
+        justify-content: flex-start; /* Align icons to the left */
+        margin-top: 5px !important;
+    }
+    
+    /* Optional: If you want icons spread out on mobile, change 'flex-start' to 'space-between' above */
+}
+/*================================================
   5.TOP NEWS SECTION STYLE
 ==================================================*/
 .top-lead-news {
