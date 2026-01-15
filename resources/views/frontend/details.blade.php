@@ -153,7 +153,7 @@ displayTime();
      @include('partial.front.header')
     <div class="container custom-container">
    <div class="row custom-row">
-     <div class="left-content-area details-left-content-area">
+     <div class="col-lg-8 col-md-8 col-12 left-content-area details-left-content-area">
        <div class="col-lg-12 custom-padding">
 
          <ol class="breadcrumb details-page-breadcrumb">
@@ -278,95 +278,112 @@ displayTime();
             </div>
         </div>
         @endif
-         </div><div class="facebook-comment-box">
-           <h2 class="fb-h2" style="">আপনার মতামত লিখুন :</h2>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0&appId=1716117305495236" nonce="OKS9Fdbx"></script>
-<div class="fb-comments" data-href="{{ URL::to('details/'.$data->id.'/'.$data->slug)}}" data-width="700" data-numposts="10"></div>
- 
-         </div></div></div><div class="right-content-area details-right-content-area">
-       <div class="col-lg-12 custom-padding">
+         <div class="facebook-comment-box">
+            <h2 class="fb-h2">আপনার মতামত লিখুন :</h2>
+            <div id="fb-root"></div>
+            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0&appId=1716117305495236" nonce="OKS9Fdbx"></script>
+            <div class="fb-comments" data-href="{{ URL::to('details/'.$data->id.'/'.$data->slug)}}" data-width="700" data-numposts="10"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- RIGHT SIDEBAR STARTS HERE -->
+    <div class="col-lg-4 col-md-4 col-12 right-content-area details-right-content-area">
+        <div class="modern-sb-wrapper">
+          <div class="col-lg-12 custom-padding">
 
-         <div class="details-page-side-banner">
-           {!!$gs->sidebar_ads!!}
-         </div><div class="details-right-news-heading">
-            @php
-        $favourite45=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->limit(6)->get();
-        @endphp 
-             <h2>আলোচিত শীর্ষ ১০ সংবাদ </h2>
-           </div><div class="row custom-row">
-                               
-                 
-          @foreach($favourite45 as $row)       
-             <div class="col-lg-6 col-md-6 col-6">
-                    <div class="details-news-single">
-                      <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-                        <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />                        <div class="details-news-single-text">
-                          <span></span>
+            <div class="modern-sb-ads">
+              {!!$gs->sidebar_ads!!}
+            </div>
+
+            <div class="modern-sb-header">
+              @php
+              $topNews = DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->limit(6)->get();
+              @endphp
+              <h2>আলোচিত শীর্ষ ১০ সংবাদ</h2>
+            </div>
+
+            <div class="row custom-row">
+              @foreach($topNews as $row)
+              <div class="col-6 col-md-6 modern-sb-grid-item">
+                <a href="{{ route('frontend.details',[$row->id,$row->slug])}}" class="modern-sb-grid-link">
+                  <div class="modern-sb-grid-thumb">
+                    <img src="{{asset('assets/images/post/'.$row->image_big)}}" alt="{{ $row->title}}" title="{{ $row->title}}">
+                  </div>
+                  <h3>{{ Str::limit($row->title, 45) }}</h3>
+                </a>
+              </div>
+              @endforeach
+            </div>
+
+            <div class="modern-sb-tab-wrapper">
+
+              <ul class="nav nav-pills modern-sb-nav" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">সর্বশেষ</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">জনপ্রিয়</a>
+                </li>
+              </ul>
+
+              <div class="tab-content modern-sb-tab-body" id="pills-tabContent">
+
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                  <ul class="modern-sb-list">
+                    @php
+                    $latestpost = DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(10)->limit(20)->get();
+                    @endphp
+
+                    @foreach($latestpost as $row)
+                    <li class="modern-sb-list-item">
+                      <a href="{{ route('frontend.details',[$row->id,$row->slug])}}" class="modern-sb-list-link">
+                        <div class="modern-sb-list-thumb">
+                          <img src="{{asset('assets/images/post/'.$row->image_big)}}" alt="{{ $row->title}}">
+                        </div>
+                        <div class="modern-sb-list-info">
                           <h3>{{ $row->title}}</h3>
                         </div>
                       </a>
-                    </div>
-                  </div>
- @endforeach
-                           </div></div><div class="details-tab-container">
-          @php
-        $latestpost=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(10)->limit(20)->get();
-        @endphp
-           <ul class="nav nav-pills side-tab-main" id="pills-tab" role="tablist">
-             <li class="nav-item">
-               <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">সর্বশেষ</a>
-             </li>
-             <li class="nav-item">
-               <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">জনপ্রিয়</a>
-             </li>
-           </ul>
+                    </li>
+                    @endforeach
+                  </ul>
+                </div>
 
-           <div class="tab-content alokitonews-tab-content" id="pills-tabContent">
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                  <ul class="modern-sb-list">
+                    @php
+                    $favourite = DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(5)->limit(20)->get();
+                    @endphp
 
-             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-               <div class="least-news">
-                 <ul class="least-news-ul detail-least-news-ul">
-  
-  
-  
-  
-  @foreach($latestpost as $row)
-  <li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-    <div class="least-news-left">
-      <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-    </div>
-    <div class="least-news-right">
-      <h3>{{ $row->title}}</h3>
-    </div>
-  </a></li>
-  @endforeach
-  
-  
- 
- </ul></div></div><div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-               <div class="least-news">
-                 <ul class="least-news-ul detail-least-news-ul">
-    
-            @php
-        $favourite=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(5)->limit(20)->get();
-        @endphp 
-  
-  @foreach($favourite as $row)
-  <li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-    <div class="least-news-left">
-      <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-    </div>
-    <div class="least-news-right">
-      <h3>{{ $row->title}}</h3>
-    </div>
-  </a></li>
-    @endforeach
+                    @foreach($favourite as $row)
+                    <li class="modern-sb-list-item">
+                      <a href="{{ route('frontend.details',[$row->id,$row->slug])}}" class="modern-sb-list-link">
+                        <div class="modern-sb-list-thumb">
+                          <img src="{{asset('assets/images/post/'.$row->image_big)}}" alt="{{ $row->title}}">
+                        </div>
+                        <div class="modern-sb-list-info">
+                          <h3>{{ $row->title}}</h3>
+                        </div>
+                      </a>
+                    </li>
+                    @endforeach
+                  </ul>
+                </div>
 
-
-
-
-                 </ul></div></div></div></div></div></div></div></div>@include('partial.front.footer')
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <!-- RIGHT SIDEBAR ENDS HERE -->
+      
+    </div> <!-- End of row -->
+  </div> <!-- End of container -->
+  
+@include('partial.front.footer')
   <script src="{{asset('assets/frontend/asset/js/jquery-2.1.4.min.js')}}"></script>
 <script src="{{asset('assets/frontend/asset/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/frontend/asset/js/popper.min.js')}}"></script>

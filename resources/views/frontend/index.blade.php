@@ -23,153 +23,157 @@
   </div><!--/.container-->
 
 <div class="container top-news-section custom-container">
-  <div class="row custom-row">
-    <div class="top-news-middle">
-      <div class="col-md-12 custom-padding">
+    <div class="row custom-row">
         
-          <div class="row custom-row category-row">
-		   @foreach ($sliders as $slider) 
-            <div class="col-md-8 custom-padding">
-              <div class="lead-news">
-                <a href="{{ route('frontend.details',[$slider->id,$slider->slug])}}">
-                  <img src="{{asset('assets/images/post/'.$slider->image_big)}}" class="img-fluid" alt="{{$slider->title}}" title="{{$slider->title}}" />
-                  <div class="lead-news-heading">
+        <div class="top-news-middle">
+            <div class="col-md-12 custom-padding">
+
+                <div class="row custom-row hero-wrapper">
                     
-                    <h1>{{$slider->title}}</h1>
-                  </div>
-                </a>
-              </div>
-			   @endforeach  
-			  
-			  
-            </div>
-            <div class="col-md-4 custom-padding">
-			
-			@foreach ($slider_rights_firsts as $slider_rights_first)
-              <div class="lead-news-small-wrapper">
-          <div class="lead-news-small">
-            <a href="{{ route('frontend.details',[$slider_rights_first->id,$slider_rights_first->slug])}}">
-              <img src="{{asset('assets/images/post/'.$slider_rights_first->image_big)}}" class="img-fluid" alt="{{$slider_rights_first->title}}" title="{{$slider_rights_first->title}}" />
-              <div class="lead-news-heading-small">
-                
-                <h3>{{$slider_rights_first->title}}</h3>
-              </div>
-            </a>
-          </div>
-            </div>
-			@endforeach
-			
-			
-              </div>
-              </div><div class="row custom-row">
-			  
-			  
-			  
-			  
-			  @foreach ($slider_rights_seconds as $slider_rights_second)
-          <div class="col-md-4 custom-padding">
-            <div class="lead-news-second">
-              <a href="{{ route('frontend.details',[$slider_rights_second->id,$slider_rights_second->slug])}}">
-                <img src="{{asset('assets/images/post/'.$slider_rights_second->image_big)}}" class="img-fluid" alt="{{$slider_rights_first->title}}" title="{{$slider_rights_first->title}}" />
-                <div class="lead-news-second-heading">
-                  
-                  <h3>{{$slider_rights_first->title}}</h3>
+                    <div class="col-md-8 custom-padding">
+                        @foreach ($sliders as $slider)
+                        <div class="hero-card big">
+                            <a href="{{ route('frontend.details',[$slider->id,$slider->slug])}}">
+                                <img src="{{asset('assets/images/post/'.$slider->image_big)}}" alt="{{$slider->title}}">
+                                <div class="hero-overlay">
+                                    <h1>{{$slider->title}}</h1>
+                                </div>
+                            </a>
+                        </div>
+                        @endforeach
+                    </div>
+
+                    <div class="col-md-4 custom-padding">
+                        {{-- We use take(2) to ensure we strictly get 2 images for the stack --}}
+                        @foreach ($slider_rights_firsts->take(2) as $slider_rights_first)
+                        <div class="hero-card small">
+                            <a href="{{ route('frontend.details',[$slider_rights_first->id,$slider_rights_first->slug])}}">
+                                <img src="{{asset('assets/images/post/'.$slider_rights_first->image_big)}}" alt="{{$slider_rights_first->title}}">
+                                <div class="hero-overlay">
+                                    <h3>{{$slider_rights_first->title}}</h3>
+                                </div>
+                            </a>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
-              </a>
+                <div class="row custom-row">
+                    @foreach ($slider_rights_seconds->take(3) as $item)
+                    <div class="col-md-4 custom-padding">
+                        <div class="grid-card">
+                            <a href="{{ route('frontend.details',[$item->id,$item->slug])}}">
+                                <img src="{{asset('assets/images/post/'.$item->image_big)}}" alt="{{$item->title}}">
+                                <div class="grid-card-content">
+                                    <h3>{{Str::limit($item->title, 55)}}</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+
+
+                <div class="row custom-row list-view-wrapper">
+                    <div class="col-md-12 custom-padding">
+                        <h4 class="section-title">আরও সংবাদ</h4> 
+                        
+                        @php
+                            // Fixed query: using 'description' column and limit(3)
+                            $list_news = DB::table('posts')
+                                        ->where('status',1)
+                                        ->orderBy('id','DESC')
+                                        ->skip(10)
+                                        ->limit(3) 
+                                        ->get();
+                        @endphp
+
+                        @foreach($list_news as $row)
+                        <div class="list-card">
+                            <a href="{{ route('frontend.details',[$row->id,$row->slug])}}" class="d-flex w-100">
+                                <div class="list-card-img">
+                                    <img src="{{asset('assets/images/post/'.$row->image_big)}}" alt="{{$row->title}}">
+                                </div>
+                                <div class="list-card-content">
+                                    <h3>{{ $row->title }}</h3>
+                                    <p>{{ Str::limit(strip_tags($row->description), 160) }}</p>
+                                    <div class="list-card-meta">
+                                        <i class="fa fa-clock-o"></i> {{ \Carbon\Carbon::parse($row->created_at)->diffForHumans() }}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+
             </div>
-          </div>
-       @endforeach
-          
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  </div>      </div><!--/.col-md-12 custom-padding-->
-    </div><!--/.top-news-middle-->
+        </div>
 
-    <div class="top-news-right">
+        <div class="top-news-right">
+            
+            <div class="col-md-12 custom-padding">
+                <div class="right-top-banner mb-3 text-center">
+                    {!!$gs->sidebar_ads!!}
+                </div>
+            </div>
 
-      <div class="col-md-12 custom-padding">
-        <div class="right-top-banner">
-          {!!$gs->sidebar_ads!!}
-        </div><!--/.right-top-banner-->
-      </div><!--/.col-md-12-->
+            <div class="col-md-12 custom-padding">
+                <ul class="nav nav-pills side-tab-nav" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab">সর্বশেষ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab">জনপ্রিয়</a>
+                    </li>
+                </ul>
 
-      <div class="col-md-12 custom-padding">
+                <div class="tab-content alokitonews-tab-content" id="pills-tabContent">
+                    
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel">
+                        <ul class="sidebar-list">
+                            @php
+                                $latestpost = DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(10)->limit(10)->get();
+                            @endphp
+                            @foreach($latestpost as $row)
+                            <li class="sidebar-item">
+                                <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
+                                    <div class="sidebar-item-img">
+                                        <img src="{{asset('assets/images/post/'.$row->image_big)}}" alt="{{ $row->title}}">
+                                    </div>
+                                    <div class="sidebar-item-content">
+                                        <h3>{{ $row->title}}</h3>
+                                    </div>
+                                </a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
 
-        <ul class="nav nav-pills side-tab-main" id="pills-tab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">সর্বশেষ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">জনপ্রিয়</a>
-          </li>
-        </ul>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel">
+                        <ul class="sidebar-list">
+                            @php
+                                $favourite = DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(5)->limit(10)->get();
+                            @endphp 
+                            @foreach($favourite as $row)
+                            <li class="sidebar-item">
+                                <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
+                                    <div class="sidebar-item-img">
+                                        <img src="{{asset('assets/images/post/'.$row->image_big)}}" alt="{{ $row->title}}">
+                                    </div>
+                                    <div class="sidebar-item-content">
+                                        <h3>{{ $row->title}}</h3>
+                                    </div>
+                                </a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
 
-        <div class="tab-content alokitonews-tab-content" id="pills-tabContent">
+                </div>
+            </div>
 
-          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-     
-	 
-	 
-	 
-	 
-	 <div class="least-news">
-     <ul class="least-news-ul">
-    			@php
-				$latestpost=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(10)->limit(20)->get();
-				@endphp
-	 
-@foreach($latestpost as $row)
-<li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-    <div class="least-news-left">
-      <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-    </div>
-    <div class="least-news-right">
-      <h3>{{ $row->title}}</h3>
-    </div>
-  </a></li>
-@endforeach
-  
-  
-  </ul><!--/.least-news-ul-->
-            </div><!--/.least-news-->
-          </div><!--/.tab-pane-->
-
-          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-            <div class="least-news">
-              <ul class="least-news-ul">
-    			@php
-				$favourite=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(5)->limit(20)->get();
-				@endphp 
-	@foreach($favourite as $row)
-	<li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-    <div class="least-news-left">
-      <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-    </div>
-    <div class="least-news-right">
-      <h3>{{ $row->title}}</h3>
-    </div>
-  </a></li>
-  @endforeach
-  
-  
- 
-
- </ul><!--/.least-news-ul-->
-            </div><!--/.least-news-->
-          </div><!--/.tab-pane-->
-
-        </div><!--/.tab-content-->
-
-      </div><!--/.col-md-12 custom-padding-->
-
-    </div><!--/.top-news-right-->
-  </div><!--/.row-->
-</div><!--/.container .top-news-section-->
+        </div> </div>
+</div>
 
 
 <div class="feature-news-wrapper bg-white">
@@ -209,14 +213,27 @@
                                     {{ $category->title ?? '' }}
                                 </a>
                             </h2>
-                        </div>@if($bigPost)
+                        </div>
+
+                        @if($bigPost)
                             <div class="clean-lead-news">
                                 <a href="{{ route('frontend.details',[$bigPost->id, $bigPost->slug]) }}">
                                     <div class="clean-lead-img">
                                         <img src="{{ asset('assets/images/post/'.$bigPost->image_big) }}" class="img-fluid" alt="{{ $bigPost->title }}">
                                     </div>
                                     <div class="clean-lead-content">
-                                        <h3>{{ $bigPost->title }}</h3>
+                                        {{-- Added style for 2-line limit --}}
+                                        <h3 style="
+                                            display: -webkit-box;
+                                            -webkit-line-clamp: 2;
+                                            -webkit-box-orient: vertical;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                            line-height: 1.4;
+                                            height: 2.8em; /* Optional: forces consistent height */
+                                        ">
+                                            {{ $bigPost->title }}
+                                        </h3>
                                     </div>
                                 </a>
                             </div>
@@ -234,9 +251,13 @@
                             </ul>
                         </div>
 
-                    </div></div>@endforeach
+                    </div>
+                </div>
+            @endforeach
 
-        </div></div></div>
+        </div>
+    </div>
+</div>
 
 
 <section class="international-modern-section">

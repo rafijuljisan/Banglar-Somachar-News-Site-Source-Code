@@ -27,7 +27,7 @@ header("Content-type: text/css; charset: UTF-8");
   margin: 0;
   line-height: 24px;
   position: absolute;
-  background: <?php echo $base_color ?>;
+  background: #d70000;
   color: #fff;
   padding: 6px 10px;
 }
@@ -36,7 +36,7 @@ header("Content-type: text/css; charset: UTF-8");
   content: "";
   position: absolute;
   left: 84px;
-  border-left: 20px solid <?php echo $base_color ?>;
+  border-left: 20px solid #d70000;
   border-top: 36px solid transparent;
   clear: both;
   top: 0;

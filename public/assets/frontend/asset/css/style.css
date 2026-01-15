@@ -15,7 +15,7 @@
 
 body {
   font-family: "SolaimanLipiNormal", Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   color: #333;
   background: #ffffff;
 }
@@ -712,293 +712,262 @@ input:-webkit-autofill:focus {
     /* Optional: If you want icons spread out on mobile, change 'flex-start' to 'space-between' above */
 }
 /*================================================
-  MODERN UTILITIES (Images & Text)
-==================================================*/
-/* Fix image aspect ratios */
-.lead-news img,
-.lead-news-small img,
-.lead-news-second img,
-.least-news-ul .least-news-left img {
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-/* Common rounded corners for all cards */
-.lead-news,
-.lead-news-small,
-.lead-news-second,
-.least-news-left img {
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-/* Subtle Zoom Effect on Hover */
-.lead-news:hover img,
-.lead-news-small:hover img {
-  transform: scale(1.03);
-}
-
-/*================================================
-  LAYOUT SECTIONS (Kept exact same widths)
+  GLOBAL & UTILITIES
 ==================================================*/
 .top-news-section {
-  margin-bottom: 30px;
-  font-family: sans-serif; /* Use your site's main font */
+    margin-bottom: 40px;
+    font-family: 'Roboto', sans-serif;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+a {
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+}
+
+/* Layout Columns */
 .top-news-middle {
-  width: 73.27%;
-  float: left;
+    width: 73.27%;
+    float: left;
+    padding-right: 15px;
 }
-
 .top-news-right {
-  width: 26.73%;
-  float: left;
-  padding-left: 15px; /* Added slight breathing room */
+    width: 26.73%;
+    float: left;
+    padding-left: 15px;
 }
 
 /*================================================
-  MAIN LEAD NEWS (Left Side)
+  1. HERO SECTION (Mosaic Style)
+  Matches your 1st Image: Text inside image
 ==================================================*/
-.lead-news {
-  position: relative;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Soft shadow */
+.hero-wrapper {
+    margin-bottom: 25px;
 }
 
-.lead-news img {
-  height: 350px;
-  width: 100%;
-  display: block;
+/* 1. THE CARD CONTAINER (Anchor Point) */
+.hero-card {
+    position: relative !important; /* Essential: This anchors the absolute overlay */
+    display: block;
+    width: 100%;
+    overflow: hidden; /* Ensures image stays inside rounded corners */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Soft shadow */
+    margin-bottom: 20px; /* Spacing */
+    background: #000; /* Fallback color */
 }
 
-/* Improved Readable Gradient */
-.lead-news-heading {
-  position: absolute;
-  width: 100%;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.6) 40%,
-    rgba(0, 0, 0, 0.9) 100%
-  );
-  color: #fff;
-  bottom: 0;
-  padding: 30px 15px 15px;
+/* Specific Heights to align grid perfectly */
+.hero-card.big img {
+    height: 410px; /* Taller left image */
+    width: 100%;
+}
+.hero-card.small {
+    margin-bottom: 10px; /* Space between the two right images */
+}
+.hero-card.small:last-child {
+    margin-bottom: 0;
+}
+.hero-card.small img {
+    height: 200px; /* Half height of left side approx */
+    width: 100%;
 }
 
-.lead-news-heading h1 {
-  margin: 0;
-  font-size: 24px; /* Adjusted for cleaner look */
-  font-weight: 700;
-  line-height: 1.4;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+/* Hover Zoom Effect */
+.hero-card img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+.hero-card:hover img {
+    transform: scale(1.05);
+}
+
+/* The Gradient Text Overlay */
+.hero-overlay {
+    position: absolute !important;
+    bottom: 0 !important;      /* Stick to bottom */
+    left: 0 !important;
+    width: 100%;
+    top: auto !important;      /* ESSENTIAL: Prevents it from stretching to top */
+    
+    /* Dark fade from bottom only */
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+    
+    padding: 20px 15px;
+    z-index: 2;
+    pointer-events: none; /* Allows clicking through the text to the link behind it */
+}
+
+.hero-overlay h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.hero-overlay h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+    line-height: 1.3;
 }
 
 /*================================================
-  SMALL LEAD NEWS (Right of Main Slider)
+  2. GRID ROW (3 Cards Below Hero)
 ==================================================*/
-.lead-news-small-wrapper {
-  position: relative;
+.grid-card {
+    background: #fff;
+    border: 1px solid #eee; /* Light border */
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    height: 100%;
 }
 
-.lead-news-small {
-  position: relative;
-  margin-bottom: 24px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.grid-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-.lead-news-small img {
-  /* Using your HTML structure, typically these need height definition */
-  height: 165px; 
-  width: 100%;
+.grid-card img {
+    height: 160px;
+    width: 100%;
+    border-bottom: 3px solid #e74c4f; /* Red accent line */
 }
 
-.lead-news-heading-small {
-  position: absolute;
-  width: 100%;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.6) 40%,
-    rgba(0, 0, 0, 0.9) 100%
-  );
-  color: #fff;
-  bottom: 0;
-  padding: 20px 10px 10px;
+.grid-card-content {
+    padding: 12px;
 }
 
-.lead-news-heading-small h3 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.4;
+.grid-card-content h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 /*================================================
-  SECOND ROW ITEMS (Below Slider)
+  3. LIST VIEW (Bottom Section)
 ==================================================*/
-.lead-news-second {
-  background: #fff;
-  /* Replaced heavy box-shadow with a soft one */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); 
-  border: 1px solid #eee;
-  padding: 0; /* Removing padding for a flush card look */
-  margin-bottom: 24px;
-  transition: transform 0.3s ease;
+.list-view-wrapper {
+    margin-top: 10px;
+}
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    border-bottom: 2px solid #e74c4f;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    color: #333;
+    display: inline-block;
 }
 
-.lead-news-second:hover {
-  transform: translateY(-5px); /* Moves up slightly on hover */
-  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+.list-card {
+    display: flex;
+    background: #fff;
+    border-bottom: 1px solid #f1f1f1;
+    padding: 15px 0;
+    align-items: flex-start;
 }
+.list-card:last-child { border-bottom: none; }
 
-.lead-news-second img {
-  width: 100%;
-  height: 160px; /* Consistent height */
+.list-card-img {
+    flex: 0 0 220px; /* Fixed width */
+    margin-right: 20px;
+    border-radius: 6px;
+    overflow: hidden;
 }
+.list-card-img img {
+    width: 100%;
+    height: 125px;
+    transition: transform 0.4s ease;
+}
+.list-card:hover .list-card-img img { transform: scale(1.05); }
 
-.lead-news-second-heading {
-  padding: 12px;
-  background: #fff;
-  min-height: 70px;
+.list-card-content { flex: 1; }
+.list-card-content h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+    line-height: 1.3;
 }
-
-.lead-news-second-heading h3 {
-  font-size: 16px;
-  line-height: 22px;
-  color: #222;
-  font-weight: 600;
-  margin: 0;
+.list-card-content p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 8px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
-
-.lead-news-second-heading h3:hover {
-  color: #e74c4f;
-}
+.list-card-meta { font-size: 12px; color: #999; }
 
 /*================================================
-  RIGHT SIDEBAR & TABS
+  SIDEBAR STYLES
 ==================================================*/
-.right-top-banner {
-  margin-bottom: 20px;
-  text-align: center;
+/* Tabs */
+.side-tab-nav {
+    width: 100%;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 15px;
+    display: flex;
+}
+.side-tab-nav .nav-item { width: 50%; text-align: center; }
+.side-tab-nav .nav-link {
+    display: block;
+    padding: 10px;
+    font-weight: 700;
+    color: #555;
+    background: transparent;
+    border-bottom: 2px solid transparent;
+}
+.side-tab-nav .nav-link.active {
+    color: #e74c4f;
+    border-bottom: 2px solid #e74c4f;
+    background-color: #ffffff;
 }
 
-/* Modern Tab Styling (Cleaner than solid red blocks) */
-.side-tab-main {
-  width: 100%;
-  margin-top: 0;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #f0f0f0;
+/* Sidebar List */
+.sidebar-list { padding: 0; margin: 0; list-style: none; }
+.sidebar-item a {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f1f1;
+    align-items: center;
 }
-
-.side-tab-main .nav-item {
-  display: block;
-  float: left;
-  width: 50%;
-  margin-bottom: -2px; /* Pulls active border down */
+.sidebar-item-img {
+    flex: 0 0 90px;
+    height: 65px;
+    margin-right: 15px;
+    border-radius: 4px;
+    overflow: hidden;
 }
-
-.side-tab-main .nav-item .nav-link {
-  font-weight: 700;
-  font-size: 18px;
-  color: #555;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-  background: transparent;
-  padding: 10px 0;
-  border: none;
-  border-bottom: 2px solid transparent;
-  transition: all 0.3s;
+.sidebar-item-img img { height: 100%; width: 100%; }
+.sidebar-item-content h3 {
+    font-size: 18px;
+    line-height: 1.3;
+    margin: 0;
+    color: #333;
 }
-
-/* Active State - Simple underline style */
-.side-tab-main .nav-item .nav-link.active,
-.side-tab-main .nav-item .nav-link:hover {
-  background: transparent;
-  color: #e74c4f; /* Red Text */
-  border-bottom: 2px solid #e74c4f; /* Red Underline */
-}
-
-/* Sidebar News List */
-.alokitonews-tab-content {
-  max-height: 541px;
-  overflow-y: auto;
-  padding-right: 5px; /* prevent scrollbar overlap */
-}
-
-/* Custom Scrollbar */
-.alokitonews-tab-content::-webkit-scrollbar {
-  width: 4px;
-}
-.alokitonews-tab-content::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 4px;
-}
-
-.least-news-ul {
-  margin: 0;
-  padding: 0;
-  display: block;
-  background: #fff;
-}
-
-.least-news-ul li {
-  list-style: none;
-  display: block;
-  width: 100%;
-}
-
-.least-news-ul li a {
-  text-decoration: none;
-  display: block; /* Changed to block for clear float */
-  padding: 12px 0;
-  border-bottom: 1px solid #f1f1f1; /* Solid light line instead of dotted */
-  width: 100%;
-  overflow: hidden; /* Clear floats */
-}
-
-.least-news-ul li:last-child a {
-  border-bottom: 0;
-}
-
-/* Sidebar Item Image */
-.least-news-ul .least-news-left {
-  float: left;
-  width: 30%; /* Slightly smaller to give text more room */
-  padding-right: 10px;
-}
-
-.least-news-ul .least-news-left img {
-  min-height: 60px;
-  height: 60px;
-  width: 100%;
-}
-
-/* Sidebar Item Text */
-.least-news-ul .least-news-right {
-  float: left;
-  width: 70%;
-  min-height: 60px;
-  overflow: hidden;
-  display: flex; /* Centers text vertically if only 1 line */
-  align-items: center; 
-}
-
-.least-news-ul .least-news-right h3 {
-  color: #333;
-  margin: 0;
-  padding: 0;
-  font-size: 15px;
-  line-height: 1.3;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-.least-news-ul li:hover .least-news-right h3 {
-  color: #e74c4f;
-}
+.sidebar-item:hover h3 { color: #e74c4f; }
 /*================================================
   7. FEATURE NEWS WRAPPER SECTION STYLE
 ==================================================*/
@@ -1600,14 +1569,6 @@ input:-webkit-autofill:focus {
 .sub-card:last-child {
     margin-bottom: 0;
 }
-/* --- Common Card Styles --- */
-.hero-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--border-radius);
-    width: 100%;
-    background: #eee; /* Placeholder color */
-}
 
 /* Forces the main container heights to match */
 .main-card-wrap, .sub-card-wrap, .hero-tab-wrapper {
@@ -1639,12 +1600,6 @@ input:-webkit-autofill:focus {
     transform: scale(1.05); /* Subtle zoom effect */
 }
 
-/* Gradient Overlay */
-.hero-overlay {
-    position: absolute;
-    bottom: 0; left: 0; right: 0; top: 0;
-    background: var(--dark-overlay);
-}
 
 /* Content Positioning */
 .hero-content {
@@ -1959,7 +1914,7 @@ input:-webkit-autofill:focus {
 .clean-lead-img img { width: 100%; height: auto; border-radius: 3px; margin-bottom: 8px; }
 /* --- 1. BIG HEADLINE (Lead News) --- */
 .clean-lead-content h3 {
-    font-size: 20px;       /* Increased text size */
+    font-size: 18px !important;       /* Increased text size */
     line-height: 28px;     /* Adjust line height for readability */
     font-weight: 700;
     margin: 0;
@@ -3027,7 +2982,211 @@ input:-webkit-autofill:focus {
   font-size: 18px;
   line-height: 24px;
 }
+/*================================================
+  MODERN SIDEBAR STYLES (New Classes)
+==================================================*/
+.modern-sb-wrapper {
+    padding-left: 15px;
+    background: #fff;
+}
 
+.modern-sb-ads {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Section Headings */
+.modern-sb-header {
+    position: relative;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+.modern-sb-header h2 {
+    font-size: 19px;
+    font-weight: 700;
+    color: #222;
+    display: inline-block;
+    border-bottom: 2px solid #e74c4f; /* Red Accent */
+    padding-bottom: 8px;
+    margin-bottom: -2px;
+}
+
+/*================================================
+  TOP 10 GRID (2 Columns)
+==================================================*/
+.modern-sb-grid-item {
+    margin-bottom: 20px;
+}
+
+.modern-sb-grid-link {
+    display: block;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.modern-sb-grid-link:hover {
+    transform: translateY(-3px);
+}
+
+.modern-sb-grid-thumb {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    height: 95px; /* Fixed height */
+    width: 100%;
+}
+
+.modern-sb-grid-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.modern-sb-grid-link:hover .modern-sb-grid-thumb img {
+    transform: scale(1.08);
+}
+
+.modern-sb-grid-link h3 {
+    font-size: 15px;
+    line-height: 1.4;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    /* Limit to 3 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.2s;
+}
+
+.modern-sb-grid-link:hover h3 {
+    color: #e74c4f;
+}
+
+/*================================================
+  MODERN TABS (Latest / Popular)
+==================================================*/
+.modern-sb-tab-wrapper {
+    margin-top: 35px;
+}
+
+.modern-sb-nav {
+    display: flex;
+    border-bottom: 2px solid #f1f1f1;
+    margin-bottom: 15px;
+    padding: 0;
+    width: 100%;
+}
+
+.modern-sb-nav .nav-item {
+    width: 50%;
+    text-align: center;
+    list-style: none;
+}
+
+.modern-sb-nav .nav-link {
+    display: block;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #777;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 12px 0;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modern-sb-nav .nav-link.active,
+.modern-sb-nav .nav-link:hover {
+    background: transparent;
+    color: #e74c4f;
+    border-bottom: 2px solid #e74c4f;
+}
+
+/* Tab Scroll Area */
+.modern-sb-tab-body {
+    max-height: 580px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Custom Scrollbar */
+.modern-sb-tab-body::-webkit-scrollbar {
+    width: 5px;
+}
+.modern-sb-tab-body::-webkit-scrollbar-track {
+    background: #f9f9f9;
+}
+.modern-sb-tab-body::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 5px;
+}
+
+/*================================================
+  LIST ITEMS (Inside Tabs)
+==================================================*/
+.modern-sb-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.modern-sb-list-item {
+    border-bottom: 1px solid #eee;
+}
+
+.modern-sb-list-item:last-child {
+    border-bottom: none;
+}
+
+.modern-sb-list-link {
+    display: flex;
+    padding: 12px 0;
+    text-decoration: none;
+    align-items: flex-start;
+}
+
+.modern-sb-list-thumb {
+    flex: 0 0 90px;
+    height: 65px;
+    margin-right: 15px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.modern-sb-list-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.modern-sb-list-link:hover .modern-sb-list-thumb img {
+    transform: scale(1.1);
+}
+
+.modern-sb-list-info {
+    flex: 1;
+}
+
+.modern-sb-list-info h3 {
+    font-size: 15px;
+    line-height: 1.35;
+    margin: 0;
+    font-weight: 500;
+    color: #333;
+    transition: color 0.2s;
+}
+
+.modern-sb-list-link:hover .modern-sb-list-info h3 {
+    color: #e74c4f;
+}
 /*===================  DETAILS PAGE STYLE ==============================*/
 .category-content {
 }
