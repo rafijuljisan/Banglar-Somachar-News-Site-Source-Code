@@ -228,6 +228,25 @@ document.getElementById('fb-root').appendChild(e);
     });
   });
 </script>
+<script>
+    $(document).ready(function() {
+        // Initialize the Main Hero Slider
+        $(".hero-main-slider").owlCarousel({
+        items: 1,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 6000,
+        smartSpeed: 1000,
+        animateOut: 'fadeOut', // Cleaner transition
+        animateIn: 'fadeIn',
+        nav: true,
+        dots: false, // Hidden for cleaner look
+        navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+        margin: 0,
+        stagePadding: 0
+        });
+    });
+</script>
 </body>
 
 </html>

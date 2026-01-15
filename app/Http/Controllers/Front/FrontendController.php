@@ -256,60 +256,94 @@ class FrontendController extends Controller
         return view('errors.404');
     }
 
-    public function details(Request $request,$id,$slug){
-        $sliders         = Post::orderBy('id','desc')
-                                ->where('is_slider',1)
-                                ->where('status',true)
-                                ->where('is_pending',0)
-                                ->where('schedule_post',0)
-                                ->limit(6)
-                                ->get();
-		$is_recents      = Post::orderBy('id','desc')
-                                ->where('is_pending',0)
-                                ->where('schedule_post',0)
-                                ->take(10)
-                                ->get();
-		$slider_rights_firsts   = Post::orderBy('id','desc')
-                                ->where('slider_right',1)
-                                ->where('status',true)
-                                ->where('is_pending',0)
-                                ->where('schedule_post',0)
-                                ->take(10)
-                                ->get();
-	    $slider_rights_firsts_1   = Post::orderBy('id','desc')
-                                ->where('slider_right',1)
-                                ->where('status',true)
-                                ->where('is_pending',0)
-                                ->where('schedule_post',0)
-                                ->take(1)
-                                ->get();
-						
-								
-		$data = Post::find($id);
-		
-        $ws = WidgetSetiings::find(1);
-        if($data){
-            $ip_address = $request->ip();
-            $is_view = View::where('post_id',$id)->where('ip_address',$ip_address)->first();
-            if(empty($is_view)){
-                $view = new View();
-                $view->post_id = $id;
-                $view->ip_address = $ip_address;
-                $view->save();
-            }
-			
-            if($data->post_type == 'Trivia Quiz'){
-                return view('frontend.quiz',compact('data','ws'));
-            }elseif($data->post_type == 'Sorted List'){
-                return view('frontend.sort',compact('data','ws'));
-            }elseif($data->post_type == 'Personality Quiz'){
-                return view('frontend.personality',compact('data','ws'));
-            }
-            return view('frontend.details',compact('data','ws','sliders','is_recents','slider_rights_firsts','slider_rights_firsts_1'));
-        }else{
-            return redirect()->back();
-        }
+    public function details(Request $request, $id, $slug) {
+    // 1. Fetch the Sliders (The first one is used for the Big Main Image)
+    $sliders = Post::orderBy('id', 'desc')
+        ->where('is_slider', 1)
+        ->where('status', true)
+        ->where('is_pending', 0)
+        ->where('schedule_post', 0)
+        ->limit(6)
+        ->get();
+
+    // 2. Get the ID of the Main Post so we never repeat it
+    $mainPostId = $sliders->first() ? $sliders->first()->id : 0;
+
+    // 3. Fetch Right Side Posts (Middle Stack)
+    // First, try to get posts specifically marked for 'slider_right'
+    $slider_rights_firsts = Post::orderBy('id', 'desc')
+        ->where('slider_right', 1)
+        ->where('status', true)
+        ->where('is_pending', 0)
+        ->where('schedule_post', 0)
+        ->where('id', '!=', $mainPostId) // Exclude main post
+        ->take(2)
+        ->get();
+
+    // --- THE FIX: SMART FILLER ---
+    // If we found less than 2 posts, fill the gap with regular recent posts
+    if ($slider_rights_firsts->count() < 2) {
+        $needed = 2 - $slider_rights_firsts->count();
+        
+        // create list of IDs to exclude (Main Post + Any Right posts we already found)
+        $excludeIds = $slider_rights_firsts->pluck('id')->push($mainPostId)->toArray();
+        
+        $fillers = Post::orderBy('id', 'desc')
+            ->where('status', true)
+            ->where('is_pending', 0)
+            ->where('schedule_post', 0)
+            ->whereNotIn('id', $excludeIds) // Don't pick duplicates
+            ->take($needed)
+            ->get();
+            
+        // Merge the fillers into our main list
+        $slider_rights_firsts = $slider_rights_firsts->merge($fillers);
     }
+    // -----------------------------
+
+    // 4. Fetch Recent Posts
+    $is_recents = Post::orderBy('id', 'desc')
+        ->where('is_pending', 0)
+        ->where('schedule_post', 0)
+        ->take(10)
+        ->get();
+
+    // (Optional) Leftover variable from your code
+    $slider_rights_firsts_1 = Post::orderBy('id', 'desc')
+        ->where('slider_right', 1)
+        ->where('status', true)
+        ->where('id', '!=', $mainPostId)
+        ->take(1)
+        ->get();
+
+    // --- Current Post Logic ---
+    $data = Post::find($id);
+    $ws = WidgetSetiings::find(1);
+
+    if ($data) {
+        $ip_address = $request->ip();
+        $is_view = View::where('post_id', $id)->where('ip_address', $ip_address)->first();
+        
+        if (empty($is_view)) {
+            $view = new View();
+            $view->post_id = $id;
+            $view->ip_address = $ip_address;
+            $view->save();
+        }
+        
+        if ($data->post_type == 'Trivia Quiz') {
+            return view('frontend.quiz', compact('data', 'ws'));
+        } elseif ($data->post_type == 'Sorted List') {
+            return view('frontend.sort', compact('data', 'ws'));
+        } elseif ($data->post_type == 'Personality Quiz') {
+            return view('frontend.personality', compact('data', 'ws'));
+        }
+        
+        return view('frontend.details', compact('data', 'ws', 'sliders', 'is_recents', 'slider_rights_firsts', 'slider_rights_firsts_1'));
+    } else {
+        return redirect()->back();
+    }
+}
 	
 	
 	

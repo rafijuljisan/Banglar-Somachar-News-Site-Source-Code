@@ -17,7 +17,7 @@ body {
   font-family: "SolaimanLipiNormal", Helvetica, Arial, sans-serif;
   font-size: 16px;
   color: #333;
-  background: #eff3f4;
+  background: #ffffff;
 }
 .logo-area {
   background: #fff;
@@ -434,7 +434,6 @@ input:-webkit-autofill:focus {
 }
 
 
-
 .marquee li {
   display: inline-block;
   padding-right: 15px;
@@ -713,252 +712,292 @@ input:-webkit-autofill:focus {
     /* Optional: If you want icons spread out on mobile, change 'flex-start' to 'space-between' above */
 }
 /*================================================
-  5.TOP NEWS SECTION STYLE
+  MODERN UTILITIES (Images & Text)
 ==================================================*/
-.top-lead-news {
-  margin-top: 18px;
-  /* margin-bottom: 20px; */
+/* Fix image aspect ratios */
+.lead-news img,
+.lead-news-small img,
+.lead-news-second img,
+.least-news-ul .least-news-left img {
+  object-fit: cover;
+  transition: transform 0.4s ease;
 }
-.top-lead-news-single {
-}
-.top-lead-news-single-link {
-  /* background-color: #17a2b8; */
-  background-color: #133b5a;
-  padding: 7px;
-  display: inline-block;
-  margin-bottom: -7px;
-  width: 100%;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-.top-lead-news-single-link-left {
-  float: left;
-  width: 40%;
-  padding-right: 3%;
-}
-.top-lead-news-single-link-left img {
-  height: 67px;
-}
-.top-lead-news-single-link-right {
-  float: left;
-  width: 60%;
-  min-height: 63px;
-  max-height: 63px;
+
+/* Common rounded corners for all cards */
+.lead-news,
+.lead-news-small,
+.lead-news-second,
+.least-news-left img {
+  border-radius: 6px;
   overflow: hidden;
 }
-.top-lead-news-single-link-right h2 {
-  color: #fff;
-  margin: 0;
-  padding: 0;
-  font-size: 18px;
-  line-height: 20px;
-  padding-left: 2px;
-  transition: all 0.5s ease 0s;
+
+/* Subtle Zoom Effect on Hover */
+.lead-news:hover img,
+.lead-news-small:hover img {
+  transform: scale(1.03);
 }
-.top-lead-news-single-link-right span {
-  color: #e74c4f;
-  font-size: 14px;
-  line-height: 14px;
-}
+
+/*================================================
+  LAYOUT SECTIONS (Kept exact same widths)
+==================================================*/
 .top-news-section {
-  /* margin-top: 5px; */
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  font-family: sans-serif; /* Use your site's main font */
 }
+
 .top-news-middle {
   width: 73.27%;
   float: left;
 }
+
+.top-news-right {
+  width: 26.73%;
+  float: left;
+  padding-left: 15px; /* Added slight breathing room */
+}
+
+/*================================================
+  MAIN LEAD NEWS (Left Side)
+==================================================*/
 .lead-news {
   position: relative;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Soft shadow */
 }
+
 .lead-news img {
   height: 350px;
   width: 100%;
+  display: block;
 }
+
+/* Improved Readable Gradient */
 .lead-news-heading {
   position: absolute;
   width: 100%;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0) 0,
-    rgba(0, 0, 0, 0.5) 30%,
-    rgba(0, 0, 0, 0.8) 100%
+    transparent 0%,
+    rgba(0, 0, 0, 0.6) 40%,
+    rgba(0, 0, 0, 0.9) 100%
   );
   color: #fff;
   bottom: 0;
-  padding: 20px 10px 10px;
+  padding: 30px 15px 15px;
 }
+
 .lead-news-heading h1 {
   margin: 0;
-  font-size: 28px;
-  line-height: 32px;
+  font-size: 24px; /* Adjusted for cleaner look */
+  font-weight: 700;
+  line-height: 1.4;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
-.lead-news-heading h3 {
-  margin: 0;
-  font-size: 24px;
-  line-height: 28px;
+
+/*================================================
+  SMALL LEAD NEWS (Right of Main Slider)
+==================================================*/
+.lead-news-small-wrapper {
+  position: relative;
 }
+
 .lead-news-small {
   position: relative;
   margin-bottom: 24px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
+
+.lead-news-small img {
+  /* Using your HTML structure, typically these need height definition */
+  height: 165px; 
+  width: 100%;
+}
+
 .lead-news-heading-small {
   position: absolute;
   width: 100%;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0) 0,
-    rgba(0, 0, 0, 0.5) 30%,
-    rgba(0, 0, 0, 0.8) 100%
+    transparent 0%,
+    rgba(0, 0, 0, 0.6) 40%,
+    rgba(0, 0, 0, 0.9) 100%
   );
   color: #fff;
   bottom: 0;
-  padding: 20px 10px 5px;
+  padding: 20px 10px 10px;
 }
+
 .lead-news-heading-small h3 {
   margin: 0;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
 }
-.lead-news-small-wrapper {
-  position: relative;
-}
+
+/*================================================
+  SECOND ROW ITEMS (Below Slider)
+==================================================*/
 .lead-news-second {
   background: #fff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  padding: 7px;
+  /* Replaced heavy box-shadow with a soft one */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); 
+  border: 1px solid #eee;
+  padding: 0; /* Removing padding for a flush card look */
   margin-bottom: 24px;
+  transition: transform 0.3s ease;
 }
+
+.lead-news-second:hover {
+  transform: translateY(-5px); /* Moves up slightly on hover */
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.lead-news-second img {
+  width: 100%;
+  height: 160px; /* Consistent height */
+}
+
 .lead-news-second-heading {
-  min-height: 66px;
-  max-height: 66px;
-  overflow: hidden;
-  padding-top: 1px;
-  padding-left: 3px;
+  padding: 12px;
+  background: #fff;
+  min-height: 70px;
 }
+
 .lead-news-second-heading h3 {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 22px;
-  color: #000;
+  color: #222;
+  font-weight: 600;
   margin: 0;
 }
-.lead-news-second-heading span {
+
+.lead-news-second-heading h3:hover {
   color: #e74c4f;
-  font-size: 14px;
-  line-height: 14px;
-}
-.top-news-right {
-  width: 26.73%;
-  float: left;
 }
 
-/*======================= START FADE STYLE ============================*/
-
-.fade {
-  -webkit-animation: fadeInScale 0.7s ease-in-out;
-  -moz-animation: fadeInScale 0.7s ease-in-out;
-  animation: fadeInScale 0.7s ease-in-out;
+/*================================================
+  RIGHT SIDEBAR & TABS
+==================================================*/
+.right-top-banner {
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-@keyframes fadeInScale {
-  0% {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/*======================= END FADE STYLE ============================*/
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #007bff;
-  transition: background-color 0.3s 0.2s;
-}
+/* Modern Tab Styling (Cleaner than solid red blocks) */
 .side-tab-main {
   width: 100%;
-  margin-top: 27px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
 }
+
 .side-tab-main .nav-item {
   display: block;
   float: left;
   width: 50%;
+  margin-bottom: -2px; /* Pulls active border down */
 }
+
 .side-tab-main .nav-item .nav-link {
-  transition: background-color 0.3s 0s;
   font-weight: 700;
-  font-size: 20px;
-  color: #fff;
+  font-size: 18px;
+  color: #555;
   cursor: pointer;
   text-decoration: none;
   text-align: center;
-  background: #ff0000;
-  border-radius: 0;
-  padding: 9px 15px;
-  border-top: 3px solid transparent;
+  background: transparent;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
 }
-.nav-pills .nav-link.active {
-  background: #fff;
-  color: #19232d;
-  border-top: 3px solid #e74c4f;
+
+/* Active State - Simple underline style */
+.side-tab-main .nav-item .nav-link.active,
+.side-tab-main .nav-item .nav-link:hover {
+  background: transparent;
+  color: #e74c4f; /* Red Text */
+  border-bottom: 2px solid #e74c4f; /* Red Underline */
 }
-.least-news {
-  position: relative;
-}
-.least-news-ul {
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-  background: #fff;
-}
-.least-news-ul li {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: inline-block;
-  width: 100%;
-}
-.least-news-ul li a {
-  margin-bottom: -6px;
-  text-decoration: none;
-  display: inline-block;
-  padding: 10px 7px 9px;
-  /* border-bottom: 1px dashed #969696; */
-  border-bottom: 1px dotted gray;
-  width: 100%;
-}
-.least-news-ul li:last-child a {
-  border-bottom: 0;
-}
-.least-news-ul .least-news-left {
-  float: left;
-  width: 37%;
-  padding-right: 3%;
-}
-.least-news-ul .least-news-left img {
-  min-height: 60px;
-  max-height: 60px;
-}
-.least-news-ul .least-news-right {
-  float: left;
-  width: 63%;
-  min-height: 60px;
-  max-height: 60px;
-  overflow: hidden;
-}
-.least-news-ul .least-news-right h3 {
-  color: #000;
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
-  line-height: 20px;
-}
+
+/* Sidebar News List */
 .alokitonews-tab-content {
   max-height: 541px;
   overflow-y: auto;
+  padding-right: 5px; /* prevent scrollbar overlap */
+}
+
+/* Custom Scrollbar */
+.alokitonews-tab-content::-webkit-scrollbar {
+  width: 4px;
+}
+.alokitonews-tab-content::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.least-news-ul {
+  margin: 0;
+  padding: 0;
+  display: block;
+  background: #fff;
+}
+
+.least-news-ul li {
+  list-style: none;
+  display: block;
+  width: 100%;
+}
+
+.least-news-ul li a {
+  text-decoration: none;
+  display: block; /* Changed to block for clear float */
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f1f1; /* Solid light line instead of dotted */
+  width: 100%;
+  overflow: hidden; /* Clear floats */
+}
+
+.least-news-ul li:last-child a {
+  border-bottom: 0;
+}
+
+/* Sidebar Item Image */
+.least-news-ul .least-news-left {
+  float: left;
+  width: 30%; /* Slightly smaller to give text more room */
+  padding-right: 10px;
+}
+
+.least-news-ul .least-news-left img {
+  min-height: 60px;
+  height: 60px;
+  width: 100%;
+}
+
+/* Sidebar Item Text */
+.least-news-ul .least-news-right {
+  float: left;
+  width: 70%;
+  min-height: 60px;
+  overflow: hidden;
+  display: flex; /* Centers text vertically if only 1 line */
+  align-items: center; 
+}
+
+.least-news-ul .least-news-right h3 {
+  color: #333;
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.least-news-ul li:hover .least-news-right h3 {
+  color: #e74c4f;
 }
 /*================================================
   7. FEATURE NEWS WRAPPER SECTION STYLE
@@ -1031,7 +1070,7 @@ input:-webkit-autofill:focus {
   border-bottom: 0;
 }
 .feature-news-single {
-  background-color: #eff3f4;
+  background-color: #ffffff;
   padding: 7px 6px;
   display: inline-block;
   margin-bottom: -7px;
@@ -1515,6 +1554,847 @@ input:-webkit-autofill:focus {
   line-height: 28px;
   color: #fbc02d;
 }
+/*================================================
+  9. Updated Home Page CSS STYLE
+==================================================*/
+:root {
+    --primary-color: #D32F2F; /* The red color from samples */
+    --dark-overlay: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%);
+    --hero-height: 450px; /* Fixed height to ensure alignment across all 3 columns */
+    --border-radius: 0px; /* Squared corners as per sample */
+}
+
+/* Section Spacing */
+.hero-modern-section {
+    padding: 20px 0;
+    background-color: #ffffff;
+}
+
+/* --- The Grid Structure --- */
+/* Removes default gutter padding for a tighter grid */
+.hero-grid-row { margin: 0 -5px; }
+.hero-col { padding: 0 5px; }
+/* --- The Grid Structure --- */
+/* Adjust margins to align with the rest of the page */
+.hero-grid-row { 
+    margin-right: -15px; 
+    margin-left: -15px; 
+}
+
+/* Add standard 15px padding to columns. 
+   15px on the left of one col + 15px on the right of the next = 30px total gap. */
+.hero-col { 
+    padding-right: 15px; 
+    padding-left: 15px; 
+}
+
+/* --- Middle Sub Cards (Stacked) --- */
+.sub-card {
+    /* Adjust height for the new gap */
+    height: calc(50% - 15px) !important;
+    /* Add margin to the bottom of the first card to create a vertical gap */
+    margin-bottom: 30px;
+}
+
+/* Remove margin from the bottom card so it aligns perfectly */
+.sub-card:last-child {
+    margin-bottom: 0;
+}
+/* --- Common Card Styles --- */
+.hero-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    width: 100%;
+    background: #eee; /* Placeholder color */
+}
+
+/* Forces the main container heights to match */
+.main-card-wrap, .sub-card-wrap, .hero-tab-wrapper {
+    height: var(--hero-height);
+}
+
+.hero-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    color: #fff;
+}
+.hero-link:hover { color: #fff; text-decoration: none; }
+
+/* Image Handling */
+.hero-img-box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.hero-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.hero-card:hover .hero-img-box img {
+    transform: scale(1.05); /* Subtle zoom effect */
+}
+
+/* Gradient Overlay */
+.hero-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0; top: 0;
+    background: var(--dark-overlay);
+}
+
+/* Content Positioning */
+.hero-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    z-index: 2;
+    width: 100%;
+}
+
+/* Category Badge (Red box) */
+.badge-cat {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+/* Typography */
+.hero-content h2 {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    color: #fff;
+}
+.hero-content p {
+    font-size: 14px;
+    color: #ddd;
+    margin-bottom: 0;
+    line-height: 1.5;
+    /* Limit to 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* --- Middle Sub Cards (Stacked) --- */
+.sub-card {
+    /* Calculates exactly half height minus the gap space */
+    height: calc(50% - 5px) !important; 
+}
+.hero-content.small {
+    padding: 15px;
+}
+.hero-content.small h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.4;
+    color: #fff;
+    /* Limit to 3 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* --- Right Side: Modern Tabs --- */
+.hero-tab-wrapper {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.hero-nav-tabs {
+    border-bottom: 2px solid var(--primary-color);
+    display: flex;
+}
+.hero-nav-tabs .nav-item {
+    flex: 1;
+    margin-bottom: -2px; /* Overlap border */
+}
+.hero-nav-tabs .nav-link {
+    width: 100%;
+    border: none;
+    color: #333;
+    font-weight: 700;
+    padding: 12px 0;
+    text-align: center;
+    background: #f5f5f5;
+    transition: 0.3s;
+    border-radius: 0;
+    font-size: 16px;
+}
+.hero-nav-tabs .nav-link.active {
+    color: #fff;
+    background: var(--primary-color);
+}
+
+.hero-tab-content {
+    flex: 1;
+    overflow-y: auto; /* Enables scrolling for long lists */
+    padding: 0;
+}
+/* Clean scrollbar styling */
+.hero-tab-content::-webkit-scrollbar { width: 3px; }
+.hero-tab-content::-webkit-scrollbar-thumb { background: #ccc; }
+
+.hero-list-group {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.hero-list-group li {
+    border-bottom: 1px solid #f1f1f1;
+    padding: 10px 12px;
+    transition: 0.2s;
+}
+.hero-list-group li:hover { background: #f9f9f9; }
+
+.hero-list-group a {
+    display: flex;
+    align-items: flex-start;
+    text-decoration: none;
+}
+/* Number counters */
+.list-count {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e0e0e0; /* Light gray number like sample */
+    line-height: 1;
+    margin-right: 12px;
+    min-width: 20px;
+    text-align: center;
+}
+/* Highlight top 3 popular items if desired */
+.hero-list-group li:nth-child(-n+3) .list-count.trend {
+     color: rgba(211, 47, 47, 0.3); 
+}
+
+.list-text h6 {
+    font-size: 17px;
+    font-weight: 500;
+    color: #333;
+    line-height: 1.3;
+    margin-bottom: 0;
+    /* Limit to 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.hero-list-group li:hover .list-text h6 { color: var(--primary-color); }
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .hero-col { margin-bottom: 15px; }
+    .main-card-wrap, .sub-card-wrap, .hero-tab-wrapper { height: auto; }
+    .main-card { height: 300px; }
+    .sub-card { height: 200px !important; margin-bottom: 10px; }
+    .hero-tab-wrapper { height: 400px; } /* Keep tabs scrollable on mobile */
+}
+
+
+
+
+/*================================================
+  End Hero Section STYLE
+==================================================*/
+
+/* --- Modern Tabs (Right) --- */
+.modern-tab-wrapper {
+    background: #fff;
+    border: 1px solid #f1f1f1;
+    border-radius: 8px;
+    padding: 15px;
+    height: 400px; /* Match Main Hero Height */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.modern-nav .nav-link {
+    background: #f8f9fa;
+    color: #555;
+    font-weight: 600;
+    border-radius: 4px;
+    margin: 0 2px;
+    padding: 8px 0;
+    transition: all 0.3s;
+}
+.modern-nav .nav-link.active {
+    background: #0d2e5b;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(13, 46, 91, 0.3);
+}
+
+.modern-tab-content {
+    flex-grow: 1;
+    overflow-y: auto; /* Scrollable if list is long */
+}
+/* Scrollbar styling for tabs */
+.modern-tab-content::-webkit-scrollbar {
+    width: 4px;
+}
+.modern-tab-content::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 4px;
+}
+
+.modern-list-group {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.modern-list-group li {
+    border-bottom: 1px dashed #eee;
+    padding: 10px 0;
+}
+.modern-list-group li:last-child {
+    border-bottom: none;
+}
+.modern-list-group a {
+    display: flex;
+    text-decoration: none;
+    align-items: flex-start;
+}
+.modern-list-group .counter {
+    background: #f1f1f1;
+    color: #555;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 10px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+.modern-list-group .counter.highlight {
+    background: #e74c4f; /* Red for popular */
+    color: #fff;
+}
+.modern-list-group p {
+    margin: 0;
+    color: #333;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+.modern-list-group li:hover p {
+    color: #e74c4f;
+}
+/* 1. Make the ROW a flex container (You already have this) */
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* 2. CRITICAL FIX: Make the COLUMN a flex container too */
+/* This forces the child (.clean-cat-wrapper) to be able to stretch */
+.row-eq-height > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 3. Make the wrapper grow to fill the column */
+.clean-cat-wrapper {
+    background: #fff;
+    flex: 1;        /* This makes it stretch to fill the height */
+    width: 100%;    /* Ensures it takes full width */
+    border-right: 1px solid #eee; 
+    padding: 0 15px;
+    margin-bottom: 20px; /* Optional: Keep spacing at bottom */
+    
+    /* Ensure the border goes all the way by removing any default margins interfering */
+    display: flex;       
+    flex-direction: column;
+}
+
+/* Optional: Pushes the list to the bottom if you want content spaced out, 
+   otherwise remove this block */
+.clean-lead-news {
+    /* flex: 0 0 auto; */
+}
+.clean-small-list {
+    /* flex: 1 1 auto; */
+}
+
+/* Styles for header/text (same as before) */
+.clean-cat-heading {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+    width: 100%;
+}
+.clean-cat-heading .title a {
+    color: #202020;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Images and List Styles */
+.clean-lead-news { margin-bottom: 15px; }
+.clean-lead-news a { text-decoration: none; }
+.clean-lead-img img { width: 100%; height: auto; border-radius: 3px; margin-bottom: 8px; }
+/* --- 1. BIG HEADLINE (Lead News) --- */
+.clean-lead-content h3 {
+    font-size: 20px;       /* Increased text size */
+    line-height: 28px;     /* Adjust line height for readability */
+    font-weight: 700;
+    margin: 0;
+    color: #000;
+
+    /* FORCE EQUAL HEIGHT: Limits to exactly 3 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;        /* Show max 3 lines, then add ... */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    /* This ensures even 1-line titles take up the space of 3 lines 
+       so everything stays aligned. (28px line-height * 3 = 84px) */
+    min-height: 84px;      
+}
+.clean-lead-content h3:hover { color: #e74c4f; }
+.clean-small-list ul { margin: 0; padding: 0; list-style: none; }
+/* Increase spacing between list items for a cleaner look */
+.clean-small-list li {
+    border-top: 1px solid #e1e1e1;
+    padding: 12px 0;      /* Increased padding */
+}
+/* --- 2. SMALL LIST ITEMS --- */
+.clean-small-list li a {
+    color: #333;
+    font-size: 18px;       /* Increased text size */
+    line-height: 22px;     
+    text-decoration: none;
+    display: block;
+
+    /* FORCE EQUAL HEIGHT: Limits to exactly 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;        /* Show max 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* Ensures alignment even if text is short (22px * 2 = 44px) */
+    min-height: 44px;      
+}
+.clean-small-list li a:hover { color: #e74c4f; }
+
+/* Remove border from last column on Desktop */
+@media (min-width: 992px) {
+    .col-lg-3:last-child .clean-cat-wrapper {
+        border-right: none;
+    }
+}
+
+/* --- Section Spacing (Reduced Whitespace) --- */
+.international-modern-section {
+    padding: 20px 0; /* Reduced from 40px */
+    background: #fff;
+}
+
+/* --- Clean Header Style (Solid Border) --- */
+.modern-header-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px; /* Reduced gap */
+    width: 100%;
+    position: relative;
+}
+
+.modern-header-title {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    padding-right: 15px;
+    background: #fff; /* Covers the line behind text */
+    z-index: 2;
+}
+
+.modern-header-title .bar {
+    font-size: 20px;
+    color: #0d2e5b;
+    font-weight: 900;
+    margin-right: 10px;
+    line-height: 1;
+}
+
+.modern-header-title a {
+    color: #0d2e5b;
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+/* SOLID LINE styling */
+.modern-header-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 2px;
+    background: #e1e1e1; /* Clean solid gray line */
+    z-index: 1;
+}
+
+/* --- Left Side Content (Big Post) --- */
+.modern-lead-news {
+    margin-bottom: 0; /* Remove extra space */
+}
+
+.modern-lead-img {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.modern-lead-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Overlay Title on Image Bottom */
+.modern-lead-title-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 15px;
+}
+.modern-lead-title-overlay h2 {
+    font-size: 18px;
+    line-height: 24px;
+    color: #fff;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Body Text for Equal Height */
+.modern-lead-body {
+    padding-top: 5px;
+}
+.modern-lead-body p {
+    font-size: 16px;
+    line-height: 24px;
+    color: #333;
+    text-align: justify;
+    margin: 0;
+}
+
+/* --- Middle List (Thumbnails) --- */
+.modern-small-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.modern-small-list li {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+.modern-small-list li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.modern-small-list a {
+    display: flex;
+    text-decoration: none;
+    align-items: flex-start; /* Align top to handle long text */
+}
+.modern-small-list .img-thumb {
+    width: 100px; /* Fixed width */
+    height: 65px;
+    flex-shrink: 0;
+    margin-right: 12px;
+}
+.modern-small-list .img-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+}
+.modern-small-list .text-content h3 {
+    font-size: 18px;
+    line-height: 20px;
+    margin: 0;
+    color: #333;
+    font-weight: 500;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit text to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* --- Right Sidebar (Circular Images) --- */
+.modern-circle-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.modern-circle-list li {
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #eee; /* Box border */
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+.modern-circle-list li:hover {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.modern-circle-list a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.modern-circle-list .img-circle {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    margin-right: 12px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #f8f9fa;
+}
+.modern-circle-list .img-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.modern-circle-list .text-content h3 {
+    font-size: 16px;
+    line-height: 18px;
+    margin: 0;
+    color: #333;
+    font-weight: 600;
+}
+/* --- Modern Grid Item (Bottom Row) --- */
+.clean-lead-content h3 {
+    transition: color 0.3s;
+}
+.clean-lead-news:hover .clean-lead-content h3 {
+    color: #e74c4f;
+}
+/* Section Padding Helper */
+.lifestyle-modern-section {
+    padding: 30px 0;
+}
+/* Ensure table looks clean inside sidebar */
+.namaj-wrapper table td {
+    vertical-align: middle;
+    border-color: #f1f1f1;
+}
+/* --- Video Section Spacing --- */
+.video-gallery-section {
+    padding: 30px 0;
+}
+
+/* --- Clean Video Card --- */
+.clean-video-card {
+    background: #fff;
+    border: 1px solid #f1f1f1;
+    margin-bottom: 5px; /* Spacing for carousel shadows */
+    transition: all 0.3s ease;
+}
+.clean-video-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.clean-video-card a {
+    text-decoration: none;
+    display: block;
+}
+
+/* Thumbnail Area */
+.video-thumb {
+    position: relative;
+    overflow: hidden;
+    height: 160px; /* Fixed height for consistency */
+}
+.video-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.clean-video-card:hover .video-thumb img {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Play Button Overlay */
+.play-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+.clean-video-card:hover .play-overlay {
+    opacity: 1;
+    background: rgba(0,0,0,0.1); /* Lighten overlay on hover */
+}
+
+.play-icon {
+    width: 45px;
+    height: 45px;
+    background: #e74c4f; /* Red Play Button */
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: 0 0 0 4px rgba(231, 76, 79, 0.3); /* Pulsing ring effect */
+}
+
+/* Video Text */
+.video-content {
+    padding: 12px;
+}
+.video-content h3 {
+    font-size: 15px;
+    line-height: 20px;
+    color: #333;
+    font-weight: 600;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 40px; /* Ensures alignment */
+}
+.clean-video-card:hover .video-content h3 {
+    color: #e74c4f;
+}
+/* --- Photo Section Spacing --- */
+.photo-modern-section {
+    padding: 30px 0;
+}
+
+/* --- Clean Photo Card --- */
+.clean-photo-card {
+    background: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.clean-photo-card:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    border-color: #bbb;
+}
+
+/* Thumbnail Wrapper */
+.photo-thumb {
+    position: relative;
+    height: 180px; /* Fixed height for uniformity */
+    overflow: hidden;
+    background: #f8f9fa;
+}
+
+.photo-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Zoom Effect on Hover */
+.clean-photo-card:hover .photo-thumb img {
+    transform: scale(1.1);
+}
+
+/* Overlay */
+.photo-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.clean-photo-card:hover .photo-overlay {
+    opacity: 1;
+}
+
+/* Camera Icon */
+.camera-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255,255,255,0.9);
+    color: #333;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.clean-photo-card:hover .camera-icon {
+    transform: scale(1);
+}
+
+/* Content Text */
+.photo-content {
+    padding: 12px 15px;
+    background: #fff;
+    border-top: 1px solid #f1f1f1;
+}
+
+.photo-content h3 {
+    font-size: 16px;
+    line-height: 22px;
+    margin: 0;
+    color: #333;
+    font-weight: 600;
+    text-align: center;
+    
+    /* Limit to 1 line with ellipsis */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.clean-photo-card:hover .photo-content h3 {
+    color: #0d2e5b; /* Dark Blue */
+}
+
 /*====== FOOTER NEW STYLE ============*/
 .map-heading {
   text-align: center;
@@ -1837,7 +2717,7 @@ input:-webkit-autofill:focus {
   padding: 6px 0;
 }
 .writter-ul-single {
-  background-color: #eff3f4;
+  background-color: #ffffff;
   padding: 7px 6px;
   display: inline-block;
   margin-bottom: -7px;
@@ -2270,28 +3150,34 @@ input:-webkit-autofill:focus {
 .tool-btn.text-size:hover { background: #333; color: #fff; }
 
 /* Ensure the article body has a default transition for smooth resizing */
+/* --- Article Body Wrapper (The Parent) --- */
 #article-body-content {
-    transition: font-size 0.2s ease;
-    line-height: 1.6; /* Good readability */
+    font-size: 20px; /* Sets the DEFAULT starting size */
+    line-height: 34px;
+    transition: font-size 0.2s ease, line-height 0.2s ease;
+    color: #222;
 }
-/* FIX: Force inner elements to inherit the font size */
-    #article-body-content p, 
-    #article-body-content span, 
-    #article-body-content div, 
-    #article-body-content font,
-    #article-body-content b,
-    #article-body-content strong {
-        font-size: inherit !important;
-        line-height: inherit !important;
-    }
 
-    /* Optional: Ensure headers don't get messed up, or let them scale too */
-    #article-body-content h1, 
-    #article-body-content h2, 
-    #article-body-content h3, 
-    #article-body-content h4 {
-        line-height: 1.4 !important;
-    }
+/* --- Inner Elements (The Children) --- */
+/* This forces all paragraphs to follow the Parent's size */
+#article-body-content p, 
+#article-body-content span, 
+#article-body-content div, 
+#article-body-content font,
+#article-body-content b,
+#article-body-content strong {
+    font-size: inherit;   /* Matches the parent (20px) */
+    line-height: inherit; /* Matches the parent (34px) */
+}
+
+/* Keep headers distinct so they don't become tiny */
+#article-body-content h1, 
+#article-body-content h2, 
+#article-body-content h3, 
+#article-body-content h4 {
+    line-height: 1.4 !important;
+    font-size: 1.5em !important; /* Scales relative to body text */
+}
 /*====================== CATAGORY PAGE TAB ==========================*/
 .right-category-tab {
   margin-bottom: 27px;
@@ -2547,7 +3433,7 @@ input:-webkit-autofill:focus {
 }
 #gallery-images-section .owl-prev:hover,
 .owl-next:hover {
-  background: #eff3f4;
+  background: #ffffff;
   color: #ff0000;
 }
 #gallery-images-section .owl-prev {
@@ -2609,7 +3495,7 @@ input:-webkit-autofill:focus {
   position: relative;
   display: inline-block;
   padding: 7px 7px;
-  background: #eff3f4;
+  background: #ffffff;
   width: 100%;
   margin-bottom: 2px;
 }

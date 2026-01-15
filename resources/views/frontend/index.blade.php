@@ -173,791 +173,560 @@
 
 
 <div class="feature-news-wrapper bg-white">
-  <div class="container custom-container">
-    <div class="row custom-row">
-	                 @php
-					$firstcat=DB::table('categories')->where('parent_id',null)->first();
-					$firstcatpostbig=DB::table('posts')->where('category_id',$firstcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(1)->get();
-					$firstcatpostsmall=DB::table('posts')->where('category_id',$firstcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(4)->get();
-					@endphp
-            <div class="col-md-6 col-lg-3 custom-padding">
-              <div class="special-event-heading">
-                <h2 class="title"> <a href="{{ URL::to("$firstcat->slug")}}"><span class="text-span">{{ $firstcat->title ??''}}</span></a><span class="liner"></span></h2>
-              </div><!--/.special-event-heading-->
-           
-
-   @foreach ($firstcatpostbig as $row)
-        <div class="feature-news-lead">
-		 <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-            <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-            <div class="feature-news-heading">
-              
-              <h3>{{ $row->title}}</h3>
-            </div>
-          </a>
-          </div>
-		  @endforeach   
-		  
-		  <ul class="feature-news-ul">
-		  
-		  
-		  @foreach($firstcatpostsmall as $row)
-        <li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-          <div class="feature-news-single">
-            <div class="feature-news-left">
-              <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-            </div>
-            <div class="feature-news-right">
-              
-              <h3>{{ $row->title}}</h3>
-            </div>
-          </div>
-        </a></li>
-		@endforeach  
-		
-		
-       
-		
-		
-		</ul>            </div><!--/.col-md-6 col-lg-3-->
-
+    <div class="container custom-container">
+        <div class="row custom-row row-eq-height">
             
-			
-			
-			<div class="col-md-6 col-lg-3 custom-padding">
-			        @php
-					$secondcat=DB::table('categories')->where('parent_id',null)->skip(1)->first();
-					$secondcatpostbig=DB::table('posts')->where('category_id',$secondcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(1)->get();
-					$secondcatpostsmall=DB::table('posts')->where('category_id',$secondcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(4)->get();
-					@endphp
-              <div class="special-event-heading mobile-heading">
-                <h2 class="title"> <a href="{{ URL::to("$secondcat->slug")}}"><span class="text-span"> {{ $secondcat->title}} </span></a><span class="liner"></span></h2>
-              </div><!--/.special-event-heading-->
-          
+            @php
+                // Fetch the first 4 parent categories
+                $categories = DB::table('categories')->where('parent_id', null)->take(4)->get();
+            @endphp
 
-		  @foreach ($secondcatpostbig as $row)
-        <div class="feature-news-lead">
-          <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-            <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-            <div class="feature-news-heading">
-              
-              <h3>{{ $row->title}}</h3>
-            </div>
-          </a>
-          </div>
-		   @endforeach  
-		  
-		  
-		  <ul class="feature-news-ul">
-		  
-		 @foreach($secondcatpostsmall as $row) 
-        <li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-          <div class="feature-news-single">
-            <div class="feature-news-left">
-              <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-            </div>
-            <div class="feature-news-right">
-              
-              <h3>{{ $row->title}}</h3>
-            </div>
-          </div>
-        </a></li>
-		@endforeach 
-		
-		
-        </ul>            </div><!--/.col-md-4-->
+            @foreach($categories as $category)
+                @php
+                    // Get 1 Big Post for the top
+                    $bigPost = DB::table('posts')
+                                ->where('category_id', $category->id)
+                                ->where('is_feature', 1)
+                                ->orderBy('id','DESC')
+                                ->first();
+                                
+                    // Get 4 Small Posts for the list
+                    $smallPosts = DB::table('posts')
+                                ->where('category_id', $category->id)
+                                ->where('is_feature', 1)
+                                ->orderBy('id','DESC')
+                                ->skip(1)
+                                ->limit(4)
+                                ->get();
+                @endphp
 
-            <div class="col-md-6 col-lg-3 custom-padding">
-              <div class="special-event-heading mobile-heading tab-heading">
-			                      @php
-					$thirdcat=DB::table('categories')->where('parent_id',null)->skip(2)->first();
-					$thirdcatpostbig=DB::table('posts')->where('category_id',$thirdcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(1)->get();
-					$thirdcatpostsmall=DB::table('posts')->where('category_id',$thirdcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(4)->get();
-					@endphp
-                <h2 class="title"> <a href="{{ URL::to("$thirdcat->slug")}}"><span class="text-span">{{ $thirdcat->title}}</span></a><span class="liner"></span></h2>
-              </div><!--/.special-event-heading-->
-              
-       
-	   @foreach ($thirdcatpostbig as $row)
-	   <div class="feature-news-lead">
-          <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-            <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-            <div class="feature-news-heading">
-              
-              <h3>{{ $row->title}}</h3>
-            </div>
-          </a>
-          </div>
-		  @endforeach 
-		  
-		  
-		  
-		  
-		  <ul class="feature-news-ul">
-		  
-		  @foreach($thirdcatpostsmall as $row)
-        <li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-          <div class="feature-news-single">
-            <div class="feature-news-left">
-              <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-            </div>
-            <div class="feature-news-right">
-              
-              <h3>{{ $row->title}}</h3>
-            </div>
-          </div>
-        </a></li>
-		@endforeach  
-		
-		
-		
-		</ul>            </div><!--/.col-md-4-->
+                <div class="col-md-6 col-lg-3 custom-padding">
+                    <div class="clean-cat-wrapper">
+                        
+                        <div class="clean-cat-heading">
+                            <h2 class="title">
+                                <a href="{{ URL::to($category->slug) }}">
+                                    {{ $category->title ?? '' }}
+                                </a>
+                            </h2>
+                        </div>@if($bigPost)
+                            <div class="clean-lead-news">
+                                <a href="{{ route('frontend.details',[$bigPost->id, $bigPost->slug]) }}">
+                                    <div class="clean-lead-img">
+                                        <img src="{{ asset('assets/images/post/'.$bigPost->image_big) }}" class="img-fluid" alt="{{ $bigPost->title }}">
+                                    </div>
+                                    <div class="clean-lead-content">
+                                        <h3>{{ $bigPost->title }}</h3>
+                                    </div>
+                                </a>
+                            </div>
+                        @endif
+
+                        <div class="clean-small-list">
+                            <ul>
+                                @foreach($smallPosts as $row)
+                                    <li>
+                                        <a href="{{ route('frontend.details',[$row->id, $row->slug]) }}">
+                                            {{ $row->title }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                    </div></div>@endforeach
+
+        </div></div></div>
 
 
-        <div class="col-md-6 col-lg-3 custom-padding">
-				    @php
-					$fourthcat=DB::table('categories')->where('parent_id',null)->skip(5)->first();
-					$fourthcatpostbig=DB::table('posts')->where('category_id',$fourthcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(1)->get();
-					$fourthcatpostsmall=DB::table('posts')->where('category_id',$fourthcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(5)->get();
-					@endphp
-          <div class="special-event-heading mobile-heading tab-heading">
-            <h2 class="title"> <a href="{{ URL::to("$fourthcat->slug")}}"><span class="text-span"> {{ $fourthcat->title ??''}}  </span></a><span class="liner"></span></h2>
-          </div><!--/.special-event-heading-->
-          <ul class="writter-ul">
-            
-      
-	  
-
-@foreach($fourthcatpostsmall as $row)
-      <li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-        <div class="writter-ul-single">
-          <div class="writter-ul-left">
-            <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-          </div>
-          <div class="writter-ul-right">
-            <h3>{{ $row->title}}</h3>
-          </div>
-        </div>
-      </a></li>          
-	  @endforeach 
-	  
-	  
-	  </ul>
-
- 
-        </div><!--/.col-md-6 col-lg-3-->
-
-
-
-    </div><!--/.row-->
-  </div><!--/.container-->
-</div><!--/.new-international-->
-
-
-<section class="international">
-  <div class="container custom-container">
-    <div class="row custom-row">
-      <div class="international-news-left">
-        <div class="col-md-12 custom-padding">
-          <div class="special-event-heading">
-		                      @php
-					$fifthcat=DB::table('categories')->where('parent_id',null)->skip(4)->first();
-					$fifthcatpostbig=DB::table('posts')->where('category_id',$fifthcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(1)->get();
-					$fifthcatpostsmall=DB::table('posts')->where('category_id',$fifthcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(5)->get();
-					@endphp
-            <h2 class="title"> <a href="{{ URL::to("$fifthcat->slug")}}"><span class="text-span"> {{ $fifthcat->title ??''}} </span></a><span class="liner"></span></h2>
-          </div><!--/.special-event-heading-->
-          <div class="row custom-row international-news-row">
-            
+<section class="international-modern-section">
+    <div class="container custom-container">
         
-		
-		@foreach ($fifthcatpostbig as $row)
-		<div class="col-md-7 custom-padding">
-         <div class="international-lead">
-           <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-             <div class="international-lead-img">
-               <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-               <div class="international-lead-heading">
-               
-               <h2>{{ $row->title}}</h2>
-               </div>
-             </div>
-             <div class="international-lead-detail">
-               <p style="text-align: justify">{{ $row->short_description}}</p>
-             </div>
-           </a>
-         </div>
-		 @endforeach  
-		 
-		 
-       </div> <div class="col-md-5 custom-padding">
-          <ul class="international-news-ul">
-        
-		@foreach ($fifthcatpostsmall as $row) 
-		<li>
-		  <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-            <div class="international-news-ul-left">
-            <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-            </div>
-            <div class="international-news-ul-right">
-              <h3>{{ $row->title}}</h3>
-            </div>
-          </a>
-        </li>
-		  @endforeach   
-		
-		
+        @php
+            // Left Category (e.g. Exclusive)
+            $catLeft = DB::table('categories')->where('parent_id',null)->skip(4)->first();
+            $catLeftBig = DB::table('posts')->where('category_id', $catLeft->id)->where('is_feature',1)->orderBy('id','DESC')->first();
+            // Get 4 items for the list next to big post
+            $catLeftSmall = DB::table('posts')->where('category_id', $catLeft->id)->where('is_feature',1)->orderBy('id','DESC')->skip(1)->limit(4)->get();
 
-		
-		
-		
-		
-</div>
+            // Right Category (e.g. Interview)
+            $catRight = DB::table('categories')->where('parent_id',null)->skip(5)->first();
+            $catRightPosts = DB::table('posts')->where('category_id', $catRight->id)->where('is_feature',1)->orderBy('id','DESC')->limit(5)->get();
+        @endphp
 
-
-
-
-</ul>          </div><!--/.custom-row-->
-
-        </div><!--/.col-md-12-->
-      </div><!--/.international-news-left-->
-      <div class="international-news-right">
-	  		        @php
-					$sixthcat=DB::table('categories')->where('parent_id',null)->skip(5)->first();
-					$sixthcatpostbig=DB::table('posts')->where('category_id',$fifthcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(1)->get();
-					$sixthcatpostsmall=DB::table('posts')->where('category_id',$fifthcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(3)->get();
-					@endphp
-        <div class="col-md-12 custom-padding">
-          <div class="special-event-heading">
-            <h2 class="title"> <a href="{{ URL::to("$sixthcat->slug")}}"><span class="text-span"> {{ $sixthcat->title ??''}}  </span></a><span class="liner"></span></h2>
-          </div><!--/.special-event-heading-->
-          <ul class="writter-ul">
+        <div class="row custom-row">
             
-			
-		@foreach($sixthcatpostsmall as $row)	
-      <li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-        <div class="writter-ul-single writter-ul-single-white">
-          <div class="writter-ul-left">
-            <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-          </div>
-          <div class="writter-ul-right">
-            <h3>{{ $row->title}}</h3>
-          </div>
-        </div>
-      </a></li>
-	  @endforeach
-	  
-	  
+            <div class="col-md-8 custom-padding">
+                
+                <div class="modern-header-wrapper">
+                    <div class="modern-header-line"></div>
+                    <div class="modern-header-title">
+                        <span class="bar">|</span>
+                        <a href="{{ URL::to($catLeft->slug) }}">{{ $catLeft->title ?? '' }}</a>
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-md-7">
+                        @if($catLeftBig)
+                        <div class="modern-lead-news">
+                            <a href="{{ route('frontend.details',[$catLeftBig->id, $catLeftBig->slug]) }}">
+                                <div class="modern-lead-img">
+                                    <img src="{{ asset('assets/images/post/'.$catLeftBig->image_big) }}" alt="{{ $catLeftBig->title }}">
+                                    <div class="modern-lead-title-overlay">
+                                        <h2>{{ $catLeftBig->title }}</h2>
+                                    </div>
+                                </div>
+                                <div class="modern-lead-body">
+                                     <p>{{ Str::limit($catLeftBig->short_description, 220) }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        @endif
+                    </div>
 
-         </ul><!--/.writter-ul-->
-          <div class="footer-facebook-like">
-		  <div class="fb-page" data-href="https://www.facebook.com/{{$gs->facebookpage_id}}" data-width="300" data-height="250" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/{{$gs->facebookpage_id}}"><a href="https://www.facebook.com/{{$gs->facebookpage_id}}">{{ $gs->title }}</a></blockquote></div></div>
+                    <div class="col-md-5">
+                        <ul class="modern-small-list">
+                            @foreach($catLeftSmall as $row)
+                            <li>
+                                <a href="{{ route('frontend.details',[$row->id, $row->slug]) }}">
+                                    <div class="img-thumb">
+                                        <img src="{{ asset('assets/images/post/'.$row->image_big) }}" alt="{{ $row->title }}">
+                                    </div>
+                                    <div class="text-content">
+                                        <h3>{{ $row->title }}</h3>
+                                    </div>
+                                </a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div><div class="col-md-4 custom-padding">
+                
+                <div class="modern-header-wrapper">
+                    <div class="modern-header-line"></div>
+                    <div class="modern-header-title">
+                         <span class="bar">|</span>
+                        <a href="{{ URL::to($catRight->slug) }}">{{ $catRight->title ?? '' }}</a>
+                    </div>
+                </div>
 
-		  </div><!--/.footer-facebook-like-->
-          <!-- <div class="right-international-banner">
-          <img src="media/common/sider-banner.gif" alt="Banner AD.">
-        </div> -->
-        </div><!--/.col-md-12-->
-      </div><!--/.international-news-right-->
-    </div><!--/.row-->
-  </div><!--/.container-->
-</section><!--/.international-->
+                <ul class="modern-circle-list">
+                    @foreach($catRightPosts as $row)
+                    <li>
+                        <a href="{{ route('frontend.details',[$row->id, $row->slug]) }}">
+                            <div class="img-circle">
+                                <img src="{{ asset('assets/images/post/'.$row->image_big) }}" alt="{{ $row->title }}">
+                            </div>
+                            <div class="text-content">
+                                <h3>{{ $row->title }}</h3>
+                            </div>
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+
+            </div></div></div></section>
+
 <section class="capital-section bg-white">
   <div class="container custom-container">
-    <div class="row custom-row">
-      <div class="col-md-6 custom-padding col-lg-3">
-	                      @php
-					$seventhcat=DB::table('categories')->where('parent_id',null)->skip(6)->first();
-					$seventhcatpostbig=DB::table('posts')->where('category_id',$seventhcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(1)->get();
-					$seventhcatpostsmall=DB::table('posts')->where('category_id',$seventhcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(4)->get();
-					@endphp  
-        <div class="special-event-heading">
-          <h2 class="title"> <a href="{{ URL::to("$seventhcat->slug")}}"><span class="text-span"> {{ $seventhcat->title ??''}} </span></a><span class="liner"></span></h2>
-        </div><!--/.special-event-heading-->
-        
-		@foreach ($seventhcatpostbig as $row)
-        <div class="feature-news-lead">
-          <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-            <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-            <div class="feature-news-heading">
-              
-              <h3>{{ $row->title}}</h3>
-            </div>
-          </a>
-          </div>
-		   @endforeach  
-		  
-		  <ul class="feature-news-ul">
-		  
-		  
-		  
-		 @foreach($seventhcatpostsmall as $row) 
-        <li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-          <div class="feature-news-single">
-            <div class="feature-news-left">
-              <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-            </div>
-            <div class="feature-news-right">
-              
-              <h3>{{ $row->title}}</h3>
-            </div>
-          </div>
-        </a></li>
-		 @endforeach 
-		
-		
-		</ul>      </div><!--/.col-md-3-->
-      <div class="col-md-6 col-lg-3 custom-padding">
-	  				@php
-					$eighthcat=DB::table('categories')->where('parent_id',null)->skip(7)->first();
-					$eighthcatpostbig=DB::table('posts')->where('category_id',$eighthcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(1)->get();
-					$eighthcatpostsmall=DB::table('posts')->where('category_id',$eighthcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(4)->get();
-					@endphp 
-        <div class="special-event-heading mobile-heading">
-          <h2 class="title"> <a href="{{ URL::to("$eighthcat->slug")}}"><span class="text-span">  {{ $eighthcat->title ??''}} </span></a><span class="liner"></span></h2>
-        </div><!--/.special-event-heading-->
-        
-		
-		@foreach ($eighthcatpostbig as $row)
-        <div class="feature-news-lead">
-          <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-            <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-            <div class="feature-news-heading">
-              
-              <h3>{{ $row->title}}</h3>
-            </div>
-          </a>
-          </div>
-		  @endforeach 
-		  
-		  
-		  <ul class="feature-news-ul">
-		  
-		  
-		  
-		 @foreach($eighthcatpostsmall as $row)  
-        <li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-          <div class="feature-news-single">
-            <div class="feature-news-left">
-              <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-            </div>
-            <div class="feature-news-right">
-              
-              <h3>{{ $row->title}}</h3>
-            </div>
-          </div>
-        </a></li>
-		 @endforeach   
-		
-		
-		
-        </ul>      </div><!--/.col-md-3-->
-      <div class="col-md-6 col-lg-3 custom-padding">
-	                  @php
-					$ninethcat=DB::table('categories')->where('parent_id',null)->skip(8)->first();
-					$ninethcatpostbig=DB::table('posts')->where('category_id',$ninethcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(1)->get();
-					$ninethcatpostsmall=DB::table('posts')->where('category_id',$ninethcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(3)->get();
-					@endphp
-        <div class="special-event-heading mobile-heading tab-heading">
-          <h2 class="title"> <a href="{{ URL::to("$ninethcat->slug")}}"><span class="text-span"> {{ $ninethcat->title ??''}} </span></a><span class="liner"></span></h2>
-        </div><!--/.special-event-heading-->
-        
-		
-		@foreach ($ninethcatpostbig as $row)
-        <div class="feature-news-lead">
-          <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-            <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-            <div class="feature-news-heading">
-              
-              <h3>{{ $row->title}}</h3>
-            </div>
-          </a>
-          </div>
-		   @endforeach  
-		  
-		  
-		  <ul class="feature-news-ul">
-		  
-		  
-		  @foreach($ninethcatpostsmall as $row)
-        <li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-          <div class="feature-news-single">
-            <div class="feature-news-left">
-              <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-            </div>
-            <div class="feature-news-right">
-              
-              <h3>{{ $row->title}}</h3>
-            </div>
-          </div>
-        </a></li>
-		@endforeach 
-		
-		
-        
-		
-		</ul>      </div><!--/.col-md-3-->
-      <div class="col-md-6 col-lg-3 custom-padding">
-	                       @php
-					$tenthcat=DB::table('categories')->where('parent_id',null)->skip(9)->first();
-					$tenthcatpostbig=DB::table('posts')->where('category_id',$tenthcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(1)->get();
-					$tenthcatpostsmall=DB::table('posts')->where('category_id',$tenthcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(4)->get();
-					@endphp 
-        <div class="special-event-heading mobile-heading tab-heading">
-          <h2 class="title"> <a href="{{ URL::to("$tenthcat->slug")}}"><span class="text-span"> {{ $tenthcat->title ??''}} </span></a><span class="liner"></span></h2>
-        </div><!--/.special-event-heading-->
-        
-        @foreach ($tenthcatpostbig as $row)
-		<div class="feature-news-lead">
-          <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-            <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-            <div class="feature-news-heading">
-              
-              <h3>{{ $row->title}}</h3>
-            </div>
-          </a>
-          </div>
-		   @endforeach  
-		  
-		  
-		  <ul class="feature-news-ul">
-		  
-		  @foreach($tenthcatpostsmall as $row)
-        <li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-          <div class="feature-news-single">
-            <div class="feature-news-left">
-              <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-            </div>
-            <div class="feature-news-right">
-              
-              <h3>{{ $row->title}}</h3>
-            </div>
-          </div>
-        </a></li>
-		@endforeach
-		
-		
-		
-       </ul>      </div><!--/.col-md-3-->
-    </div><!--/.row-->
-  </div><!--/.container-->
-</section><!--/.capital-section-->
-<section class="sports">
-  <div class="container custom-container">
-  	                       @php
-					$eleventhcat=DB::table('categories')->where('parent_id',null)->skip(10)->first();
-					$eleventhcatpostbig=DB::table('posts')->where('category_id',$eleventhcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(1)->get();
-					$eleventhcatpostsmall=DB::table('posts')->where('category_id',$eleventhcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(4)->get();
-					$eleventhcatpostsmall2=DB::table('posts')->where('category_id',$eleventhcat->id)->where('is_feature',1)->orderBy('id','DESC')->skip(4)->limit(4)->get();
-					@endphp 
-    <div class="row custom-row">
-      <div class="sports-news-left">
-        <div class="col-md-12">
-          <div class="special-event-heading">
-            <h2 class="title"> <a href="{{ URL::to("$eleventhcat->slug")}}"><span class="text-span"> {{ $eleventhcat->title ??''}} </span></a><span class="liner"></span></h2>
-          </div><!--/.special-event-heading-->
-          
-        
-		@foreach ($eleventhcatpostbig as $row)
-		<div class="row custom-row">
-          <div class="col-md-6 custom-padding">
-            <div class="sports-lead-news">
-              <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-                <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-                <div class="sports-lead-news-text">
-                  <h2>{{ $row->title}}</h2>
-                </div>
-              </a>
-            </div>
-          </div>
-		   @endforeach 
-		  
-		  
-		  
-		  
-		  <div class="col-md-6 custom-padding">
-          <div class="row custom-row">
-		  
-		  
-		  
-		  
-		  
-		  @foreach($eleventhcatpostsmall2 as $row)
-          <div class="col-md-6 custom-padding">
-            <div class="sports-small-news">
-              <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-                <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-                <div class="sports-small-news-text">
-                  <h3>{{ $row->title}}</h3>
-                </div>
-              </a>
-            </div>
-          </div>
-		  @endforeach
-		  
-		  
-          
-		  
-		  
-		  
-		  </div>
-          </div>
-          </div>
-		  
-		  
-		  
-          <div class="row custom-row">
-		  
-		  
-		   @foreach($eleventhcatpostsmall as $row)
-          <div class="col-md-3 custom-padding">
-            <div class="sports-small-news">
-              <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-              <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-                <div class="sports-small-news-text">
-                  <h3>{{ $row->title}}</h3>
-                </div>
-              </a>
-            </div>
-          </div>
-@endforeach
-		  
-		  
-		  
-		  
-		  </div>        </div><!--/.col-md-12-->
-      </div><!--/.sports-news-left-->
-      <div class="sports-news-right">
-        <div class="col-md-12">
-          <div class="sports-banner-1 text-center">
-             {!!$gs->sidebar_ads!!}
-          </div><!--/.sports-banner-1-->
-          <div class="sports-banner-2">
-            {!!$gs->sidebar1_ads!!}
-          </div><!--/.sports-banner-2-->
-        </div><!--/.col-md-12-->
-      </div><!--/.sports-news-right-->
-    </div><!--/.row-->
-  </div><!--/.container-->
-</section><!--/.sports-->
+    <div class="row custom-row row-eq-height">
 
+        @php
+            // Fetch the next 4 categories (Categories 7, 8, 9, 10)
+            // We skip the first 6, then take the next 4
+            $capitalCategories = DB::table('categories')->where('parent_id', null)->skip(6)->take(4)->get();
+        @endphp
 
-<section class="life-style-section">
+        @foreach($capitalCategories as $category)
+            @php
+                // Get 1 Big Post
+                $bigPost = DB::table('posts')
+                            ->where('category_id', $category->id)
+                            ->where('is_feature', 1)
+                            ->orderBy('id','DESC')
+                            ->first();
+
+                // Get 4 Small Posts for the list
+                $smallPosts = DB::table('posts')
+                            ->where('category_id', $category->id)
+                            ->where('is_feature', 1)
+                            ->orderBy('id','DESC')
+                            ->skip(1)
+                            ->limit(4)
+                            ->get();
+            @endphp
+
+            <div class="col-md-6 col-lg-3 custom-padding">
+                <div class="clean-cat-wrapper">
+
+                    <div class="clean-cat-heading">
+                        <h2 class="title">
+                            <a href="{{ URL::to($category->slug) }}">
+                                {{ $category->title ?? '' }}
+                            </a>
+                        </h2>
+                    </div>
+
+                    @if($bigPost)
+                        <div class="clean-lead-news">
+                            <a href="{{ route('frontend.details',[$bigPost->id, $bigPost->slug]) }}">
+                                <div class="clean-lead-img">
+                                    <img src="{{ asset('assets/images/post/'.$bigPost->image_big) }}" class="img-fluid" alt="{{ $bigPost->title }}">
+                                </div>
+                                <div class="clean-lead-content">
+                                    <h3>{{ $bigPost->title }}</h3>
+                                </div>
+                            </a>
+                        </div>
+                    @endif
+
+                    <div class="clean-small-list">
+                        <ul>
+                            @foreach($smallPosts as $row)
+                                <li>
+                                    <a href="{{ route('frontend.details',[$row->id, $row->slug]) }}">
+                                        {{ $row->title }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+
+                </div></div>@endforeach
+
+    </div></div></section>
+
+<section class="sports-modern-section bg-white">
   <div class="container custom-container">
     <div class="row custom-row">
-      <div class="life-style-left">
-        <div class="col-md-12 custom-padding">
-		                    @php
-					$firstcat=DB::table('categories')->where('parent_id',null)->first();
-					$firstcatpostbig=DB::table('posts')->where('category_id',$firstcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(3)->get();
-					$firstcatpostsmall=DB::table('posts')->where('category_id',$firstcat->id)->where('is_feature',1)->orderBy('id','DESC')->skip(3)->limit(4)->get();
-					@endphp
-          <div class="special-event-heading">
-            <h2 class="title"> <a href="{{ URL::to("$firstcat->slug")}}"><span class="text-span"> আলোচিত সংবাদ সমূহ </span></a><span class="liner"></span></h2>
-          </div><!--/.special-event-heading-->
-          <div class="row custom-row life-style-row">
+
+      <div class="col-md-9 custom-padding">
+        
+        @php
+            // Get Category 11 (Sports)
+            $catSports = DB::table('categories')->where('parent_id',null)->skip(10)->first();
             
-			
-			@foreach ($firstcatpostbig as $row)
-        <div class="col-md-4 custom-padding">
-          <div class="life-style-single">
-            <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-            <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-              <div class="life-style-single-text">
-                
-                <h2>{{ $row->title}}</h2>
-              </div>
-            </a>
-          </div>
-        </div>
-		@endforeach 
-		
-		
-@foreach ($firstcatpostsmall as $row)  
-        <div class="col-md-3 custom-padding">
-          <div class="life-style-single">
-            <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-              <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-              <div class="life-style-single-text">
-                
-                <h2>{{ $row->title}}</h2>
-              </div>
-            </a>
-          </div>
-        </div>
-		@endforeach 
+            // Get 1 Big Post
+            $sportBig = DB::table('posts')->where('category_id', $catSports->id)->where('is_feature',1)->orderBy('id','DESC')->first();
+            
+            // Get Next 4 Small Posts (For Right List)
+            $sportList = DB::table('posts')->where('category_id', $catSports->id)->where('is_feature',1)->orderBy('id','DESC')->skip(1)->limit(4)->get();
+            
+            // Get Next 4 Grid Posts (For Bottom Row)
+            $sportGrid = DB::table('posts')->where('category_id', $catSports->id)->where('is_feature',1)->orderBy('id','DESC')->skip(5)->limit(4)->get();
+        @endphp
 
+        <div class="modern-header-wrapper">
+            <div class="modern-header-line"></div>
+            <div class="modern-header-title">
+                <span class="bar">|</span>
+                <a href="{{ URL::to($catSports->slug) }}">{{ $catSports->title ?? '' }}</a>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            
+            <div class="col-md-7">
+                @if($sportBig)
+                <div class="modern-lead-news">
+                    <a href="{{ route('frontend.details',[$sportBig->id, $sportBig->slug]) }}">
+                        <div class="modern-lead-img">
+                            <img src="{{ asset('assets/images/post/'.$sportBig->image_big) }}" alt="{{ $sportBig->title }}">
+                            <div class="modern-lead-title-overlay">
+                                <h2>{{ $sportBig->title }}</h2>
+                            </div>
+                        </div>
+                        <div class="modern-lead-body">
+                                <p>{{ Str::limit($sportBig->short_description, 200) }}</p>
+                        </div>
+                    </a>
+                </div>
+                @endif
+            </div>
+
+            <div class="col-md-5">
+                <ul class="modern-small-list">
+                    @foreach($sportList as $row)
+                    <li>
+                        <a href="{{ route('frontend.details',[$row->id, $row->slug]) }}">
+                            <div class="img-thumb">
+                                <img src="{{ asset('assets/images/post/'.$row->image_big) }}" alt="{{ $row->title }}">
+                            </div>
+                            <div class="text-content">
+                                <h3>{{ $row->title }}</h3>
+                            </div>
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div><div class="row custom-row row-eq-height">
+            @foreach($sportGrid as $row)
+            <div class="col-md-3 custom-padding">
+                <div class="clean-cat-wrapper h-100 border-0 p-0 mb-3">
+                     <div class="clean-lead-news mb-0">
+                        <a href="{{ route('frontend.details',[$row->id, $row->slug]) }}">
+                            <div class="clean-lead-img">
+                                <img src="{{ asset('assets/images/post/'.$row->image_big) }}" class="img-fluid" alt="{{ $row->title }}">
+                            </div>
+                            <div class="clean-lead-content mt-2">
+                                <h3 style="font-size: 16px; line-height: 22px; min-height: 44px; -webkit-line-clamp: 2;">{{ $row->title }}</h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+      </div><div class="col-md-3 custom-padding">
         
-		</div><!--/.row-->
-        </div><!--/.col-md-12-->
-      </div><!--/.life-style-left-->
-      <div class="life-style-right">
-        <div class="col-md-12">
-          <div class="namaj-time">
-            <div class="namaj-time-heading">
-              <h2> নামাজের সময়সূচী </h2>
-            </div><!--/.namaj-time-heading-->
-            <div class="namaj-time-body">
-              <div class="namaj-time-body-left">
-                <img class="img-fluid" src="{{asset('assets/frontend/namaj-time.jpg')}}" alt="Masjid">
-              </div><!--/.namaj-time-body-left-->
-              <div class="namaj-time-body-right">
-                <table class="table table-striped namaj-time-table">
-                  <tbody>
-                    <tr>
-    <td>ফজর</td>
-    <td>{{$gs->fazar}}</td>
-  </tr><tr>
-    <td>জোহর</td>
-    <td>{{$gs->jahar}}</td>
-  </tr><tr>
-    <td>আসর</td>
-    <td>{{$gs->achar}}</td>
-  </tr><tr>
-    <td>মাগরিব</td>
-    <td>{{$gs->magrib}}</td>
-  </tr><tr>
-    <td>এশা</td>
-    <td>{{$gs->esha}}</td>
-  </tr>                  </tbody>
-                </table>
-              </div><!--/.namaj-time-body-right-->
-            </div><!--/.namaj-time-body-->
-          </div><!--/.namaj-time-->
-          <div class="life-style-2 text-center">
-             {!!$gs->sidebar2_ads!!}
-          </div><!--/.sports-banner-2-->
-        </div><!--/.col-md-12-->
-      </div><!--/.life-style-right-->
-    </div><!--/.row-->
-  </div><!--/.container-->
-</section><!--/.life-style-section-->
+        <div class="modern-header-wrapper">
+             <div class="modern-header-line"></div>
+             <div class="modern-header-title">
+                <span class="bar">|</span>
+                <span>বিজ্ঞাপন</span> </div>
+        </div>
+
+        <div class="text-center mb-4">
+             {!! $gs->sidebar_ads !!}
+        </div>
+        
+        <div class="text-center">
+             {!! $gs->sidebar1_ads !!}
+        </div>
+
+      </div></div></div></section>
+
+
+<section class="lifestyle-modern-section bg-white">
+  <div class="container custom-container">
+    <div class="row custom-row">
+
+      <div class="col-md-9 custom-padding">
+        
+        @php
+           // Get Category 1 (or whichever category you want here)
+           $firstcat = DB::table('categories')->where('parent_id',null)->first();
+           
+           // Get 3 Big Posts (Top Row)
+           $lifeBig = DB::table('posts')->where('category_id',$firstcat->id)->where('is_feature',1)->orderBy('id','DESC')->limit(3)->get();
+           
+           // Get 4 Small Posts (Bottom Row)
+           $lifeSmall = DB::table('posts')->where('category_id',$firstcat->id)->where('is_feature',1)->orderBy('id','DESC')->skip(3)->limit(4)->get();
+        @endphp
+
+        <div class="modern-header-wrapper">
+            <div class="modern-header-line"></div>
+            <div class="modern-header-title">
+                <span class="bar">|</span>
+                <a href="{{ URL::to($firstcat->slug) }}">আলোচিত সংবাদ সমূহ</a>
+            </div>
+        </div>
+
+        <div class="row custom-row row-eq-height mb-4">
+            @foreach($lifeBig as $row)
+            <div class="col-md-4 custom-padding">
+                <div class="clean-cat-wrapper h-100 border-0 p-0">
+                    <div class="clean-lead-news mb-0">
+                        <a href="{{ route('frontend.details',[$row->id, $row->slug]) }}">
+                            <div class="clean-lead-img">
+                                <img src="{{ asset('assets/images/post/'.$row->image_big) }}" class="img-fluid" alt="{{ $row->title }}">
+                            </div>
+                            <div class="clean-lead-content mt-2">
+                                <h3 style="font-size: 18px; line-height: 24px;">{{ $row->title }}</h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+        <div class="row custom-row row-eq-height">
+            @foreach($lifeSmall as $row)
+            <div class="col-md-3 custom-padding">
+                <div class="clean-cat-wrapper h-100 border-0 p-0">
+                    <div class="clean-lead-news mb-0">
+                        <a href="{{ route('frontend.details',[$row->id, $row->slug]) }}">
+                            <div class="clean-lead-img">
+                                <img src="{{ asset('assets/images/post/'.$row->image_big) }}" class="img-fluid" alt="{{ $row->title }}">
+                            </div>
+                            <div class="clean-lead-content mt-2">
+                                <h3 style="font-size: 16px; line-height: 22px; -webkit-line-clamp: 2;">{{ $row->title }}</h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+      </div><div class="col-md-3 custom-padding">
+        
+        <div class="modern-header-wrapper">
+             <div class="modern-header-line"></div>
+             <div class="modern-header-title">
+                <span class="bar">|</span>
+                <span>নামাজের সময়সূচী</span>
+            </div>
+        </div>
+
+        <div class="namaj-wrapper mb-4" style="border: 1px solid #eee; padding: 10px;">
+            <div class="text-center mb-2">
+                <img src="{{ asset('assets/frontend/namaj-time.jpg') }}" class="img-fluid" alt="Masjid" style="max-height: 100px;">
+            </div>
+            <table class="table table-striped table-sm text-center mb-0" style="font-size: 14px;">
+                <tbody>
+                    <tr><td>ফজর</td><td>{{$gs->fazar}}</td></tr>
+                    <tr><td>জোহর</td><td>{{$gs->jahar}}</td></tr>
+                    <tr><td>আসর</td><td>{{$gs->achar}}</td></tr>
+                    <tr><td>মাগরিব</td><td>{{$gs->magrib}}</td></tr>
+                    <tr><td>এশা</td><td>{{$gs->esha}}</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center">
+            {!! $gs->sidebar2_ads !!}
+        </div>
+
+      </div></div></div></section>
 
 <section class="video-gallery-section bg-white">
-                @php
-				$video2=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->where('is_video',1)->limit(8)->get();
-				@endphp
-  <div class="container jagaran-container">
-    <div class="video-gallery-heading">
-      <h3 class="title-bg"><a href="{{ URL::to('/video') }}">ভিডিও গ্যালারি</a></h3>
-    </div><!--/.video-gallery-heading-->
-      <div id="featured-videos-section" class="owl-carousel">
+    <div class="container custom-container">
         
+        @php
+            $video2 = DB::table('posts')
+                        ->inRandomOrder()
+                        ->orderBy('id','DESC')
+                        ->where('is_video',1)
+                        ->limit(8)
+                        ->get();
+        @endphp
 
-
-
-@foreach($video2 as $row)
-        <div class="item">
-          <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-            <div class="single-videos">
-              <div class="images">
-                <img src="https://img.youtube.com/vi/{{ $row->video_link}}/mqdefault.jpg" alt="{{strlen($row->title)>40 ? mb_substr($row->title,0,40,"utf-8") : $row->title}}">
-                <div class="overley">
-                  <div class="videos-icon">
-                    <div class="videos-icon-wapper">
-                      <i class="fa fa-play" aria-hidden="true"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="videos-text">
-                <h3>{{strlen($row->title)>40 ? mb_substr($row->title,0,40,"utf-8") : $row->title}}...</h3>
-              </div>
+        <div class="modern-header-wrapper mb-4">
+            <div class="modern-header-line"></div>
+            <div class="modern-header-title">
+                <span class="bar">|</span>
+                <a href="{{ URL::to('/video') }}">ভিডিও গ্যালারি</a>
             </div>
-          </a>
         </div>
- @endforeach  
 
+        <div id="featured-videos-section" class="owl-carousel">
+            @foreach($video2 as $row)
+            <div class="item">
+                <div class="clean-video-card">
+                    <a href="{{ route('frontend.details',[$row->id, $row->slug]) }}">
+                        
+                        <div class="video-thumb">
+                            <img src="https://img.youtube.com/vi/{{ $row->video_link }}/mqdefault.jpg" alt="{{ $row->title }}">
+                            <div class="play-overlay">
+                                <div class="play-icon">
+                                    <i class="fa fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
 
-        
-		</div><!--/featured-videos-section-->
-  </div><!--/.container-->
-</section><!--/.video-gallery-section-->
+                        <div class="video-content">
+                            <h3>{{ Str::limit($row->title, 55) }}</h3>
+                        </div>
 
-<section class="international">
+                    </a>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+    </div></section>
+
+<section class="international-modern-section bg-white">
   <div class="container custom-container">
     <div class="row custom-row">
-      <div class="international-news-left">
-	  			@php
-				$favourite=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->limit(1)->get();
-				$favourite1=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->limit(4)->get();
-				$favourite2=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(4)->limit(4)->get();
-				@endphp
-        <div class="col-md-12 custom-padding">
-          <div class="special-event-heading">
-            <h2 class="title"> <a href="#"><span class="text-span"> সব থেকে বেশি জনপ্রিয় সংবাদ সমূহ </span></a><span class="liner"></span></h2>
-          </div><!--/.special-event-heading-->
-          
-        <div class="row custom-row natioal-top-section">
-          
-		  @foreach($favourite as $row)  
-		  <div class="col-md-6 custom-padding">
-          <div class="lead-national-main">
-            <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-            <div class="lead-national-main-img">
-              <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-              <div class="lead-national-heading">
-              
-              <h2>{{ $row->title}}</h2>
-              </div>
-            </div>
-              <div class="lead-national-main-text">
-                <p style="text-align: justify">{{ $row->short_description}}</p>
-              </div>
-            </a>
-          </div>
-		  @endforeach
-		  
-		  
-          </div><div class="col-md-6 custom-padding">
-          <div class="row custom-row">
-		  
-		  @foreach($favourite1 as $row)
-          <div class="col-md-6 custom-padding">
-            <div class="sports-small-news">
-              <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-              <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-                <div class="sports-small-news-text">
-                  <h3>{{ $row->title}}</h3>
-                </div>
-              </a>
-            </div>
-          </div>
-		  @endforeach
-		  
 
-		  
-		  
-		  </div>
-          </div>
-          </div>
-          <div class="row custom-row">
-		  
-		   @foreach($favourite2 as $row) 
-          <div class="col-md-3 custom-padding">
-            <div class="sports-small-news">
-              <a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-              <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-                <div class="sports-small-news-text">
-                  <h3>{{ $row->title}}</h3>
-                </div>
-              </a>
-            </div>
-          </div>
-		  @endforeach
-		  
-		  
+      <div class="col-md-9 custom-padding">
+        
+        @php
+            // Fetch Data
+            $favourite  = DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->limit(1)->get(); // 1 Big
+            $favourite1 = DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->limit(4)->get(); // 4 List
+            $favourite2 = DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(4)->limit(4)->get(); // 4 Grid
+        @endphp
 
-		  
-		  </div>
-        </div><!--/.col-md-12-->
-      </div><!--/.international-news-left-->
-      <div class="international-news-right">
-        <div class="col-md-12 custom-padding">
-          <div class="map-heading">
-            <h2> এক ক্লিকে বিভাগের সব খবর </h2>
-          </div>
+        <div class="modern-header-wrapper">
+            <div class="modern-header-line"></div>
+            <div class="modern-header-title">
+                <span class="bar">|</span>
+                <a href="#">সব থেকে বেশি জনপ্রিয় সংবাদ সমূহ</a>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            
+            <div class="col-md-7">
+                @foreach($favourite as $row)
+                <div class="modern-lead-news">
+                    <a href="{{ route('frontend.details',[$row->id, $row->slug]) }}">
+                        <div class="modern-lead-img">
+                            <img src="{{ asset('assets/images/post/'.$row->image_big) }}" alt="{{ $row->title }}">
+                            <div class="modern-lead-title-overlay">
+                                <h2>{{ $row->title }}</h2>
+                            </div>
+                        </div>
+                        <div class="modern-lead-body">
+                             <p>{{ Str::limit($row->short_description, 200) }}</p>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+
+            <div class="col-md-5">
+                <ul class="modern-small-list">
+                    @foreach($favourite1 as $row)
+                    <li>
+                        <a href="{{ route('frontend.details',[$row->id, $row->slug]) }}">
+                            <div class="img-thumb">
+                                <img src="{{ asset('assets/images/post/'.$row->image_big) }}" alt="{{ $row->title }}">
+                            </div>
+                            <div class="text-content">
+                                <h3>{{ $row->title }}</h3>
+                            </div>
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div><div class="row custom-row row-eq-height">
+            @foreach($favourite2 as $row)
+            <div class="col-md-3 custom-padding">
+                <div class="clean-cat-wrapper h-100 border-0 p-0 mb-3">
+                    <div class="clean-lead-news mb-0">
+                        <a href="{{ route('frontend.details',[$row->id, $row->slug]) }}">
+                            <div class="clean-lead-img">
+                                <img src="{{ asset('assets/images/post/'.$row->image_big) }}" class="img-fluid" alt="{{ $row->title }}">
+                            </div>
+                            <div class="clean-lead-content mt-2">
+                                <h3 style="font-size: 16px; line-height: 22px; -webkit-line-clamp: 2;">{{ $row->title }}</h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+      </div><div class="col-md-3 custom-padding">
+        
+        <div class="modern-header-wrapper">
+            <div class="modern-header-line"></div>
+            <div class="modern-header-title" style="padding-right: 0;">
+                <span class="bar">|</span>
+                <span style="font-size: 18px;">এক ক্লিকে বিভাগের সব খবর</span>
+            </div>
+        </div>
             <div class="bangladesh-map">
 <!--?xml version="1.0" encoding="utf-8"?-->
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
@@ -2182,103 +1951,67 @@ s9.535,4.269,9.535,9.536s-4.269,9.537-9.535,9.537S-869.445,850.269-869.445,845.0
 
 </div><!--/.bangladesh Map-->
 
-        <div class="single-block">
-		          <div class="map-heading">
-            <h2> জাতীয় সঙ্গীত </h2>
-          </div>
-           						<audio controls="" style="width:100%">
-				 <source src="{{asset('assets/frontend/bd_national_anthem.mp3')}}" type="audio/mp3">
-				</audio>
+        <div class="single-block mt-4">
+            <div class="modern-header-wrapper">
+                <div class="modern-header-line"></div>
+                <div class="modern-header-title">
+                    <span class="bar">|</span>
+                    <span>জাতীয় সঙ্গীত</span>
+                </div>
             </div>
-          </div><!--/.single-block-->
-        </div><!--/.col-md-12-->
-      </div><!--/.international-news-right-->
-    </div><!--/.row-->
-  </div><!--/.container-->
-</section><!--/.international-->
-<section class="photo-gallery-wrapper bg-white">
-  <div class="container custom-container">
-    <div class="photo-gallery-heading">
-      <h2><a href="{{ URL::to('/photo') }}"> ফটো গ্যালারি</a></h2>
-    </div><!--/.photo-gallery-heading-->
-    <div class="row custom-row">
-      <div class="photo-gallery-left">
-        <div class="col-md-12 custom-padding">
-          <div id="gallery-images-section" class="owl-carousel">
-           
-
-		                             @if ($image_albums->count()>0)
-                            @foreach ($image_albums as $image_album)  
-        <li data-thumb="{{asset('assets/images/image-album/'.$image_album->photo)}}" style="list-style:none;">
-          <img class="img-fluid" src="{{asset('assets/images/image-album/'.$image_album->photo)}}" />
-          <a class="photo-gallery-text"  href="{{asset('assets/images/image-album/'.$image_album->photo)}}"><h3 style="font-size:20px;">{{$image_album->album_name}}</h3></a>
-        </li>
-		                            @endforeach
-							 @else 
-		
-		
-        <li data-thumb="assets/images/nopic.png" style="list-style:none;">
-          <img class="img-fluid" src="assets/images/nopic.png" />
-          <a class="photo-gallery-text"  href="#"><h3 style="font-size:20px;">এখানে কোন এ্যালবাম ইমেজস নেই</h3></a>
-        </li>
- @endif
-
-
-          
-		</div>
+            <audio controls="" style="width:100%">
+                <source src="{{asset('assets/frontend/bd_national_anthem.mp3')}}" type="audio/mp3">
+            </audio>
         </div>
-      </div>
-      <div class="photo-gallery-right">
-        <div class="col-md-12 custom-padding">
-          <div class="row custom-row">
-            <div class="col-md-12 custom-padding">
-              <ul class="photo-gallery-ul col-md-12">
-                
-       
-                            @if ($image_albums->count()>0)
-                            @foreach ($image_albums as $image_album)
-	   <li>
-          <a href="{{asset('assets/images/image-album/'.$image_album->photo)}}">
-            <i class="fa fa-camera" aria-hidden="true"></i>
-            <div class="photo-gallery-ul-left">
-              <img class="img-fluid" src="{{asset('assets/images/image-album/'.$image_album->photo)}}" alt="{{$image_album->album_name}}">
-            </div>
-            <div class="photo-gallery-ul-right">
-              <h2>{{$image_album->album_name}}</h2>
-            </div>
-          </a>
-        </li>
-		                             @endforeach
-							 @else      
-		
-		
-        <li>
-          <a href="#">
-            <i class="fa fa-camera" aria-hidden="true"></i>
-            <div class="photo-gallery-ul-left">
-              <img class="img-fluid" src="assets/images/nopic.png" alt="এখানে কোন এ্যালবাম ইমেজস নেই">
-            </div>
-            <div class="photo-gallery-ul-right">
-              <h2>এখানে কোন এ্যালবাম ইমেজস নেই</h2>
-            </div>
-          </a>
-        </li>
+
+      </div></div></div></section>
+<section class="photo-modern-section bg-white">
+  <div class="container custom-container">
+    
+    <div class="modern-header-wrapper mb-4">
+        <div class="modern-header-line"></div>
+        <div class="modern-header-title">
+            <span class="bar">|</span>
+            <a href="{{ URL::to('/photo') }}">ফটো গ্যালারি</a>
+        </div>
+    </div>
+
+    <div class="row custom-row">
         
-  @endif
+        @if($image_albums->count() > 0)
+            @foreach($image_albums as $album)
+            <div class="col-md-6 col-lg-3 custom-padding mb-4">
+                <div class="clean-photo-card h-100">
+                    <a href="{{ asset('assets/images/image-album/'.$album->photo) }}" class="d-block text-decoration-none">
+                        
+                        <div class="photo-thumb">
+                            <img src="{{ asset('assets/images/image-album/'.$album->photo) }}" alt="{{ $album->album_name }}">
+                            
+                            <div class="photo-overlay">
+                                <div class="camera-icon">
+                                    <i class="fa fa-camera"></i>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="photo-content">
+                            <h3>{{ $album->album_name }}</h3>
+                        </div>
 
+                    </a>
+                </div>
+            </div>
+            @endforeach
+        @else
+            <div class="col-12 text-center py-5">
+                <div class="text-muted">
+                    <i class="fa fa-camera mb-3" style="font-size: 40px;"></i>
+                    <h4>এখানে কোন এ্যালবাম ইমেজস নেই</h4>
+                </div>
+            </div>
+        @endif
 
-
-
-
-		</ul><!--/.photo-gallery-ul-->
-            </div><!--/.col-md-12-->
-          </div><!--/.row-->
-        </div><!--/.col-md-12-->
-      </div><!--/.photo-gallery-right-->
-    </div><!--/.row-->
-  </div><!--/.container-->
-</section><!--/.photo-gallery-wrapper-->
+    </div></div></section>
 
 
 
@@ -2287,4 +2020,3 @@ s9.535,4.269,9.535,9.536s-4.269,9.537-9.535,9.537S-869.445,850.269-869.445,845.0
 
 
 @endsection
-

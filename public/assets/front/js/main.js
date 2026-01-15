@@ -288,7 +288,8 @@ $(function ($) {
     $('.subBtn').on('click',function(e){
 		e.preventDefault();
 		var url  = $('.subscribe-form').attr('action');
-		var data = new FormData(subForm);
+		var form = $(this).closest('form')[0]; // Gets the actual HTML form element
+        var data = new FormData(form);
 
 		$.ajax({
 			url  : url,

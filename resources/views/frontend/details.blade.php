@@ -425,33 +425,45 @@ document.getElementById('fb-root').appendChild(e);
 <script>
     $(document).ready(function() {
         
-        // Default start size
-        var currentFontSize = 18; 
+        // 1. Text Resizing Logic
+        // Target the ID because that is what your CSS uses
+        var $articleWrapper = $('#article-body-content'); 
+        var currentFontSize = 20; // Match your CSS default
 
         $('#btn-increase').click(function() {
-            if(currentFontSize < 30) {
+            if(currentFontSize < 34) {
                 currentFontSize += 2;
-                updateArticleStyle(currentFontSize);
+                updateSize();
             }
         });
 
         $('#btn-decrease').click(function() {
             if(currentFontSize > 14) {
                 currentFontSize -= 2;
-                updateArticleStyle(currentFontSize);
+                updateSize();
             }
         });
-
-        function updateArticleStyle(size) {
-            // Set font size on the main container
-            $('#article-body-content').css('font-size', size + 'px');
+        function updateSize() {
+            var newLineHeight = currentFontSize * 1.6;
             
-            // Set line height (e.g., 1.6 times the font size for good reading)
-            var newLineHeight = size * 1.6;
-            $('#article-body-content').css('line-height', newLineHeight + 'px');
+            // Apply size to the Main Wrapper
+            $articleWrapper.css({
+                'font-size': currentFontSize + 'px',
+                'line-height': newLineHeight + 'px'
+            });
         }
 
-        // --- 2. Copy Link Logic ---
+        function updateArticleStyle(size) {
+            // FIXED: Used '.' instead of '#' to select by class
+            $('.article-body-content').css('font-size', size + 'px');
+            $('.article-body-content p').css('font-size', size + 'px'); // Explicitly target p tags
+            
+            var newLineHeight = size * 1.6;
+            $('.article-body-content').css('line-height', newLineHeight + 'px');
+            $('.article-body-content p').css('line-height', newLineHeight + 'px');
+        }
+
+        // 2. Copy Link Logic
         $('#btn-copy-link').click(function() {
             var dummy = document.createElement('input'),
                 text = window.location.href;
@@ -461,7 +473,6 @@ document.getElementById('fb-root').appendChild(e);
             document.execCommand('copy');
             document.body.removeChild(dummy);
             
-            // Visual Feedback
             var originalIcon = $(this).html();
             $(this).html('<i class="fa fa-check" style="color:green"></i>');
             setTimeout(() => {
@@ -469,18 +480,18 @@ document.getElementById('fb-root').appendChild(e);
             }, 2000);
         });
 
-        // --- 3. Native Share (Mobile) Logic ---
+        // 3. Native Share Logic
         $('#btn-native-share').click(function() {
             if (navigator.share) {
                 navigator.share({
-                    title: '{{ $data->title }}',
+                    // Ensure $data or $post is correct for your blade file
+                    title: '{{ $data->title ?? $post->title ?? "News" }}', 
                     url: window.location.href
                 }).then(() => {
                     console.log('Thanks for sharing!');
                 })
                 .catch(console.error);
             } else {
-                // Fallback for desktop if native share not supported
                 alert('URL copied to clipboard!');
                 $('#btn-copy-link').click(); 
             }
