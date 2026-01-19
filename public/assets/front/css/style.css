@@ -2445,8 +2445,8 @@ Logo Header Area Start
     background-color: #111827; /* Very Dark Blue/Grey */
     color: #e5e7eb;
     padding: 60px 0 40px;
-    font-family: 'SolaimanLipi', sans-serif; /* Ensure Bangla font is loaded */
-    font-size: 15px;
+    font-family: 'SolaimanLipiNormal' !important; /* Ensure Bangla font is loaded */
+    font-size: 18px;
     line-height: 1.6;
 }
 
@@ -2481,14 +2481,16 @@ Logo Header Area Start
 
 .editor-list .role {
     color: #9ca3af; /* Muted gray for titles */
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 600;
+    font-family: SolaimanLipiNormal !important;
     margin-bottom: 2px;
 }
 
 .editor-list .name {
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
+    font-family: SolaimanLipiNormal !important;
     font-weight: 500;
 }
 

@@ -1,150 +1,278 @@
-@extends('layouts.load')
+@extends('layouts.admin')
 
 @section('content')
 
+    <div class="content-area">
+        <div class="mr-breadcrumb">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4 class="heading">{{ __('Edit Advertisement') }}</h4>
+                    <ul class="links">
+                        <li><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }} </a></li>
+                        <li><a href="{{ route('ads.index') }}">{{ __('Advertisements') }}</a></li>
+                        <li><a href="javascript:;">{{ __('Edit') }}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-    <div class="add-product-content p-0 shadow-none">
-        @include('includes.admin.form-success')
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="product-description">
-                    <div class="body-area shadow-none">
-                    @include('includes.admin.form-error')
-                    <div class="gocover" style="background: url({{asset('assets/images/'.$gs->admin_loader)}}) no-repeat scroll center center rgba(45, 45, 45, 0.5);"></div>
-                     <form id="elitedesignformdataedit"  action="{{ route('ads.update',$data->id)}}" method="POST"
-                            enctype="multipart/form-data">
-                            {{csrf_field()}}
-                            <input type="hidden" id="photo" value="{{$data->photo}}">
-                            <input type="hidden" id="databaseBannerType" value="{{$data->banner_type}}">
-                            <input type="hidden" id="banner_code1" value="{{$data->banner_code}}">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="left-area">
-                                        <h4 class="heading">{{ __('Placements') }} *</h4>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                   <select name="add_placement" id="placement">
-                                       <option value="">Please Select a Placements</option>
-                                       <option value="header" {{$data->add_placement =='header' ? 'selected' : ''}}>header</option>
-                                       <option value="index_bottom" {{$data->add_placement =='index_bottom' ? 'selected' : ''}}>Index Bottom</option>
-                                       <option value="sidebar_bottom" {{$data->add_placement =='sidebar_top' ? 'selected' : ''}}>Sidebar Bottom</option>
-                                       <option value="sponsor" {{$data->add_placement =='sponsor' ? 'selected' : ''}}>Sponsor Ads</option>
-                                   </select>
-                                </div>
+        <div class="add-product-content">
+            @include('includes.admin.form-success')
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="product-description">
+                        <div class="body-area">
+                            @include('includes.admin.form-error')
+                            <div class="gocover"
+                                style="background: url({{asset('assets/images/' . $gs->admin_loader)}}) no-repeat scroll center center rgba(45, 45, 45, 0.5);">
                             </div>
 
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="left-area">
-                                        <h4 class="heading">{{ __('Banner Size') }} *</h4>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <select name="addSize" id="banner_size" onchange="bannerSize()">
-                                        <option value="">Please Select a Banner Size</option>
-                                        <option value="size_728" {{$data->addSize =='size_728' ? 'selected' : ''}}>Size 728x90</option>
-                                        <option value="size_468" {{$data->addSize =='size_468' ? 'selected' : ''}}>Size 468x60</option>
-                                        <option value="size_234" {{$data->addSize =='size_234' ? 'selected' : ''}}>Size 234x60</option>
-                                    </select>
-                                </div>
-                            </div>
+                            <form id="geniusformdata" action="{{ route('ads.update', $data->id) }}" method="POST"
+                                enctype="multipart/form-data">
+                                {{csrf_field()}}
 
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="left-area">
-                                        <h4 class="heading">{{ __('Banner') }} *</h4>
+                                {{-- PLACEMENT --}}
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="left-area">
+                                            <h4 class="heading">{{ __('Placement') }} *</h4>
+                                            <p class="sub-heading">{{ __('Where will this ad show?') }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <select name="" id="banner" onchange="bannerValue()">
-                                        @if ($data->banner_type=="image")
-                                        <option value="image" {{$data->banner_type=="image" ? 'selected' : ''}}>Banner from Image</option>
-                                        @else if($data->banner_type=="code")
-                                        <option value="code" {{$data->banner_type=="code" ? 'selected' : ''}}>Banner From code</option>
-                                        @endif
-                                    </select>
-                                </div>
-                            </div>
+                                    <div class="col-lg-7">
+                                        <select name="add_placement" id="placement" class="input-field" required>
+                                            <option value="">{{__('Select Position')}}</option>
 
-                            <div class="row code" style="display:none;">
-                                <div class="col-lg-12">
-                                    <div class="left-area">
-                                        <h4 class="heading">{{ __('Banner') }} *</h4>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                <textarea class="input-field banner_code" name="banner_code" id="banner_code" placeholder="Your Script *">{{$data->banner_code}}</textarea>
-                                </div>
-                            </div>
+                                            {{-- Header --}}
+                                            <option value="header" data-size="size_728" {{ $data->add_placement == 'header' ? 'selected' : '' }}>{{__('Header Top (728x90)')}}</option>
 
-                            <div class="row image" style="display:none;">
-                                <div class="col-lg-12">
-                                <div class="left-area">
-                                    <h4 class="heading">Current Banner Image *</h4>
-                                </div>
-                                </div>
-                                <div class="col-lg-12">
-                                <div class="img-upload">
-                                    <div id="image-preview" class="img-preview" style="background: url({{ $data->photo ? asset('assets/images/addBanner/'.$data->photo) : asset('assets/images/noimage.png') }});">
-                                        <label for="image-upload" class="img-label" id="image-label"><i class="icofont-upload-alt"></i>Upload</label>
-                                        <input type="file" name="photo" class="img-upload" id="image-upload">
-                                    </div>
-                                        <p class="text prefer-size"></p>
-                                </div>
-                
-                                </div>
-                            </div>
+                                            {{-- Homepage 728x90 Series --}}
+                                            <option value="header1_728" data-size="size_728" {{ $data->add_placement == 'header1_728' ? 'selected' : '' }}>
+                                                {{__('Homepage 1 (728x90)')}}</option>
+                                            <option value="header2_728" data-size="size_728" {{ $data->add_placement == 'header2_728' ? 'selected' : '' }}>
+                                                {{__('Homepage 2 (728x90)')}}</option>
+                                            <option value="header3_728" data-size="size_728" {{ $data->add_placement == 'header3_728' ? 'selected' : '' }}>
+                                                {{__('Homepage 3 (728x90)')}}</option>
+                                            <option value="header4_728" data-size="size_728" {{ $data->add_placement == 'header4_728' ? 'selected' : '' }}>
+                                                {{__('Homepage 4 (728x90)')}}</option>
 
-                            @if($data->photo)
-                                <div class="row link">
-                                    <div class="col-lg-12">
-                                    <div class="left-area">
-                                        <h4 class="heading">{{__('Link')}} *</h4>
+                                            {{-- Homepage 970x90 Series --}}
+                                            <option value="homepageads1_970" data-size="size_728" {{ $data->add_placement == 'homepageads1_970' ? 'selected' : '' }}>
+                                                {{__('Homepage 1 (970x90)')}}</option>
+                                            <option value="homepageads2_970" data-size="size_728" {{ $data->add_placement == 'homepageads2_970' ? 'selected' : '' }}>
+                                                {{__('Homepage 2 (970x90)')}}</option>
+                                            <option value="homepageads3_970" data-size="size_728" {{ $data->add_placement == 'homepageads3_970' ? 'selected' : '' }}>
+                                                {{__('Homepage 3 (970x90)')}}</option>
+                                            <option value="homepageads4_970" data-size="size_728" {{ $data->add_placement == 'homepageads4_970' ? 'selected' : '' }}>
+                                                {{__('Homepage 4 (970x90)')}}</option>
+
+                                            {{-- Sidebar Series --}}
+                                            <option value="sidebar_ads" data-size="size_234" {{ $data->add_placement == 'sidebar_ads' ? 'selected' : '' }}>
+                                                {{__('Sidebar Ads (234x60)')}}</option>
+                                            <option value="sidebar1_ads" data-size="size_234" {{ $data->add_placement == 'sidebar1_ads' ? 'selected' : '' }}>
+                                                {{__('Sidebar 1 (300x250)')}}</option>
+                                            <option value="sidebar2_ads" data-size="size_234" {{ $data->add_placement == 'sidebar2_ads' ? 'selected' : '' }}>
+                                                {{__('Sidebar 2 (300x250)')}}</option>
+                                            <option value="sidebar3_ads" data-size="size_234" {{ $data->add_placement == 'sidebar3_ads' ? 'selected' : '' }}>
+                                                {{__('Sidebar 3 (300x250)')}}</option>
+                                            <option value="sidebar_bottom" data-size="size_234" {{ $data->add_placement == 'sidebar_bottom' ? 'selected' : '' }}>
+                                                {{__('Sidebar Bottom')}}</option>
+
+                                            {{-- Others --}}
+                                            <option value="index_bottom" data-size="size_728" {{ $data->add_placement == 'index_bottom' ? 'selected' : '' }}>
+                                                {{__('Index Bottom')}}</option>
+                                            <option value="single_page_sponsor" data-size="size_728" {{ $data->add_placement == 'single_page_sponsor' ? 'selected' : '' }}>{{__('Single Page Sponsor')}}</option>
+                                            <option value="single_sidebar_ads" data-size="size_234" {{ $data->add_placement == 'single_sidebar_ads' ? 'selected' : '' }}>{{__('Single Sidebar Ads')}}</option>
+                                        </select>
+                                        <small id="size_guideline" class="text-danger d-block mt-2 font-weight-bold"
+                                            style="display:none;"></small>
                                     </div>
+                                </div>
+
+                                {{-- SIZE --}}
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="left-area">
+                                            <h4 class="heading">{{ __('Banner Size') }} *</h4>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-7">
+                                        <select name="addSize" id="banner_size" class="input-field" required>
+                                            <option value="">{{__('Select Size')}}</option>
+                                            <option value="size_728" {{ $data->addSize == 'size_728' ? 'selected' : '' }}>
+                                                {{__('728x90 (Leaderboard)')}}</option>
+                                            <option value="size_468" {{ $data->addSize == 'size_468' ? 'selected' : '' }}>
+                                                {{__('468x60 (Full Banner)')}}</option>
+                                            <option value="size_234" {{ $data->addSize == 'size_234' ? 'selected' : '' }}>
+                                                {{__('234x60 (Half Banner)')}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {{-- TYPE --}}
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="left-area">
+                                            <h4 class="heading">{{ __('Ad Type') }} *</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <select name="banner_type" id="banner_type" class="input-field" required>
+                                            <option value="upload" {{ $data->banner_type == 'upload' ? 'selected' : '' }}>
+                                                {{__('Upload Image File')}}</option>
+                                            <option value="url" {{ $data->banner_type == 'url' ? 'selected' : '' }}>
+                                                {{__('External Image URL')}}</option>
+                                            <option value="code" {{ $data->banner_type == 'code' ? 'selected' : '' }}>
+                                                {{__('Google Adsense / Script')}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {{-- UPLOAD --}}
+                                <div class="row show-section {{ $data->banner_type == 'upload' ? '' : 'd-none' }}"
+                                    id="section_upload">
+                                    <div class="col-lg-4">
+                                        <div class="left-area">
+                                            <h4 class="heading">{{ __('Upload Image') }} *</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <div class="img-upload">
+                                            {{-- Note: Pointing to existing addBanner folder --}}
+                                            <div id="image-preview" class="img-preview"
+                                                style="background: url({{ $data->photo ? asset('assets/images/addBanner/' . $data->photo) : asset('assets/admin/images/upload.png') }});">
+                                                <label for="image-upload" class="img-label" id="image-label">
+                                                    <i class="icofont-upload-alt"></i>{{ __('Click or Drop File') }}
+                                                </label>
+                                                <input type="file" name="photo" class="img-upload" id="image-upload">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- URL --}}
+                                <div class="row show-section {{ $data->banner_type == 'url' ? '' : 'd-none' }}"
+                                    id="section_url">
+                                    <div class="col-lg-4">
+                                        <div class="left-area">
+                                            <h4 class="heading">{{ __('Image URL') }} *</h4>
+                                            <p class="sub-heading">(e.g. https://example.com/banner.jpg)</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input type="url" class="input-field" name="photo_url" placeholder="https://..."
+                                            value="{{ $data->photo_url }}">
+                                    </div>
+                                </div>
+
+                                {{-- CODE --}}
+                                <div class="row show-section {{ $data->banner_type == 'code' ? '' : 'd-none' }}"
+                                    id="section_code">
+                                    <div class="col-lg-4">
+                                        <div class="left-area">
+                                            <h4 class="heading">{{ __('Ad Script') }} *</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="input-field" name="banner_code" placeholder="<script>...</script>"
+                                            style="min-height: 150px;">{{ $data->banner_code }}</textarea>
+                                    </div>
+                                </div>
+
+                                {{-- REDIRECT --}}
+                                <div class="row {{ $data->banner_type == 'code' ? 'd-none' : '' }}" id="section_link">
+                                    <div class="col-lg-4">
+                                        <div class="left-area">
+                                            <h4 class="heading">{{ __('Redirect URL') }} *</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7">
                                         <input type="text" class="input-field" name="link"
-                                    placeholder="{{ __('Enter link(ex:example.com)') }}" id="link" autocomplete="off" value="{{$data->link}}">
+                                            placeholder="https://your-landing-page.com" autocomplete="off"
+                                            value="{{ $data->link }}">
                                     </div>
                                 </div>
-                            @endif
 
-                            <div class="row">
-                                <div class="col-lg-4">
-                                  <div class="left-area">
-                                      <h4 class="heading">{{__('Status')}} *</h4>
-                                  </div>
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="custom-control custom-radio d-inline-block mr-4">
-                                        <input type="radio"  name="status" id="enable" value="1"  class="custom-control-input" @if($data->status ==1) checked @endif>
-                                        <label class="custom-control-label" for="enable">{{__('Enable')}}</label>
+                                {{-- STATUS --}}
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="left-area">
+                                            <h4 class="heading">{{__('Status')}} *</h4>
+                                        </div>
                                     </div>
-
-                                    <div class="custom-control custom-radio d-inline-block">
-                                        <input type="radio"  name="status" value="0" id="disable"  class="custom-control-input" @if($data->status ==0) checked @endif> 
-                                        <label class="custom-control-label" for="disable">{{__('Disable')}}</label>
+                                    <div class="col-lg-7">
+                                        <div class="custom-control custom-radio d-inline-block mr-4">
+                                            <input class="custom-control-input" type="radio" name="status" value="1"
+                                                id="enable" {{ $data->status == 1 ? 'checked' : '' }}>
+                                            <label class="custom-control-label" for="enable">{{__('Active')}}</label>
+                                        </div>
+                                        <div class="custom-control custom-radio d-inline-block">
+                                            <input class="custom-control-input" type="radio" name="status" value="0"
+                                                id="disable" {{ $data->status == 0 ? 'checked' : '' }}>
+                                            <label class="custom-control-label" for="disable">{{__('Inactive')}}</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <button class="addProductSubmit-btn"
-                                        type="submit">{{ __('Update Ads') }}</button>
+                                <div class="row">
+                                    <div class="col-lg-4"></div>
+                                    <div class="col-lg-7">
+                                        <button class="addProductSubmit-btn"
+                                            type="submit">{{ __('Update Advertisement') }}</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
 @endsection
 
 @section('scripts')
-    <script src="{{asset('assets/admin/js/ads.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+
+            // 1. DYNAMIC GUIDELINES & SIZE
+            $('#placement').on('change', function () {
+                var selectedOption = $(this).find(':selected');
+                var recommendedSize = selectedOption.data('size');
+                var sizeText = {
+                    'size_728': 'Recommended Size: 728x90 Pixel',
+                    'size_468': 'Recommended Size: 468x60 Pixel',
+                    'size_234': 'Recommended Size: 234x60 Pixel'
+                };
+                if (recommendedSize && sizeText[recommendedSize]) {
+                    $('#size_guideline').text(sizeText[recommendedSize]).show();
+                } else {
+                    $('#size_guideline').hide();
+                }
+            });
+
+            // Trigger on load for Edit page
+            $('#placement').trigger('change');
+
+            // 2. TOGGLE
+            $('#banner_type').on('change', function () {
+                var type = $(this).val();
+                $('.show-section').addClass('d-none');
+
+                if (type === 'upload') {
+                    $('#section_upload').removeClass('d-none');
+                    $('#section_link').removeClass('d-none');
+                }
+                else if (type === 'url') {
+                    $('#section_url').removeClass('d-none');
+                    $('#section_link').removeClass('d-none');
+                }
+                else if (type === 'code') {
+                    $('#section_code').removeClass('d-none');
+                    $('#section_link').addClass('d-none');
+                }
+            });
+        });
+    </script>
 @endsection

@@ -55,7 +55,7 @@
     color: #333;
     margin-right: 30px;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 18px;
     text-decoration: none;
     display: inline-block;
 }

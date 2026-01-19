@@ -34,6 +34,11 @@
         <i class="fas fa-hdd"></i>{{ __('Media Manager') }}
     </a>
 </li>
+<li>
+    <a href="{{ route('ads.index') }}" class="wave-effect">
+        <i class="fas fa-ad"></i>{{ __('Advertisement Manager') }}
+    </a>
+</li>
 @if (Auth::guard('admin')->user()->sectionCheck('add_gallery'))
 <li>
     <a href="{{ route('image.album.index') }}" >
