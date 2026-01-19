@@ -30,6 +30,11 @@
 
 
 <li>
+    <a href="{{ route('admin.media.index') }}" class="wave-effect">
+        <i class="fas fa-hdd"></i>{{ __('Media Manager') }}
+    </a>
+</li>
+<li>
     <a href="{{ route('image.album.index') }}" >
         <i class="fas fa-image"></i>{{ __('All Gallery Photo') }}
     </a>

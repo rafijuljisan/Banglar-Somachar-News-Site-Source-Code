@@ -183,7 +183,11 @@
         </li>
     </ul>
 </li>
-
+<li>
+    <a href="{{ route('admin.media.index') }}" class="wave-effect">
+        <i class="fas fa-images"></i>{{ __('Media Gallery') }}
+    </a>
+</li>
 <li>
 <a href="#general" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
     <i class="fas fa-cogs"></i>{{ __('General Settings') }}

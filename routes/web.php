@@ -401,6 +401,11 @@ Route::prefix('admin')->group(function () {
         Route::get('/generalsettings/disqus/{x}', 'Admin\GeneralSettingsController@disqus')->name('admin.generalsettings.disqus');
         Route::get('/generalsettings/smtp/{x}', 'Admin\GeneralSettingsController@smtp')->name('admin.generalsettings.smtp');
 
+        // --- NEW: Media Manager Routes ---
+        Route::get('/media-manager', 'Admin\MediaController@index')->name('admin.media.index');
+        Route::post('/media-manager/store', 'Admin\MediaController@store')->name('admin.media.store');
+        Route::post('/media-manager/delete', 'Admin\MediaController@delete')->name('admin.media.delete');
+        Route::post('/media-manager/replace', 'Admin\MediaController@replace')->name('admin.media.replace');
 
         //-------------Language Base Logo Area----------------
         Route::get('/language/logo/datatables', 'Admin\LogoController@datatables')->name('admin.languagelogo.datatables');

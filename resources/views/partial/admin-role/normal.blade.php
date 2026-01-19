@@ -29,7 +29,11 @@
         <i class="fa fa-file"></i>{{ __('Add Post') }}
     </a>
 </li>
-
+<li>
+    <a href="{{ route('admin.media.index') }}" class="wave-effect">
+        <i class="fas fa-hdd"></i>{{ __('Media Manager') }}
+    </a>
+</li>
 @if (Auth::guard('admin')->user()->sectionCheck('add_gallery'))
 <li>
     <a href="{{ route('image.album.index') }}" >
