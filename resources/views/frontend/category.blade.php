@@ -4,7 +4,21 @@
 <style>
     /* === RESET & BASE === */
     .cat-page-wrapper * { 
-        box-sizing: border-box !important; 
+        box-sizing: border-box !important;
+    }
+    .cat-page-wrapper {
+    padding-left: 30px !important;
+    padding-right: 05px !important;
+}
+    /* Override reset for Bootstrap columns to restore gaps */
+    .cat-page-wrapper .left-content-area,
+    .cat-page-wrapper .right-content-area {
+        margin: 0 !important;
+    }
+    
+    .cat-page-wrapper .left-content-area > *,
+    .cat-page-wrapper .right-content-area > *,
+    .cat-page-wrapper .category-content > * {
         margin: 0 !important;
         padding: 0 !important;
     }

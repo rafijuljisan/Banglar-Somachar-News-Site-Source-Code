@@ -206,7 +206,22 @@
         </div>
     </div>
 
-
+        {{-- DYNAMIC AD START --}}
+        @php
+            $ad = App\Models\Advertisement::where('add_placement', 'Homepageads1_970')->where('status', 1)->first();
+        @endphp
+        @if($ad)
+            <div class="ad-container" style="margin: 15px 0; text-align: center;">
+                @if($ad->banner_type == 'upload')
+                    <a href="{{ $ad->link ?? '#' }}" target="_blank"><img src="{{ asset('assets/images/addBanner/'.$ad->photo) }}" style="max-width:100%; height:auto;"></a>
+                @elseif($ad->banner_type == 'url')
+                    <a href="{{ $ad->link ?? '#' }}" target="_blank"><img src="{{ $ad->photo_url }}" style="max-width:100%; height:auto;"></a>
+                @elseif($ad->banner_type == 'code')
+                    {!! $ad->banner_code !!}
+                @endif
+            </div>
+        @endif
+        {{-- DYNAMIC AD END --}}
     <div class="feature-news-wrapper bg-white">
         <div class="container custom-container">
             <div class="row custom-row row-eq-height">
@@ -387,6 +402,23 @@
             </div>
         </div>
     </section>
+
+    {{-- DYNAMIC AD START --}}
+        @php
+            $ad = App\Models\Advertisement::where('add_placement', 'Homepageads2_970')->where('status', 1)->first();
+        @endphp
+        @if($ad)
+            <div class="ad-container" style="margin: 15px 0; text-align: center;">
+                @if($ad->banner_type == 'upload')
+                    <a href="{{ $ad->link ?? '#' }}" target="_blank"><img src="{{ asset('assets/images/addBanner/'.$ad->photo) }}" style="max-width:100%; height:auto;"></a>
+                @elseif($ad->banner_type == 'url')
+                    <a href="{{ $ad->link ?? '#' }}" target="_blank"><img src="{{ $ad->photo_url }}" style="max-width:100%; height:auto;"></a>
+                @elseif($ad->banner_type == 'code')
+                    {!! $ad->banner_code !!}
+                @endif
+            </div>
+        @endif
+        {{-- DYNAMIC AD END --}}
 
     <section class="capital-section bg-white">
         <div class="container custom-container">
@@ -747,7 +779,22 @@
             </div>
         </div>
     </section>
-
+    {{-- DYNAMIC AD START --}}
+        @php
+            $ad = App\Models\Advertisement::where('add_placement', 'Homepageads3_970')->where('status', 1)->first();
+        @endphp
+        @if($ad)
+            <div class="ad-container" style="margin: 15px 0; text-align: center;">
+                @if($ad->banner_type == 'upload')
+                    <a href="{{ $ad->link ?? '#' }}" target="_blank"><img src="{{ asset('assets/images/addBanner/'.$ad->photo) }}" style="max-width:100%; height:auto;"></a>
+                @elseif($ad->banner_type == 'url')
+                    <a href="{{ $ad->link ?? '#' }}" target="_blank"><img src="{{ $ad->photo_url }}" style="max-width:100%; height:auto;"></a>
+                @elseif($ad->banner_type == 'code')
+                    {!! $ad->banner_code !!}
+                @endif
+            </div>
+        @endif
+        {{-- DYNAMIC AD END --}}
     <section class="video-gallery-section bg-white">
         <div class="container custom-container">
 

@@ -2796,7 +2796,7 @@ a {
   margin-bottom: 12px;
 }
 .details-page-breadcrumb li a {
-  color: #1da255;
+  color: #1a1a1a;
   font-size: 22px;
 }
 .breadcrumb > li + li:before {
@@ -3050,7 +3050,7 @@ a {
 }
 
 .modern-sb-grid-link h3 {
-    font-size: 15px;
+    font-size: 18px;
     line-height: 1.4;
     font-weight: 600;
     color: #333;
@@ -3176,7 +3176,7 @@ a {
 }
 
 .modern-sb-list-info h3 {
-    font-size: 15px;
+    font-size: 18px;
     line-height: 1.35;
     margin: 0;
     font-weight: 500;
