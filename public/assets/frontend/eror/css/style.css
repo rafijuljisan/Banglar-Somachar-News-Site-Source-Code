@@ -1,104 +1,114 @@
-* {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
+/* Clean Page Layout */
 body {
-  padding: 0;
-  margin: 0;
+  background-color: #f8f9fa; /* Light newspaper grey */
+  font-family: 'Hind Siliguri', 'Montserrat', sans-serif; /* Hind Siliguri is great for Bangla */
+  color: #333;
 }
 
-#notfound {
+#error-page {
   position: relative;
-  height: 100vh;
-  background: #030005;
+  height: 85vh; /* Keeps footer visible */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
 }
 
-#notfound .notfound {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-}
-
-.notfound {
-  max-width: 767px;
-  width: 100%;
-  line-height: 1.4;
+.error-content {
   text-align: center;
+  max-width: 600px;
 }
 
-.notfound .notfound-404 {
-  position: relative;
-  height: 180px;
-  margin-bottom: 20px;
-  z-index: -1;
-}
-
-.notfound .notfound-404 h1 {
-  font-family: 'Montserrat', sans-serif;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50% , -50%);
-      -ms-transform: translate(-50% , -50%);
-          transform: translate(-50% , -50%);
-  font-size: 224px;
+/* The "404" Number - Big Newspaper Headline Style */
+.error-content h1 {
+  font-family: 'Playfair Display', serif; /* Serif font looks more like a Newspaper */
+  font-size: 140px;
   font-weight: 900;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-left: -12px;
-  color: #030005;
-  text-transform: uppercase;
-  text-shadow: -1px -1px 0px #8400ff, 1px 1px 0px #ff005a;
-  letter-spacing: -20px;
-}
-
-
-.notfound .notfound-404 h2 {
-  font-family: 'Montserrat', sans-serif;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 110px;
-  font-size: 42px;
-  font-weight: 700;
-  color: #fff;
-  text-transform: uppercase;
-  text-shadow: 0px 2px 0px #8400ff;
-  letter-spacing: 13px;
   margin: 0;
+  line-height: 1;
+  color: #eee; /* Subtle background text */
+  background: url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1000&q=80') no-repeat center;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: cover;
+  /* Fallback for browsers that don't support clip */
+  text-shadow: 2px 2px 0px #d1d1d1; 
 }
 
-.notfound a {
-  font-family: 'Montserrat', sans-serif;
-  display: inline-block;
-  text-transform: uppercase;
-  color: #ff005a;
-  text-decoration: none;
-  border: 2px solid;
-  background: transparent;
-  padding: 10px 40px;
-  font-size: 14px;
+/* If background clip fails or image is missing, this handles fallback */
+@supports not (-webkit-background-clip: text) {
+  .error-content h1 {
+      color: #dc3545;
+      background: none;
+  }
+}
+
+.error-content h2 {
+  font-size: 32px;
   font-weight: 700;
-  -webkit-transition: 0.2s all;
-  transition: 0.2s all;
+  color: #dc3545; /* Professional News Red */
+  margin-top: -20px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.notfound a:hover {
-  color: #8400ff;
+.error-content h3 {
+  font-size: 24px;
+  color: #2c3e50;
+  margin-top: 5px;
+  font-weight: 600;
 }
 
+.error-content p {
+  font-size: 16px;
+  color: #6c757d;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* Professional Button */
+.btn-news {
+  display: inline-block;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #dc3545; /* Red */
+  padding: 12px 30px;
+  border-radius: 4px; /* Slight round, professional */
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(220, 53, 69, 0.3);
+  font-size: 14px;
+  border: none;
+}
+
+.btn-news:hover {
+  background-color: #c82333; /* Darker Red */
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(220, 53, 69, 0.4);
+}
+
+.divider {
+  width: 60px;
+  height: 4px;
+  background: #dc3545;
+  margin: 20px auto;
+  border-radius: 2px;
+}
+
+/* Mobile Responsiveness */
 @media only screen and (max-width: 767px) {
-    .notfound .notfound-404 h2 {
-        font-size: 24px;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-  .notfound .notfound-404 h1 {
-      font-size: 182px;
+  .error-content h1 {
+      font-size: 100px;
+  }
+  .error-content h2 {
+      font-size: 24px;
+  }
+  .error-content h3 {
+      font-size: 20px;
   }
 }

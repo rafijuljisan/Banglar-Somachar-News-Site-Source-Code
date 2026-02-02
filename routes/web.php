@@ -425,7 +425,7 @@ Route::prefix('admin')->group(function () {
     });
     Route::group(['middleware' => 'permissions:photocard_tool'], function () {
         // --- Photocard Frames ---
-        
+
     });
 
 
@@ -538,11 +538,7 @@ Route::prefix('admin')->group(function () {
 
 
     Route::group(['middleware' => 'permissions:site_map'], function () {
-        Route::get('/sitemaps', 'Admin\SiteMapController@all')->name('admin.sitemap.all');
-        Route::get('/sitemap.xml', 'Admin\SiteMapController@index')->name('sitemap.index');
-        Route::get('/sitemap/categories.xml', 'Admin\SiteMapController@categories')->name('sitemap.categories');
-        Route::get('/sitemap/subcategories.xml', 'Admin\SiteMapController@subcategories')->name('sitemap.subcategories');
-        Route::get('/sitemap/posts.xml', 'Admin\SiteMapController@posts')->name('sitemap.posts');
+        //----------------Site Map-----------------
     });
 
     Route::group(['middleware' => 'permissions:font_option'], function () {
@@ -615,6 +611,13 @@ Route::get('/logout', 'Front\LoginController@logout')->name('front.logout');
 Route::get('auth/{provider}', 'Front\SocialRegisterController@redirectToProvider')->name('social.provider');
 Route::get('auth/{provider}/callback', 'Front\SocialRegisterController@handleProviderCallback');
 
+// --- Site Maps ---
+Route::get('/sitemaps', 'Admin\SiteMapController@all')->name('admin.sitemap.all');
+Route::get('/sitemap.xml', 'Admin\SiteMapController@index')->name('sitemap.index');
+Route::get('/sitemap/categories.xml', 'Admin\SiteMapController@categories')->name('sitemap.categories');
+Route::get('/sitemap/subcategories.xml', 'Admin\SiteMapController@subcategories')->name('sitemap.subcategories');
+Route::get('/sitemap/posts.xml', 'Admin\SiteMapController@posts')->name('sitemap.posts');
+
 Route::get('/{category}/{subcategory}', 'Front\FrontendController@postBySubcategory')->name('frontend.postBySubcategory');
 Route::get('/{category}', 'Front\FrontendController@category')->name('frontend.category');
 
@@ -626,5 +629,3 @@ Route::get('/tools/print/{id}', [App\Http\Controllers\Front\FrontendController::
 Route::get('/tools/photocard/{id}', [App\Http\Controllers\Front\FrontendController::class, 'loadPhotocardModal'])->name('post.tool.photocard');
 
 Route::get('/social-share-image/{id}', 'App\Http\Controllers\Front\FrontendController@socialImage')->name('social.share.image');
-
-

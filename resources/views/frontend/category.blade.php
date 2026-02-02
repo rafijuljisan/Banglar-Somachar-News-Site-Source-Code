@@ -20,7 +20,7 @@
     .cat-page-wrapper .right-content-area > *,
     .cat-page-wrapper .category-content > * {
         margin: 0 !important;
-        padding: 0 !important;
+        padding: 0px 0px 15px 0px !important;
     }
 
     /* === FEATURED HERO POST === */

@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Block access to the Admin panel to save Google's crawl budget
+Disallow: /admin
+Disallow: /admin/
+Disallow: /login
+Disallow: /register
+
+# Tell Google where your new Sitemap is
+Sitemap: https://banglarsomachar.com/sitemap.xml

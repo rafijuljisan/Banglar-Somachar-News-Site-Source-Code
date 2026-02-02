@@ -1,153 +1,324 @@
 @extends('layouts.front')
 @section('contents')
- 
-  
-  
-  
-   
- <div class="container custom-container">
-   <div class="row custom-row">
-     <div class="left-content-area details-left-content-area">
-       <div class="col-lg-12 custom-padding">
 
-         <ol class="breadcrumb details-page-breadcrumb">
-           <li><a href="#"><i class="fa fa-home"></i></a></li>
-           <li class="active"><a href="#">{{$parent->title}}</a></li>
-		   <li class="active"><a href="#">{{$subcategory}}</a></li>
-         </ol><!--/.details-page-breadcrumb-->
-         <div class="category-page">
-                           <div class="category-content">
-						   
-						   
-						   
+{{-- === 1. INLINE STYLES (As provided in your design) === --}}
+<style>
+    /* === RESET & BASE === */
+    .cat-page-wrapper * { box-sizing: border-box !important; }
+    .cat-page-wrapper { padding-left: 30px !important; padding-right: 05px !important; }
+    
+    .cat-page-wrapper .left-content-area,
+    .cat-page-wrapper .right-content-area { margin: 0 !important; }
+    
+    .cat-page-wrapper .left-content-area > *,
+    .cat-page-wrapper .right-content-area > *,
+    .cat-page-wrapper .category-content > * { margin: 0 !important; padding: 0px 0px 15px 0px !important; }
 
-  @if ($datas->count()>0)                            
- @foreach ($datas as $post)
-							   <div class="col-md-6 custom-padding">
-                  <div class="category-content-single">
-                    <a href="{{ route('frontend.details',[$post->id,$post->slug])}}">
-                      <div class="category-content-single-left">
-                        <img class="img-fluid" src="{{asset('assets/images/post/'.$post->image_big)}}" alt="{{ strlen($post->title)>50 ? mb_substr($post->title,0,50,'utf-8').'...' : $post->title}}">
-                      </div>
-                      <div class="category-content-single-right">
-                        <span></span>
-                        <h2>{{ strlen($post->title)>50 ? mb_substr($post->title,0,50,'utf-8').'...' : $post->title}}</h2>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                    @endforeach    
-                        @else 
-							                            <div class="col-lg-12">
+    /* === FEATURED HERO POST === */
+    .featured-hero-post {
+        background: #ffffff !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+        margin-bottom: 40px !important;
+        transition: all 0.4s ease !important;
+    }
+    .featured-hero-post:hover {
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12) !important;
+        transform: translateY(-3px) !important;
+    }
+    .featured-hero-link { display: block !important; text-decoration: none !important; color: inherit !important; }
+    .featured-hero-image-container {
+        width: 100% !important; height: 400px !important; position: relative !important;
+        overflow: hidden !important; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    }
+    .featured-hero-image-container img {
+        width: 100% !important; height: 100% !important; object-fit: cover !important;
+        display: block !important; transition: transform 0.6s ease !important;
+    }
+    .featured-hero-post:hover .featured-hero-image-container img { transform: scale(1.08) !important; }
+    .featured-hero-overlay {
+        position: absolute !important; bottom: 0 !important; left: 0 !important; right: 0 !important;
+        background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%) !important;
+        padding: 40px 30px 30px 30px !important;
+    }
+    .featured-hero-category-badge {
+        display: inline-block !important; background: #ff0000 !important; color: #ffffff !important;
+        padding: 6px 16px !important; border-radius: 20px !important; font-size: 12px !important;
+        font-weight: 600 !important; text-transform: uppercase !important; letter-spacing: 0.5px !important;
+        margin-bottom: 15px !important;
+    }
+    .featured-hero-title {
+        font-size: 32px !important; font-weight: 800 !important; line-height: 1.3 !important;
+        color: #ffffff !important; margin-bottom: 15px !important; text-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
+    }
+    .featured-hero-excerpt {
+        font-size: 16px !important; line-height: 1.6 !important; color: #f0f0f0 !important;
+        margin-bottom: 20px !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important; overflow: hidden !important;
+    }
+    .featured-hero-read-more {
+        display: inline-flex !important; align-items: center !important; gap: 8px !important;
+        color: #ffffff !important; font-weight: 700 !important; font-size: 15px !important;
+        background: rgba(255,255,255,0.15) !important; padding: 10px 20px !important; border-radius: 25px !important;
+        backdrop-filter: blur(10px) !important; transition: all 0.3s ease !important;
+    }
+    .featured-hero-post:hover .featured-hero-read-more { background: rgba(255,255,255,0.25) !important; gap: 12px !important; }
+    .featured-hero-read-more i { transition: transform 0.3s ease !important; }
+    .featured-hero-post:hover .featured-hero-read-more i { transform: translateX(4px) !important; }
+
+    /* === GRID POSTS === */
+    .posts-grid-container {
+        display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 30px !important; margin-bottom: 40px !important;
+    }
+    .grid-post-card {
+        background: #ffffff !important; border-radius: 8px !important; overflow: hidden !important;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important; transition: all 0.3s ease !important;
+        height: 100% !important; display: flex !important; flex-direction: column !important;
+    }
+    .grid-post-card:hover { box-shadow: 0 6px 25px rgba(0,0,0,0.12) !important; transform: translateY(-5px) !important; }
+    .grid-post-link { display: flex !important; flex-direction: column !important; height: 100% !important; text-decoration: none !important; color: inherit !important; }
+    .grid-post-image-wrapper {
+        width: 100% !important; height: 220px !important; position: relative !important; overflow: hidden !important; background: #f5f5f5 !important;
+    }
+    .grid-post-image-wrapper img {
+        width: 100% !important; height: 100% !important; object-fit: cover !important; display: block !important; transition: transform 0.5s ease !important;
+    }
+    .grid-post-card:hover .grid-post-image-wrapper img { transform: scale(1.12) !important; }
+    .grid-post-content { padding: 20px !important; flex-grow: 1 !important; display: flex !important; flex-direction: column !important; }
+    .grid-post-title {
+        font-size: 20px !important; font-weight: 700 !important; line-height: 1.4 !important; color: #1a1a1a !important;
+        margin-bottom: 12px !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important; overflow: hidden !important; transition: color 0.3s ease !important;
+    }
+    .grid-post-card:hover .grid-post-title { color: #ff0000 !important; }
+    .grid-post-description {
+        font-size: 15px !important; line-height: 1.6 !important; color: #666666 !important;
+        margin-bottom: 15px !important; display: -webkit-box !important; -webkit-line-clamp: 3 !important;
+        -webkit-box-orient: vertical !important; overflow: hidden !important; flex-grow: 1 !important;
+    }
+    .grid-post-meta {
+        display: flex !important; align-items: center !important; gap: 8px !important; font-size: 13px !important;
+        color: #999999 !important; padding-top: 12px !important; border-top: 1px solid #eeeeee !important;
+    }
+    .grid-post-meta i { color: #ff0000 !important; }
+
+    /* === PAGINATION & RESPONSIVE === */
+    .category-pagination { text-align: center !important; margin-top: 40px !important; padding: 20px 0 !important; }
+    @media (max-width: 992px) {
+        .posts-grid-container { grid-template-columns: repeat(2, 1fr) !important; gap: 20px !important; }
+        .featured-hero-title { font-size: 26px !important; }
+        .featured-hero-excerpt { font-size: 14px !important; }
+    }
+    @media (max-width: 768px) {
+        .posts-grid-container { grid-template-columns: 1fr !important; gap: 20px !important; }
+        .featured-hero-image-container { height: 280px !important; }
+        .featured-hero-overlay { padding: 25px 20px 20px 20px !important; }
+        .featured-hero-title { font-size: 22px !important; margin-bottom: 10px !important; }
+        .featured-hero-excerpt { font-size: 14px !important; margin-bottom: 15px !important; -webkit-line-clamp: 2 !important; }
+        .featured-hero-read-more { font-size: 14px !important; padding: 8px 16px !important; }
+        .grid-post-image-wrapper { height: 200px !important; }
+        .grid-post-title { font-size: 18px !important; }
+        .grid-post-description { font-size: 14px !important; }
+    }
+    @media (max-width: 480px) {
+        .featured-hero-image-container { height: 240px !important; }
+        .featured-hero-title { font-size: 20px !important; }
+        .grid-post-content { padding: 15px !important; }
+    }
+</style>
+
+<div class="container custom-container cat-page-wrapper">
+    <div class="row custom-row">
+        
+        {{-- === LEFT COLUMN (UPDATED DESIGN) === --}}
+        <div class="left-content-area details-left-content-area">
+            <div class="col-lg-12 custom-padding">
+
+                {{-- Breadcrumb --}}
+                <ol class="breadcrumb details-page-breadcrumb">
+                    <li><a href="{{ url('/') }}"><i class="fa fa-home"></i></a></li>
+                    <li><a href="{{ route('frontend.category', $parent->slug) }}">{{ $parent->title }}</a></li>
+                    <li class="active"><a href="#">{{ $subcategory }}</a></li>
+                </ol>
+
+                <div class="category-page">
+                    <div class="category-content">
+
+                        @if ($datas->count() > 0)
+                            
+                            {{-- === 1. FEATURED HERO POST (First Item) === --}}
+                            @php 
+                                $heroPost = $datas->first(); 
+                            @endphp
+
+                            <article class="featured-hero-post">
+                                <a href="{{ route('frontend.details',[$heroPost->id,$heroPost->slug])}}" class="featured-hero-link">
+                                    <div class="featured-hero-image-container">
+                                        <img src="{{asset('assets/images/post/'.$heroPost->image_big)}}" alt="{{ $heroPost->title }}">
+                                        <div class="featured-hero-overlay">
+                                            <span class="featured-hero-category-badge">{{ $subcategory }}</span>
+                                            <h1 class="featured-hero-title">{{ $heroPost->title }}</h1>
+                                            <p class="featured-hero-excerpt">{{ Str::limit(strip_tags($heroPost->details ?? $heroPost->description), 150) }}</p>
+                                            <div class="featured-hero-read-more">
+                                                বিস্তারিত পড়ুন <i class="fa fa-arrow-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </article>
+
+                            {{-- === 2. GRID POSTS (Remaining Items) === --}}
+                            @if ($datas->count() > 1)
+                            <div class="posts-grid-container">
+                                @foreach ($datas->skip(1) as $post)
+                                <article class="grid-post-card">
+                                    <a href="{{ route('frontend.details',[$post->id,$post->slug])}}" class="grid-post-link">
+                                        <div class="grid-post-image-wrapper">
+                                            <img src="{{asset('assets/images/post/'.$post->image_big)}}" alt="{{ $post->title }}">
+                                        </div>
+                                        <div class="grid-post-content">
+                                            <h2 class="grid-post-title">{{ $post->title }}</h2>
+                                            <p class="grid-post-description">{{ Str::limit(strip_tags($post->details ?? $post->description), 120) }}</p>
+                                            <div class="grid-post-meta">
+                                                <i class="fa fa-clock-o"></i>
+                                                <span>{{ $post->created_at->diffForHumans() }}</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                                @endforeach
+                            </div>
+                            @endif
+
+                        @else
+                            {{-- No Posts Found --}}
+                            <div class="col-lg-12">
                                 <div class="card">
-                                    <div class="card-body">
-                                        <p class="text-danger text-danger text-center">{{__('This Sub Category has no News.')}}</p>
+                                    <div class="card-body text-center py-5">
+                                        <h4 class="text-danger">{{__('This Sub Category has no News.')}}</h4>
                                     </div>
                                 </div>
                             </div>
-                        @endif					
-                                </div>
-                            <div class="row"  id="show_more_main18127" style="margin-bottom:30px;">
+                        @endif
+
+                    </div>
+                </div>
 
             </div>
-                   </div>
+        </div>
 
-         <!-- <div class="category-content-btn">
-           <div class="details-btn">
-             <a href="#" class="btn btn-more-details hvr-bounce-to-right">আরও খবর </a>
-           </div>
-         </div> -->
+        <div class="col-lg-4 col-md-4 col-12 right-content-area details-right-content-area">
+          <div class="modern-sb-wrapper">
+            <div class="col-lg-12 custom-padding">
 
-       </div><!--/.col-lg-12-->
-     </div><!--/.left-content-area-->
+              <div class="modern-sb-ads">
+                {{-- DYNAMIC AD START --}}
+                @php
+                  $ad = App\Models\Advertisement::where('add_placement', 'single_sidebar_ads')->where('status', 1)->first();
+                @endphp
+                @if($ad)
+                  <div class="ad-container" style="margin: 15px 0; text-align: center;">
+                    @if($ad->banner_type == 'upload')
+                      <a href="{{ $ad->link ?? '#' }}" target="_blank"><img
+                          src="{{ asset('assets/images/addBanner/' . $ad->photo) }}" style="max-width:100%; height:auto;"></a>
+                    @elseif($ad->banner_type == 'url')
+                      <a href="{{ $ad->link ?? '#' }}" target="_blank"><img src="{{ $ad->photo_url }}"
+                          style="max-width:100%; height:auto;"></a>
+                    @elseif($ad->banner_type == 'code')
+                      {!! $ad->banner_code !!}
+                    @endif
+                  </div>
+                @endif
+                {{-- DYNAMIC AD END --}}
+              </div>
 
-     <div class="right-content-area details-right-content-area">
-       <div class="col-lg-12 custom-padding">
+              <div class="modern-sb-header">
+                @php
+                  $topNews = DB::table('posts')->inRandomOrder()->orderBy('id', 'DESC')->limit(6)->get();
+                @endphp
+                <h2>আলোচিত শীর্ষ ১০ সংবাদ</h2>
+              </div>
 
-         <div class="details-page-side-banner">
-           {!!$gs->sidebar_ads!!}
-         </div><!--/.details-page-side-banner-->
+              <div class="row custom-row">
+                @foreach($topNews as $row)
+                  <div class="col-6 col-md-6 modern-sb-grid-item">
+                    <a href="{{ route('frontend.details', [$row->id, $row->slug])}}" class="modern-sb-grid-link">
+                      <div class="modern-sb-grid-thumb">
+                        <img src="{{asset('assets/images/post/' . $row->image_big)}}" alt="{{ $row->title}}"
+                          title="{{ $row->title}}">
+                      </div>
+                      <h3>{{ Str::limit($row->title, 45) }}</h3>
+                    </a>
+                  </div>
+                @endforeach
+              </div>
 
-         <div class="details-tab-container">
-		     	@php
-				$latestpost=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(10)->limit(20)->get();
-				@endphp
-           <ul class="nav nav-pills side-tab-main" id="pills-tab" role="tablist">
-             <li class="nav-item">
-               <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">সর্বশেষ</a>
-             </li>
-             <li class="nav-item">
-               <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">জনপ্রিয়</a>
-             </li>
-           </ul>
+              <div class="modern-sb-tab-wrapper">
 
-           <div class="tab-content alokitonews-tab-content" id="pills-tabContent">
+                <ul class="nav nav-pills modern-sb-nav" id="pills-tab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                      aria-controls="pills-home" aria-selected="true">সর্বশেষ</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                      aria-controls="pills-profile" aria-selected="false">জনপ্রিয়</a>
+                  </li>
+                </ul>
 
-             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-               <div class="least-news">
-                 <ul class="least-news-ul detail-least-news-ul">
-  
-  
-  
-  
-  @foreach($latestpost as $row)
-  <li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-    <div class="least-news-left">
-      <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
+                <div class="tab-content modern-sb-tab-body" id="pills-tabContent">
+
+                  <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                    aria-labelledby="pills-home-tab">
+                    <ul class="modern-sb-list">
+                      @php
+                        $latestpost = DB::table('posts')->inRandomOrder()->orderBy('id', 'DESC')->skip(10)->limit(20)->get();
+                      @endphp
+
+                      @foreach($latestpost as $row)
+                        <li class="modern-sb-list-item">
+                          <a href="{{ route('frontend.details', [$row->id, $row->slug])}}" class="modern-sb-list-link">
+                            <div class="modern-sb-list-thumb">
+                              <img src="{{asset('assets/images/post/' . $row->image_big)}}" alt="{{ $row->title}}">
+                            </div>
+                            <div class="modern-sb-list-info">
+                              <h3>{{ $row->title}}</h3>
+                            </div>
+                          </a>
+                        </li>
+                      @endforeach
+                    </ul>
+                  </div>
+
+                  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <ul class="modern-sb-list">
+                      @php
+                        $favourite = DB::table('posts')->inRandomOrder()->orderBy('id', 'DESC')->skip(5)->limit(20)->get();
+                      @endphp
+
+                      @foreach($favourite as $row)
+                        <li class="modern-sb-list-item">
+                          <a href="{{ route('frontend.details', [$row->id, $row->slug])}}" class="modern-sb-list-link">
+                            <div class="modern-sb-list-thumb">
+                              <img src="{{asset('assets/images/post/' . $row->image_big)}}" alt="{{ $row->title}}">
+                            </div>
+                            <div class="modern-sb-list-info">
+                              <h3>{{ $row->title}}</h3>
+                            </div>
+                          </a>
+                        </li>
+                      @endforeach
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
     </div>
-    <div class="least-news-right">
-      <h3>{{ $row->title}}</h3>
-    </div>
-  </a></li>
-  @endforeach
-  
-  
- 
- </ul><!--/.least-news-ul-->
-               </div><!--/.least-news-->
-             </div><!--/.tab-pane-->
+</div>
 
-             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-               <div class="least-news">
-                 <ul class="least-news-ul detail-least-news-ul">
-    
-	    			@php
-				$favourite=DB::table('posts')->inRandomOrder()->orderBy('id','DESC')->skip(5)->limit(20)->get();
-				@endphp 
-	
-	@foreach($favourite as $row)
-	<li><a href="{{ route('frontend.details',[$row->id,$row->slug])}}">
-    <div class="least-news-left">
-      <img src="{{asset('assets/images/post/'.$row->image_big)}}" class="img-fluid" alt="{{ $row->title}}" title="{{ $row->title}}" />
-    </div>
-    <div class="least-news-right">
-      <h3>{{ $row->title}}</h3>
-    </div>
-  </a></li>
-    @endforeach
-  
-  
-  
-  </ul><!--/.least-news-ul-->
-               </div><!--/.least-news-->
-             </div><!--/.tab-pane-->
-
-           </div><!--/.tab-content-->
-         </div><!--/.details-tab-container-->
-
-       </div><!--/.col-lg-12-->
-     </div><!--/.right-content-area-->
-   </div><!--/.row-->
- </div><!--/.container-->   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
 @endsection

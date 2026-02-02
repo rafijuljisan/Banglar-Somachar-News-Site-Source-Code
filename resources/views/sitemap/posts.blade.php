@@ -1,10 +1,11 @@
+{!! '<'.'?xml version="1.0" encoding="UTF-8"?>' !!}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    @foreach ($posts as $post)
-        <item>
-            <title>{{ $post->title }}</title>
-            <pubDate>{{ $post->created_at->tz('UTC')->toAtomString() }}</pubDate>
-            <description>{{ $post->description }}</description>
-            <link>{{ route('frontend.details',[$post->id,$post->slug])}}</link>
-        </item>
+    @foreach($posts as $post)
+    <url>
+        <loc>{{ route('frontend.details', [$post->id, $post->slug]) }}</loc>
+        <lastmod>{{ $post->updated_at->tz('UTC')->toAtomString() }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
     @endforeach
 </urlset>

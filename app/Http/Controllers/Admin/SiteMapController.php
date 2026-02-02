@@ -13,7 +13,9 @@ class SiteMapController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:admin');
+        // This tells Laravel: "Only protect the 'all' page."
+        // The XML pages (index, posts, etc.) are now open to the public.
+        $this->middleware('auth:admin')->only(['all']);
     }
 
     public function all()

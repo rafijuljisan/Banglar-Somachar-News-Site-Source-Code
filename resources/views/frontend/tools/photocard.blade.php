@@ -19,13 +19,13 @@
 
         {{-- Dynamic Date (Bengali) --}}
         {{-- UPDATED: Increased width (500px) and moved left (550px) to keep it on one line --}}
-        <div class="photocard-dynamic-date" style="position: absolute; top: 40px; left: 550px; width: 500px; text-align: right; color: black; font-size: 45px; font-weight: 600; font-family: 'solaiman-lipi', sans-serif; line-height: 1.2; display: flex; align-items: center; justify-content: flex-end; z-index: 10; padding-right: 30px;">
+        <div class="photocard-dynamic-date" style="position: absolute; top: 40px; left: 550px; width: 500px; text-align: right; color: black; font-size: 45px; font-weight: 600; font-family: 'SolaimanLipiNormal', sans-serif; line-height: 1.2; display: flex; align-items: center; justify-content: flex-end; z-index: 10; padding-right: 30px;">
             {{ $bengali_date }}
         </div>
 
         {{-- Headline --}}
         <div class="photocard-headline-container" style="position: absolute; bottom: 160px; left: 50px; right: 50px; height: 150px; display: flex; align-items: center; justify-content: center; text-align: center; z-index: 10;">
-            <h1 id="photocard-headline-text" style="text-align: center; font-family: 'solaiman-lipi', sans-serif; font-weight: 700; color: black; font-size: 60px; line-height: 1.3; padding: 0; margin: 0;">
+            <h1 id="photocard-headline-text" style="text-align: center; font-family: 'SolaimanLipiNormal', sans-serif; font-weight: 700; color: black; font-size: 60px; line-height: 1.3; padding: 0; margin: 0;">
                 {{ $post->title }}
             </h1>
         </div>

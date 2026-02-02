@@ -142,200 +142,296 @@
   }
 }
 
-/* Mobile Layout: 320px. */
+/* ============================================================
+   MOBILE LAYOUT: 320px - 767px (Final Optimized Version)
+   ============================================================ */
 @media only screen and (max-width: 767px) {
-  .header-top-area {
-    display: none;
-  }
-  .header-baner {
-    display: none;
-  }
-  .top-banner-lead {
-    display: none;
-  }
-  .main-logo {
-    padding: 10px 0 10px 0;
-  }
-  .top-lead-news-single {
-    margin-bottom: 10px;
-  }
-  .top-lead-news {
-    margin-top: 22px;
-  }
-  .marquee-container {
-    margin-top: 10px;
-  }
-  .marquee {
-    margin-bottom: 10px;
-  }
-  .lead-news img {
-    height: unset;
-  }
-  .lead-news {
-    margin-bottom: 15px;
-  }
-  .top-news-middle {
-    width: 100%;
-  }
-  .top-news-right {
-    width: 100%;
-  }
-  .international-news-left {
-    width: 100%;
-  }
-  .international-news-right {
-    width: 100%;
-  }
-  .feature-news-wrapper-left {
-    width: 100%;
-  }
-  .feature-news-wrapper-right {
-    width: 100%;
-  }
-  .sports-news-left {
-    width: 100%;
-  }
-  .sports-news-right {
-    width: 100%;
-  }
-  .life-style-left {
-    width: 100%;
-  }
-  .life-style-right {
-    width: 100%;
-  }
-  .lead-news-heading {
-    padding: 20px 10px 5px;
-  }
-  .lead-news-heading h1 {
-    font-size: 24px;
-    line-height: 28px;
-  }
-  .feature-news-wrapper {
-    padding: 30px 0 30px;
-  }
-  .btn-vot {
-    margin-bottom: 15px;
-  }
-  .international {
-    padding: 30px 0;
-  }
-  .capital-section {
-    padding: 30px 0 30px;
-  }
-  .sports {
-    padding: 30px 0 30px;
-  }
-  .sports-lead-news img {
-    min-height: unset;
-  }
-  .sports-lead-news-text h2 {
-    font-size: 20px;
-    line-height: 24px;
-  }
-  .sports-banner-1 {
-    margin-top: 0;
-  }
-  .life-style-section {
-    padding: 30px 0 30px;
-  }
-  .footer-copy-text {
-    text-align: center;
-  }
-  .footer-bottom-row p {
-    margin-bottom: 0;
-    line-height: 24px;
-  }
-  .footer {
-    padding: 15px 0;
-  }
-  .btn-date-picker {
-    margin-top: 15px;
-  }
-  .contact-details h3 {
-    margin-top: 10px;
-  }
-  .footer-new {
-    padding: 20px 0 25px 0px;
-  }
-  .international-lead {
-    margin-bottom: 25px;
-  }
-  .life-style-single-text {
-    min-height: 60px;
-    max-height: 60px;
-  }
-  .mobile-heading {
-    margin-top: 20px;
-  }
-  .top-news-section {
-    margin-top: 3px;
-  }
-  .namaj-time-table td {
-    line-height: 41px;
-  }
-  /*===================  DETAILS PAGE STYLE ==============================*/
-  .left-content-area {
-    width: 100%;
-  }
-  .right-content-area {
-    width: 100%;
-  }
-  .details-news-single-text h3 {
-    font-size: 16px;
-    line-height: 20px;
-  }
-  .detail-least-news-ul .least-news-right h3 {
-    font-size: 16px;
-    line-height: 21px;
-  }
-  /*===================  CATEGORY PAGE STYLE ==============================*/
-  .category-content-lead-left {
-    width: 100%;
-  }
-  .category-content-lead-right {
-    width: 100%;
-    padding: 10px 10px;
-  }
-  .category-content-lead-right-text {
-    max-height: 120px;
-    min-height: 120px;
-  }
-  .category-content-single-right {
-    min-height: unset;
-    max-height: unset;
-  }
-  .category-content-single-right h2 {
-    font-size: 16px;
-    line-height: 20px;
-  }
-  /*===================  PHOTO GALLERY STYLE ==============================*/
-  .photo-gallery-left {
-    width: 100%;
-  }
-  .photo-gallery-right {
-    width: 100%;
-  }
-  .photo-gallery-wrapper {
-    padding: 20px 0 15px;
-  }
-  .photo-gallery-ul-right {
-    max-height: 69px;
-    min-height: 69px;
-  }
-  .sports-banner-top-1 {
-    margin-top: 5px;
-  }
-  .international-lead-detail {
-    display: none;
-  }
-  .lead-national-main-text {
-    display: none;
-  }
-  .lead-national-main-img {
-    margin-bottom: 24px;
-  }
+    
+    /* --- 1. GLOBAL CONTAINER RESET --- */
+    .container, .container-fluid {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .row.custom-row {
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+    .custom-padding, 
+    .col-md-3, .col-md-4, .col-md-6, .col-md-8, .col-md-9, .col-md-12 {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    /* --- 2. HEADER & MARQUEE --- */
+    .header-top-area, .header-baner, .top-banner-lead { display: none; }
+    .main-logo { text-align: center; padding: 10px 0; }
+    .marquee-container { margin-top: 5px; margin-bottom: 15px; }
+
+    /* --- 3. HERO SECTION (Mosaic) --- */
+    .hero-wrapper { margin-bottom: 15px; }
+    .hero-card.big img { height: 220px !important; }
+    .hero-wrapper .col-md-4 { display: flex; flex-wrap: wrap; margin-top: 10px; }
+    .hero-card.small { width: 49%; margin-right: 2%; margin-bottom: 0; }
+    .hero-card.small:last-child { margin-right: 0; }
+    .hero-card.small img { height: 110px !important; }
+
+    /* ============================================================
+   Paste this inside: @media only screen and (max-width: 767px)
+   (Replace your existing "4. TOP NEWS GRID" section with this)
+   ============================================================ */
+
+/* --- 1. RESET COLUMNS TO STACK (Crucial Fix) --- */
+/* This forces the layout to be 1 column (Vertical Scroll) instead of a broken grid */
+.top-news-section .row.custom-row {
+    display: block !important; /* Removes flex interference */
 }
+
+.top-news-section .row.custom-row > .col-md-4,
+.top-news-section .row.custom-row > .col-md-8 {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 5px !important;
+    margin-bottom: 15px;
+}
+
+/* --- 2. HERO SECTION FIXES (Big Image) --- */
+/* Fix text covering the face */
+.hero-card.big .hero-overlay {
+    position: absolute;
+    bottom: 0;
+    top: auto; /* Unset top so it drops to bottom */
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); /* Readability gradient */
+    padding: 20px 10px 10px 10px;
+}
+
+.hero-card.big .hero-overlay h1 {
+    font-size: 20px !important; /* Smaller font */
+    line-height: 26px;
+    margin-bottom: 0;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.hero-card.big img {
+    height: 240px !important; /* Reasonable height for mobile */
+}
+
+/* --- 3. MIDDLE SECTION (The 2 Small Images) --- */
+/* We keep the container 100% width, but let the inner items sit side-by-side */
+.hero-wrapper .col-md-4 {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 0 5px; /* Alignment fix */
+}
+
+.hero-card.small {
+    width: 48% !important; /* Side by side */
+    margin-right: 0 !important;
+    margin-bottom: 0;
+}
+
+.hero-card.small img {
+    height: 100px !important;
+}
+
+.hero-card.small .hero-overlay h3 {
+    font-size: 15px; 
+    line-height: 1.4;
+    padding: 5px;
+}
+
+/* --- 4. BOTTOM GRID CARDS (The 3 items) --- */
+/* ============================================================
+   Paste this inside: @media only screen and (max-width: 767px)
+   (Replace your existing .grid-card styles with this block)
+   ============================================================ */
+
+.grid-card {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    background: #fff;
+    height: 100px; /* Fixed height for the card */
+}
+
+/* --- THE CRITICAL FIX --- */
+/* We make the Link (<a>) the flex container so the Image and Text sit Side-by-Side */
+.grid-card a {
+    display: flex !important; 
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    align-items: center; /* Vertically center the content */
+}
+
+.grid-card img {
+    flex: 0 0 130px; /* Fixed width: Image takes 130px */
+    height: 100% !important;
+    width: 130px !important;
+    object-fit: cover; /* Prevents stretching */
+    margin: 0;
+}
+
+.grid-card-content {
+    flex: 1; /* Text takes the remaining space */
+    padding: 0 12px; /* Space around text */
+    display: flex;
+    align-items: center; /* Center text vertically */
+    height: 100%;
+}
+
+.grid-card-content h3 {
+    font-size: 17px !important;
+    line-height: 20px !important;
+    color: #222; /* Ensure text is dark enough to see */
+    font-weight: 600;
+    margin: 0;
+    
+    /* Ensure text doesn't overflow */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+    /* --- 5. SIDEBAR FIX (Moves Sidebar to Bottom) --- */
+    /* Resets columns to full width so they stack */
+    .top-news-middle, 
+    .international-news-left, 
+    .sports-news-left, 
+    .life-style-left, 
+    .feature-news-wrapper-left {
+        width: 100% !important;
+        float: none !important;
+        padding: 0 !important;
+    }
+
+    /* Styles the sidebar container at the bottom */
+    .top-news-right, 
+    .international-news-right, 
+    .sports-news-right, 
+    .life-style-right, 
+    .feature-news-wrapper-right {
+        width: 100% !important;
+        float: none !important;
+        margin-top: 30px; /* Space above sidebar */
+        background: #f9f9f9; /* Light grey box */
+        padding: 15px !important;
+        border-top: 3px solid #e74c4f; /* Red accent line */
+        border-radius: 0 0 6px 6px;
+    }
+
+    /* --- 6. LIST CARD STYLE (Modern & Fixed Image) --- */
+    .list-card {
+        border-bottom: 1px dashed #e0e0e0;
+        padding: 15px 0;
+        margin: 0;
+    }
+    .list-card:last-child { border-bottom: none; }
+
+    .list-card a.d-flex {
+        display: flex !important;
+        align-items: flex-start;
+        text-decoration: none;
+        width: 100%;
+        gap: 15px; /* Clean gap between img and text */
+    }
+
+    .list-card .list-card-img {
+        flex: 0 0 110px; /* Fixed width */
+        height: 75px;    /* Fixed height */
+        border-radius: 6px;
+        overflow: hidden;
+        background: #f4f4f4;
+        margin-right: 0; 
+    }
+
+    .list-card .list-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Fixes "cut-out" images */
+        display: block;
+    }
+
+    .list-card .list-card-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 75px;
+    }
+
+    .list-card .list-card-content h3 {
+        font-size: 17px;
+        line-height: 22px;
+        font-weight: 600;
+        color: #222;
+        margin-bottom: 6px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Max 2 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    /* Hide summary and unnecessary meta */
+    .list-card .list-card-content p { display: none !important; }
+    .list-card .list-card-meta { font-size: 12px; color: #888; }
+
+
+    /* --- 7. TEXT-ONLY LISTS (Bullet Points) --- */
+    .clean-small-list ul, .modern-small-list { padding: 0; }
+    .clean-small-list li, .modern-small-list li {
+        padding: 8px 0 !important;
+        border-bottom: 1px solid #f1f1f1;
+        border-top: none !important;
+    }
+    .clean-small-list li a, .modern-small-list li a .text-content h3 {
+        font-size: 16px;
+        line-height: 22px;
+        color: #333;
+        padding-left: 12px;
+        position: relative;
+        display: block;
+    }
+    /* Red Bullet Point */
+    .clean-small-list li a::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 9px;
+        width: 5px;
+        height: 5px;
+        background: #e74c4f;
+        border-radius: 50%;
+    }
+
+
+    /* --- 8. OTHER GRIDS (Sports & Lifestyle) --- */
+    .sports-modern-section .row.custom-row.row-eq-height .col-md-3,
+    .lifestyle-modern-section .row.custom-row.row-eq-height:last-child .col-md-3 {
+        width: 50%;
+        float: left;
+        flex: 0 0 50%;
+        max-width: 50%;
+        padding: 5px;
+        margin-bottom: 15px;
+    }
+    /* Fix images in these grids */
+    .clean-lead-img img { height: 100px; object-fit: cover; width: 100%; }
+    .clean-lead-content h3 { font-size: 18px !important; line-height: 18px; min-height: 36px; }
+
+    /* --- 9. FOOTER & MISC --- */
+    .clean-cat-wrapper { border: none; border-bottom: 1px solid #eee; margin-bottom: 15px; }
+    .modern-header-title a { font-size: 18px; }
+    .namaj-wrapper table { font-size: 12px !important; }
+    .ad-container img { width: 100%; height: auto; }
+    .footer-bottom-row, .social-icon { text-align: center; }
+    .design-link { float: none; display: block; margin-top: 10px; }
+}
+
 
 /* Wide Mobile Layout: */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
