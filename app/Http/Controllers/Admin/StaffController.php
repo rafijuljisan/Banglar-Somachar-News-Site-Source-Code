@@ -29,7 +29,9 @@ class StaffController extends Controller
         return view('admin.staff.index');
     }
     public function create(){
-        $roles = Role::orderBy('id','asc')->skip(1)->take(10)->get();
+        // Removed skip(1) so Admin role shows up
+        // Removed take(10) so it doesn't limit you to only 10 roles
+        $roles = Role::orderBy('id','asc')->get(); 
         return view('admin.staff.create',compact('roles'));
     }
     public function store(Request $request){
