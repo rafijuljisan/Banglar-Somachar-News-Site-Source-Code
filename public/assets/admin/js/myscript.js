@@ -810,7 +810,8 @@ $("#loginform").on('submit',function(e){
 
 $("#forgotform").on('submit',function(e){
   e.preventDefault();
-  $('button.submit-btn').prop('disabled',true);
+  // Note: Ensure your HTML button actually has the class "submit-btn" or this line won't work
+  $('button.submit-btn').prop('disabled',true); 
   $('.alert-info').show();
   $('.alert-info p').html($('#authdata').val());
       $.ajax({
@@ -842,6 +843,17 @@ $("#forgotform").on('submit',function(e){
             $('input[type=email]').val('');
           }
           $('button.submit-btn').prop('disabled',false);
+       },
+       // ADDED THIS ERROR BLOCK TO CATCH SERVER ERRORS
+       error: function(xhr, status, error) {
+          $('.alert-info').hide();
+          $('.alert-success').hide();
+          $('.alert-danger').show();
+          // This will print the error in the alert box (e.g. "500 Internal Server Error")
+          $('.alert-danger p').html('Error: ' + xhr.status + ' ' + error); 
+          
+          $('button.submit-btn').prop('disabled',false);
+          console.log(xhr.responseText); // Log full error to console for debugging
        }
 
       });

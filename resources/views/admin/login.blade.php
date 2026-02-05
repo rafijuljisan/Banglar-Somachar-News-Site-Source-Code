@@ -19,227 +19,228 @@
     <link rel="stylesheet" href="{{asset('assets/admin/css/icofont.min.css')}}">
 
     <style>
-        /* ========================================
-        NEWSPAPER THEME LOGIN STYLES 
-        ========================================
-        */
-        :root {
-            --news-black: #1a1a1a;
-            --news-paper: #f4f1ea; /* Warm off-white paper color */
-            --news-white: #ffffff;
-            --news-gray: #666666;
-            --news-accent: #2c2c2c;
-            --news-border: #dcdcdc;
-            --font-headline: 'Playfair Display', serif;
-            --font-body: 'Inter', sans-serif;
-        }
+    /* ========================================
+       MODERN BENGALI NEWSPAPER THEME
+       Clean, Sharp, High-Contrast
+       ========================================
+    */
+    /* Import Bengali Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;700&display=swap');
 
-        body#top {
-            background-color: var(--news-paper);
-            font-family: var(--font-body);
-            color: var(--news-black);
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-image: radial-gradient(#e0ddd5 1px, transparent 1px);
-            background-size: 20px 20px; /* Subtle texture */
-        }
-
-        /* Wrapper to isolate new design */
-        .news-login-wrapper {
-            width: 100%;
-            max-width: 480px;
-            padding: 20px;
-        }
-
-        .news-card {
-            background: var(--news-white);
-            border: 1px solid var(--news-black);
-            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.8); /* Brutalist/Retro shadow */
-            padding: 40px;
-            position: relative;
-        }
-
-        /* The "Masthead" - Newspaper Header Style */
-        .news-masthead {
-            text-align: center;
-            border-bottom: 3px double var(--news-black);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-
-        .news-masthead .logo-container img {
-            max-width: 180px;
-            height: auto;
-            margin-bottom: 15px;
-            filter: grayscale(100%); /* Optional: makes logo fit newspaper vibe */
-            transition: filter 0.3s;
-        }
+    :root {
+        --news-ink: #111111;         /* Deep Black */
+        --news-white: #ffffff;       /* Pure White */
+        --news-bg: #f5f7fa;          /* Very light cool gray for page background */
+        --news-accent: #D72323;      /* "Breaking News" Red */
+        --news-border: #e1e4e8;      /* Clean border */
         
-        .news-masthead .logo-container img:hover {
-            filter: grayscale(0%);
-        }
+        /* Fonts */
+        --font-head: 'Noto Serif Bengali', serif;  /* For Headlines */
+        --font-body: 'Hind Siliguri', sans-serif;  /* For Inputs/Text */
+    }
 
-        .news-headline {
-            font-family: var(--font-headline);
-            font-weight: 700;
-            font-size: 28px;
-            line-height: 1.2;
-            margin: 10px 0 5px 0;
-            color: var(--news-black);
-        }
+    body#top {
+        background-color: var(--news-bg);
+        font-family: var(--font-body);
+        color: var(--news-ink);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+    }
 
-        .news-subhead {
-            font-family: var(--font-headline);
-            font-style: italic;
-            font-size: 16px;
-            color: var(--news-gray);
-            position: relative;
-            display: inline-block;
-        }
+    /* Wrapper */
+    .news-login-wrapper {
+        width: 100%;
+        max-width: 420px;
+        padding: 15px;
+    }
 
-        /* Form Styling */
-        .news-form-group {
-            margin-bottom: 25px;
-            position: relative;
-        }
+    /* The Main Card - Clean & Modern */
+    .news-card {
+        background: var(--news-white);
+        border: 1px solid var(--news-border);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Subtle shadow, not brutalist */
+        padding: 40px;
+        position: relative;
+        border-top: 4px solid var(--news-accent); /* Red accent bar on top */
+    }
 
-        .news-label {
-            display: block;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: var(--news-black);
-        }
+    /* Top Masthead */
+    .news-masthead {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-        .news-input {
-            width: 100%;
-            padding: 12px 0;
-            font-family: var(--font-body);
-            font-size: 16px;
-            color: var(--news-black);
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid var(--news-border);
-            border-radius: 0;
-            transition: border-color 0.3s;
-        }
+    .news-masthead .logo-container img {
+        max-width: 180px;
+        height: auto;
+        margin-bottom: 20px;
+    }
 
-        .news-input:focus {
-            outline: none;
-            border-bottom-color: var(--news-black);
-        }
+    /* Headlines */
+    .news-headline {
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 26px;
+        margin: 0 0 5px 0;
+        color: var(--news-ink);
+    }
 
-        .news-input::placeholder {
-            color: #aaa;
-            font-style: italic;
-        }
+    .news-subhead {
+        font-size: 14px;
+        color: #666;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 15px;
+    }
 
-        /* Checkbox & Link Row */
-        .news-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
+    /* Date Line Style (Common in BD Papers) */
+    .news-date-line {
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 8px 0;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #555;
+        margin-bottom: 25px;
+    }
 
-        .news-check-label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            color: var(--news-gray);
-        }
+    /* Inputs - Box Style (Cleaner) */
+    .news-form-group {
+        margin-bottom: 20px;
+        position: relative;
+    }
 
-        .news-check-input {
-            margin-right: 8px;
-            width: 16px;
-            height: 16px;
-            accent-color: var(--news-black);
-            cursor: pointer;
-        }
+    .news-label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #333;
+    }
 
-        .news-forgot-link {
-            color: var(--news-black);
-            text-decoration: none;
-            font-weight: 600;
-            position: relative;
-        }
+    .news-input {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 16px;
+        border: 1px solid var(--news-border);
+        background-color: #fcfcfc;
+        color: var(--news-ink);
+        border-radius: 4px; 
+        transition: all 0.3s ease;
+        font-family: var(--font-body);
+    }
 
-        .news-forgot-link::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 1px;
-            bottom: -2px;
-            left: 0;
-            background-color: var(--news-black);
-            visibility: hidden;
-            transform: scaleX(0);
-            transition: all 0.3s ease-in-out;
-        }
+    .news-input:focus {
+        outline: none;
+        border-color: var(--news-ink); /* Black border on focus */
+        background-color: var(--news-white);
+    }
 
-        .news-forgot-link:hover::after {
-            visibility: visible;
-            transform: scaleX(1);
-        }
+    .news-input::placeholder {
+        color: #bbb;
+        font-size: 14px;
+    }
 
-        /* Submit Button */
-        .news-btn-submit {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--news-black);
-            color: var(--news-white);
-            border: none;
-            font-family: var(--font-headline);
-            font-weight: 700;
-            font-size: 18px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+    /* Checkbox & Links */
+    .news-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        font-size: 14px;
+    }
 
-        .news-btn-submit:hover {
-            background-color: #333;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
+    .news-check-label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        color: #555;
+        font-weight: 500;
+    }
 
-        /* Decorative "Edition" Line */
-        .news-edition-line {
-            text-align: center;
-            margin-top: 20px;
-            border-top: 1px solid var(--news-border);
-            padding-top: 15px;
-            font-size: 12px;
-            color: var(--news-gray);
-            font-family: var(--font-body);
-        }
+    .news-check-input {
+        margin-right: 8px;
+        accent-color: var(--news-accent);
+        width: 16px;
+        height: 16px;
+    }
 
-        /* Alert styling for the include */
-        .alert {
-            border-radius: 0;
-            font-family: var(--font-body);
-            border: 1px solid var(--news-black);
-        }
-        .alert-danger {
-            background-color: #ffe6e6;
-            color: #990000;
-        }
-        .alert-success {
-            background-color: #e6ffe6;
-            color: #006600;
-        }
+    .news-forgot-link {
+        color: var(--news-accent); /* Red Link */
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s;
+    }
 
-    </style>
+    .news-forgot-link:hover {
+        color: var(--news-ink);
+        text-decoration: underline;
+    }
+
+    /* Submit Button */
+    .news-btn-submit {
+        width: 100%;
+        padding: 14px;
+        background-color: var(--news-ink); /* Black Button */
+        color: var(--news-white);
+        border: none;
+        font-family: var(--font-body);
+        font-weight: 700;
+        font-size: 16px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.3s;
+        border-radius: 4px;
+    }
+
+    .news-btn-submit:hover {
+        background-color: var(--news-accent); /* Turns Red on Hover */
+    }
+
+    /* Footer */
+    .news-edition-line {
+        margin-top: 25px;
+        text-align: center;
+        font-size: 12px;
+        color: #999;
+    }
+
+    /* Alert Boxes */
+    .alert {
+        padding: 12px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+        font-size: 14px;
+        border: 1px solid transparent;
+    }
+    .alert-danger { background: #fee2e2; color: #991b1b; border-color: #fecaca; }
+    .alert-success { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
+    .alert-info { background: #e0f2fe; color: #075985; border-color: #bae6fd; }
+
+    /* ============================
+       EYE ICON (VIEW PASSWORD)
+       ============================ */
+    .password-toggle-icon {
+        position: absolute;
+        right: 15px;
+        top: 43px; /* Precise alignment for label + input height */
+        cursor: pointer;
+        color: #aaa;
+        font-size: 16px;
+        z-index: 10;
+        transition: color 0.3s;
+    }
+
+    .password-toggle-icon:hover {
+        color: var(--news-ink);
+    }
+
+</style>
 </head>
 
 <body id="top">
@@ -275,6 +276,7 @@
                     <div class="news-form-group">
                         <label class="news-label">{{ __('Password') }}</label>
                         <input name="password" type="password" class="news-input" id="second_field" placeholder="••••••••" required autocomplete="off">
+                        <i class="fa fa-eye password-toggle-icon" id="togglePassword"></i>
                     </div>
 
                     <div class="news-actions">
@@ -325,6 +327,18 @@
             }).on('blur', function() {
                 $(this).parent().removeClass('focused');
             });
+        });
+        // Password View Toggle
+        $('#togglePassword').on('click', function() {
+            var passwordInput = $('#second_field');
+            var icon = $(this);
+
+            // Toggle the type attribute
+            var type = passwordInput.attr('type') === 'password' ? 'text' : 'password';
+            passwordInput.attr('type', type);
+
+            // Toggle the eye / eye-slash icon
+            icon.toggleClass('fa-eye fa-eye-slash');
         });
     </script>
 

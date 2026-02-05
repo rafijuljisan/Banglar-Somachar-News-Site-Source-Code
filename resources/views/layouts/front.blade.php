@@ -16,11 +16,13 @@
     <meta property="og:title" content="{{ $gs->title }}" />
     <meta property="og:type" content="website" />
     <meta property="og:URL" content="{{route('frontend.index')}}" />
-    <meta property="og:image" content="{{asset('assets/images/logo/'.$gs->og_images)}} />
+    <meta property="og:image" content="{{asset('assets/images/logo/'.$gs->og_images)}}" />
     <meta property="og:description" content="{{ $seo->meta_description }}" />
-    <!-- favicon -->
+    
+    <!-- favicon (FIXED - removed duplicate) -->
     <link rel="shortcut icon" href="{{asset('assets/images/'.$gs->favicon)}}" type="image/x-icon">
-
+    <link rel="icon" href="{{asset('assets/images/'.$gs->favicon)}}" type="image/x-icon">
+    
 	@if ($default_font->font_value)
 		<link href="https://fonts.googleapis.com/css?family={{ $default_font->font_value }}&display=swap" rel="stylesheet">
 	@else 
@@ -35,7 +37,6 @@
   <link href="{{asset('assets/frontend/asset/css/style.css')}}" rel="stylesheet">
   <link href="{{asset('assets/frontend/asset/css/responsive.css')}}" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="{{asset('assets/frontend/eror/css/style.css')}}" />
-
 	@if(DB::table('languages')->where('is_default','=',1)->first()->rtl == 1)
 		<link rel="stylesheet" href="{{asset('assets/front/css/rtl/style.css')}}">
 	@endif
@@ -43,7 +44,6 @@
 	<link rel="stylesheet" id="color" href="{{ asset('assets/front/css/font.php?font_familly='.$default_font->font_family) }}">
     @stack('css')
     {!!$gs->adsense_code!!}
-	 {!!$gs->adsense_code!!}
 	{!! $seo->google_analytics !!}
 </head>
 <body>

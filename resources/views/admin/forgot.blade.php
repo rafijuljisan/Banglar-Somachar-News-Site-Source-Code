@@ -1,109 +1,306 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-  
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="author" content="EliteDesign">
-    <!-- Title -->
+    <meta name="author" content="EliteDesign">
+    <title>Forget Password | {{ $gs->title }}</title>
 
-		<title>Forget Password | {{ $gs->title }}</title>
-
-    <!-- favicon -->
     <link rel="shortcut icon" href="{{asset('assets/images/'.$gs->favicon)}}" type="image/x-icon">
-    <!-- External CSS libraries -->
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/frontend/login/assets/css/bootstrap.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/frontend/login/assets/fonts/font-awesome/css/font-awesome.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/frontend/login/assets/fonts/flaticon/font/flaticon.css')}}">
-    <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
 
-    <!-- Custom Stylesheet -->
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/frontend/login/assets/css/style.css')}}">
-	    <!-- Bootstrap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;700&display=swap" rel="stylesheet">
+
     <link href="{{asset('assets/admin/css/bootstrap.min.css')}}" rel="stylesheet" />
-    <!-- Fontawesome -->
     <link rel="stylesheet" href="{{asset('assets/admin/css/fontawesome.css')}}">
-    <!-- icofont -->
     <link rel="stylesheet" href="{{asset('assets/admin/css/icofont.min.css')}}">
-    <!-- Sidemenu Css -->
-    <link href="{{asset('assets/admin/plugins/fullside-menu/css/dark-side-style.css')}}" rel="stylesheet" />
-    <link href="{{asset('assets/admin/plugins/fullside-menu/waves.min.css')}}" rel="stylesheet" />
 
-    <link href="{{asset('assets/admin/css/plugin.css')}}" rel="stylesheet" />
-    <link href="{{asset('assets/admin/css/jquery.tagit.css')}}" rel="stylesheet" />   
-      <link rel="stylesheet" href="{{ asset('assets/admin/css/bootstrap-coloroicker.css') }}">
-    <!-- Main Css -->
-    <link href="{{asset('assets/admin/css/style.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/admin/css/custom.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/admin/css/responsive.css')}}" rel="stylesheet" />
-@yield('styles')
+    <style>
+        /* ========================================
+           MODERN BENGALI NEWSPAPER THEME
+           Clean, Sharp, High-Contrast
+           ========================================
+        */
+        :root {
+            --news-ink: #111111;         /* Deep Black */
+            --news-white: #ffffff;       /* Pure White */
+            --news-bg: #f5f7fa;          /* Very light cool gray for page background */
+            --news-accent: #D72323;      /* "Breaking News" Red */
+            --news-border: #e1e4e8;      /* Clean border */
+            
+            /* Fonts */
+            --font-head: 'Noto Serif Bengali', serif;  /* For Headlines */
+            --font-body: 'Hind Siliguri', sans-serif;  /* For Inputs/Text */
+        }
+
+        body#top {
+            background-color: var(--news-bg);
+            font-family: var(--font-body);
+            color: var(--news-ink);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevents scrollbars if particles go slightly over */
+        }
+
+        /* PARTICLES BACKGROUND FIX */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Pushes particles behind the form */
+            background-color: var(--news-bg); 
+        }
+
+        /* Wrapper */
+        .news-login-wrapper {
+            width: 100%;
+            max-width: 420px;
+            padding: 15px;
+            position: relative;
+            z-index: 10; /* Ensures form sits ON TOP of particles */
+        }
+
+        /* The Main Card */
+        .news-card {
+            background: var(--news-white);
+            border: 1px solid var(--news-border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 40px;
+            position: relative;
+            border-top: 4px solid var(--news-accent);
+        }
+
+        /* Masthead */
+        .news-masthead {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .news-masthead .logo-container img {
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        /* Headlines */
+        .news-headline {
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 26px;
+            margin: 0 0 5px 0;
+            color: var(--news-ink);
+        }
+
+        .news-subhead {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        /* Date Line Style */
+        .news-date-line {
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            padding: 8px 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #555;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Form Inputs */
+        .news-form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .news-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .news-input {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 1px solid var(--news-border);
+            background-color: #fcfcfc;
+            color: var(--news-ink);
+            border-radius: 4px; 
+            transition: all 0.3s ease;
+            font-family: var(--font-body);
+        }
+
+        .news-input:focus {
+            outline: none;
+            border-color: var(--news-ink);
+            background-color: var(--news-white);
+        }
+
+        .news-input::placeholder {
+            color: #bbb;
+            font-size: 14px;
+        }
+
+        /* Submit Button */
+        .news-btn-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--news-ink);
+            color: var(--news-white);
+            border: none;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .news-btn-submit:hover {
+            background-color: var(--news-accent);
+        }
+
+        /* Footer */
+        .news-edition-line {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Back Link */
+        .back-to-login {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            color: var(--news-ink);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-to-login:hover {
+            color: var(--news-accent);
+            text-decoration: underline;
+        }
+
+        /* Alert Boxes */
+        .alert {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            border: 1px solid transparent;
+        }
+        .alert-danger { background: #fee2e2; color: #991b1b; border-color: #fecaca; }
+        .alert-success { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
+        .alert-info { background: #e0f2fe; color: #075985; border-color: #bae6fd; }
+
+    </style>
+    @yield('styles')
 </head>
+
 <body id="top">
-<div class="page_loader"></div>
 
-<!-- Login 7 start -->
-<div class="login-7">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <div class="form-section">
-                    <div class="logo">
-                        <a href="login-7.html">
-                            <img src="{{asset('assets/images/logo/'.$gs->logo)}}" alt="logo">
-                        </a>
-                    </div>
-                    <h3>পাসওয়ার্ড পরিবর্তন করুন</h3>
-                    <div class="login-inner-form">
-					@include('includes.admin.form-login')
-             <form id="forgotform" action="{{ route('admin.forgot.submit') }}" method="POST">
-                  {{ csrf_field() }}
-                            <div class="form-group clearfix">
-                                <div class="form-box">
-                                    <input name="email" type="email" class="form-control" id="first_field" placeholder="{{ __('Type Email Address') }}" aria-label="Email Address">
-                                    <i class="flaticon-mail-2"></i>
-                                </div>
-                            </div>
-                           
+    <div id="particles-js"></div>
 
-                            <div class="form-group clearfix">
-<input id="authdata" type="hidden"  value="Checking...">
-                                <button class="btn btn-primary btn-lg btn-theme">{{__('Login')}}</button>
-                            </div>
-                        </form>
-                    </div>
+    <div class="page_loader"></div>
+
+    <div class="news-login-wrapper">
+        <div class="news-card">
+
+            <div class="news-masthead">
+                <div class="logo-container">
+                    <a href="#">
+                        <img src="{{asset('assets/images/logo/'.$gs->logo)}}" alt="logo">
+                    </a>
                 </div>
+                
+                <div class="news-date-line">
+                    <span>Admin Recovery</span>
+                    <span>{{ date('l, F j, Y') }}</span>
+                </div>
+
+                <h3 class="news-headline">পাসওয়ার্ড পরিবর্তন করুন</h3>
+                <span class="news-subhead">Recover Access to Dashboard</span>
             </div>
+
+            <div class="news-form-body">
+                
+                @include('includes.admin.form-login')
+
+                <form id="forgotform" action="{{ route('admin.forgot.submit') }}" method="POST">
+                    {{ csrf_field() }}
+
+                    <div class="news-form-group">
+                        <label class="news-label">{{ __('Type Email Address') }}</label>
+                        <input name="email" type="email" class="news-input" id="first_field" placeholder="example@email.com" required>
+                    </div>
+
+                    <div class="news-form-group">
+                        <input id="authdata" type="hidden" value="Checking...">
+                        <button class="news-btn-submit submit-btn">{{__('Submit')}}</button>
+                    </div>
+
+                    <a href="{{ route('admin.login') }}" class="back-to-login">
+                        &larr; {{ __('Back to Login') }}
+                    </a>
+
+                </form>
+            </div>
+
+            <div class="news-edition-line">
+                &copy; {{ date('Y') }} {{ $gs->title }}. All Rights Reserved.
+            </div>
+
         </div>
     </div>
-</div>
-<!-- Login 7 end -->
 
-    <!-- Dashboard Core -->
+
     <script src="{{asset('assets/admin/js/vendors/jquery-1.12.4.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/vendors/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/jqueryui.min.js')}}"></script>
-    <!-- Fullside-menu Js-->
-    <script src="{{asset('assets/admin/plugins/fullside-menu/jquery.slimscroll.min.js')}}"></script>
-    <script src="{{asset('assets/admin/plugins/fullside-menu/waves.min.js')}}"></script>
-
     <script src="{{asset('assets/admin/js/plugin.js')}}"></script>
     <script src="{{asset('assets/admin/js/tag-it.js')}}"></script>
     <script src="{{asset('assets/admin/js/nicEdit.js')}}"></script>
     <script src="{{ asset('assets/admin/js/bootstrap-colorpicker.min.js') }}"></script>
     <script src="{{asset('assets/admin/js/load.js')}}"></script>
-    <!-- Custom Js-->
     <script src="{{asset('assets/admin/js/custom.js')}}"></script>
-    <!-- AJAX Js-->
     <script src="{{asset('assets/admin/js/myscript.js')}}"></script>
 
-<!-- External JS libraries -->
-<script src="{{asset('assets/frontend/login/assets/js/jquery-3.6.0.min.js')}}"></script>
-<script src="{{asset('assets/frontend/login/assets/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('assets/frontend/login/assets/js/jquery.validate.min.js')}}"></script>
-<script src="{{asset('assets/frontend/login/assets/js/app.js')}}"></script>
-<!-- Custom JS Script -->
+    <script src="{{asset('assets/frontend/login/assets/js/jquery-3.6.0.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/login/assets/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/login/assets/js/jquery.validate.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/login/assets/js/app.js')}}"></script>
+    
+    <script>
+        $(document).ready(function() {
+            $('.news-input').on('focus', function() {
+                $(this).css('border-color', '#111');
+            }).on('blur', function() {
+                $(this).css('border-color', '#e1e4e8');
+            });
+        });
+    </script>
 </body>
 
 </html>
