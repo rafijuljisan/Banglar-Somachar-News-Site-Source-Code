@@ -29,23 +29,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{$data->title}}</title>
 
-  {{-- Facebook / Open Graph --}}
-  <meta property="og:url" content="{{Request::fullUrl()}}" />
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="{{$data->title}}" />
-  <meta property="og:description" content="{{ mb_substr(strip_tags($data->description), 0, 200) }}..." />
-  <meta property="fb:app_id" content="966242223397117" />
+{{-- Facebook / Open Graph --}}
+<meta property="og:url" content="{{Request::fullUrl()}}" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="{{$data->title}}" />
+<meta property="og:description" content="{{ mb_substr(strip_tags($data->description), 0, 200) }}..." />
+<meta property="fb:app_id" content="966242223397117" />
 
-  {{-- Dynamic Social Image --}}
-  <meta property="og:image" content="{{ route('social.share.image', $data->id) }}" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+{{-- Dynamic Social Image - UPDATED --}}
+{{-- Points to your new route that adds the banner --}}
+<meta property="og:image" content="{{ route('social.share.image', $data->id) }}" />
+<meta property="og:image:secure_url" content="{{ route('social.share.image', $data->id) }}" />
+<meta property="og:image:type" content="image/jpeg" />
 
-  {{-- Twitter --}}
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="{{$data->title}}" />
-  <meta name="twitter:description" content="{{ mb_substr(strip_tags($data->description), 0, 200) }}..." />
-  <meta name="twitter:image" content="{{ route('social.share.image', $data->id) }}" />
+{{-- Removed fixed width/height tags to prevent errors if the image size varies --}}
+<meta property="og:image:alt" content="{{$data->title}}" />
+
+{{-- Twitter Card --}}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{$data->title}}" />
+<meta name="twitter:description" content="{{ mb_substr(strip_tags($data->description), 0, 200) }}..." />
+<meta name="twitter:image" content="{{ route('social.share.image', $data->id) }}" />
 
   <link rel="shortcut icon" href="{{asset('assets/images/' . $gs->favicon)}}" type="image/x-icon">
 

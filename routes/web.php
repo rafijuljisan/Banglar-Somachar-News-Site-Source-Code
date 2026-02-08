@@ -13,6 +13,9 @@
 
 use Spatie\Sitemap\SitemapGenerator;
 
+// Correct Version
+Route::get('/social-share-image/{id}', 'Front\FrontendController@socialShareImage')->name('social.share.image');
+
 Route::get('/family', function () {
     return view('frontend.family');
 });
@@ -627,5 +630,3 @@ Route::get('/click/count/{id}', 'Front\FrontendController@clickCount')->name('fr
 // Place these at the bottom of web.php to ensure they are accessible publicly
 Route::get('/tools/print/{id}', [App\Http\Controllers\Front\FrontendController::class, 'loadPrintModal'])->name('post.tool.print');
 Route::get('/tools/photocard/{id}', [App\Http\Controllers\Front\FrontendController::class, 'loadPhotocardModal'])->name('post.tool.photocard');
-
-Route::get('/social-share-image/{id}', 'App\Http\Controllers\Front\FrontendController@socialImage')->name('social.share.image');
