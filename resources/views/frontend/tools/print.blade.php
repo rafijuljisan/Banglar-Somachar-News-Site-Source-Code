@@ -43,7 +43,7 @@
 
         /* Date Line (Bangla Font Support) */
         .upg-meta-info {
-            font-family: 'SolaimanLipi', 'Merriweather', sans-serif; /* Fallback for Bangla */
+            font-family: 'SolaimanLipiNormal', 'Merriweather', sans-serif; /* Fallback for Bangla */
             font-size: 16px;
             color: #555;
             margin-top: 5px;
@@ -123,7 +123,7 @@
             text-align: center;
             font-size: 12px;
             color: #888;
-            font-family: 'SolaimanLipi', sans-serif;
+            font-family: 'SolaimanLipiNormal', sans-serif;
         }
 
         /* --- Buttons --- */
@@ -236,7 +236,7 @@
     </div>
 
     <div class='upg-print-credit'>
-        Developed By: <a href='https://jisan.technomenia.com' target='_blank'>Md Jisan Sheikh</a>
+        Developed By: <a href='https://jisan.openwindowbd.com' target='_blank'>Md Jisan Sheikh</a>
     </div>
 
 </body>

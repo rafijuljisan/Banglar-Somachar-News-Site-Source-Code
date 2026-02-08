@@ -6,6 +6,24 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
 <head>
+  <style>
+  /* Force all article content to respect font size changes */
+  #article-body-content p,
+  #article-body-content div,
+  #article-body-content span,
+  #article-body-content h1,
+  #article-body-content h2,
+  #article-body-content h3,
+  #article-body-content h4,
+  #article-body-content h5,
+  #article-body-content h6,
+  #article-body-content li,
+  #article-body-content td,
+  #article-body-content th {
+    font-size: inherit !important;
+    line-height: inherit !important;
+  }
+</style>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -189,7 +207,7 @@
 
                   <div style="line-height: 1.3;">
                     <strong style="font-size: 15px;">{{$data->admin->name}}</strong> <br>
-                    <small style="color: #666; font-size: 12px;">প্রকাশ: {{$data->createdAt()}} ইং</small>
+                    <small style="color: #666; font-family: solaimanLipiNormal; font-size: 14px;">প্রকাশ: {{ bn_date(date('d M Y, h:i a', strtotime($data->created_at))) }}</small>
                   </div>
                 </div>
 
@@ -208,6 +226,16 @@
                   <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}"
                     target="_blank" class="tool-btn fb-share" title="Share on Facebook">
                     <i class="fa fa-facebook"></i>
+                  </a>
+
+                  <a href="https://api.whatsapp.com/send?text={{ urlencode($data->title . ' - ' . Request::fullUrl()) }}"
+                    target="_blank" class="tool-btn wa-share" title="Share on WhatsApp">
+                    <i class="fa fa-whatsapp"></i>
+                  </a>
+
+                  <a href="fb-messenger://share/?link={{ urlencode(Request::fullUrl()) }}"
+                    target="_blank" class="tool-btn messenger-share" title="Share on Messenger">
+                    <i class="fa fa-commenting"></i>
                   </a>
 
                   <button class="tool-btn link-copy" id="btn-copy-link" title="Copy Link">
@@ -251,17 +279,18 @@
               <p style="text-align: justify;">{!! $data->video_embed !!}</p>
 
               <div class="upg-print-button-wrapper"
-                style="margin: 20px 0; border-top: 1px dashed #ddd; padding-top: 20px;">
+                style="margin: 20px 0; border-top: 1px dashed #ddd; padding-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                
                 <button id="upg-print-trigger" data-postid="{{ $data->id }}"
                   data-url="{{ route('post.tool.print', $data->id) }}"
-                  style="padding: 8px 15px; background: #0e61d4; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
-                  <i class="fa fa-print"></i> সংবাদটি প্রিন্ট করুন
+                  style="padding: 8px 15px; background: #0e61d4; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-family: 'solaimanLipiNormal', Arial, sans-serif; display: inline-flex; align-items: center; gap: 5px;">
+                  <i class="fa fa-print"></i> <span>পোস্ট প্রিন্ট করুন</span>
                 </button>
 
                 <button id="upg-photocard-trigger" data-postid="{{ $data->id }}"
                   data-url="{{ route('post.tool.photocard', $data->id) }}"
-                  style="padding: 8px 15px; background: #198754; color: #fff; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px; font-size: 16px;">
-                  <i class="fa fa-camera"></i> ফটোকার্ড ডাউনলোড
+                  style="padding: 8px 15px; background: #198754; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-family: 'solaimanLipiNormal', Arial, sans-serif; display: inline-flex; align-items: center; gap: 5px;">
+                  <i class="fa fa-camera"></i> <span>ফটোকার্ড ডাউনলোড</span>
                 </button>
               </div>
               {{-- 1. TAGS SECTION --}}
@@ -498,48 +527,50 @@
     <script>
       $(document).ready(function () {
 
-        // 1. Text Resizing Logic
-        // Target the ID because that is what your CSS uses
+        // ==========================================
+        // 1. TEXT RESIZING - FIXED VERSION
+        // ==========================================
         var $articleWrapper = $('#article-body-content');
-        var currentFontSize = 20; // Match your CSS default
+        var currentFontSize = 18; // Default size
 
         $('#btn-increase').click(function () {
           if (currentFontSize < 34) {
             currentFontSize += 2;
-            updateSize();
+            applyFontSize();
           }
         });
 
         $('#btn-decrease').click(function () {
           if (currentFontSize > 14) {
             currentFontSize -= 2;
-            updateSize();
+            applyFontSize();
           }
         });
-        function updateSize() {
+
+        function applyFontSize() {
           var newLineHeight = currentFontSize * 1.6;
 
-          // Apply size to the Main Wrapper
+          // Apply to the main wrapper
           $articleWrapper.css({
             'font-size': currentFontSize + 'px',
             'line-height': newLineHeight + 'px'
           });
+
+          // Force apply to ALL child elements
+          $articleWrapper.find('*').each(function() {
+            $(this).css({
+              'font-size': currentFontSize + 'px',
+              'line-height': newLineHeight + 'px'
+            });
+          });
         }
 
-        function updateArticleStyle(size) {
-          // FIXED: Used '.' instead of '#' to select by class
-          $('.article-body-content').css('font-size', size + 'px');
-          $('.article-body-content p').css('font-size', size + 'px'); // Explicitly target p tags
-
-          var newLineHeight = size * 1.6;
-          $('.article-body-content').css('line-height', newLineHeight + 'px');
-          $('.article-body-content p').css('line-height', newLineHeight + 'px');
-        }
-
-        // 2. Copy Link Logic
+        // ==========================================
+        // 2. COPY LINK FUNCTION
+        // ==========================================
         $('#btn-copy-link').click(function () {
-          var dummy = document.createElement('input'),
-            text = window.location.href;
+          var dummy = document.createElement('input');
+          var text = window.location.href;
           document.body.appendChild(dummy);
           dummy.value = text;
           dummy.select();
@@ -548,29 +579,47 @@
 
           var originalIcon = $(this).html();
           $(this).html('<i class="fa fa-check" style="color:green"></i>');
-          setTimeout(() => {
+          setTimeout(function() {
             $(this).html(originalIcon);
-          }, 2000);
+          }.bind(this), 2000);
         });
 
-        // 3. Native Share Logic
+        // ==========================================
+        // 3. NATIVE SHARE FUNCTION
+        // ==========================================
         $('#btn-native-share').click(function () {
           if (navigator.share) {
             navigator.share({
-              // Ensure $data or $post is correct for your blade file
-              title: '{{ $data->title ?? $post->title ?? "News" }}',
+              title: '{{ $data->title ?? "News" }}',
               url: window.location.href
-            }).then(() => {
+            }).then(function() {
               console.log('Thanks for sharing!');
-            })
-              .catch(console.error);
+            }).catch(function(error) {
+              console.error('Share failed:', error);
+            });
           } else {
             alert('URL copied to clipboard!');
             $('#btn-copy-link').click();
           }
         });
+
       });
     </script>
+    <script>
+  $(function () {
+    // Initialize bottom marquee
+    $('.marquee-bottom').marquee({
+        duration: 40000,  // Slower speed
+        gap: 50,
+        delayBeforeStart: 0,
+        direction: 'left',
+        duplicated: true,
+        pauseOnHover: true
+    });
+    
+    console.log('Bottom marquee initialized!');
+  });
+</script>
 </body>
 
 </html>

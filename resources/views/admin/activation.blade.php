@@ -37,7 +37,7 @@
 									<div class="col-lg-12 text-center" style="color:darkgreen">
 
 							
-										বিস্তারিত জানতে ভিজিটঃ www.jisan.technomenia.com | ইমেইলঃ rafijuljisan@gmail.com
+										বিস্তারিত জানতে ভিজিটঃ www.jisan.openwindowbd.com | ইমেইলঃ rafijuljisan@gmail.com
 
 									</div>
 								</div>
@@ -53,7 +53,7 @@
 										<div class="col-lg-4">
 											<div class="left-area">
 												<h4 class="heading">{{ __('Purchase Code') }} *</h4>
-												<p class="sub-heading"><a href="https://jisan.technomenia.com" target="_blank">{{ __('How to get purchase code?') }}</a></p>
+												<p class="sub-heading"><a href="https://jisan.openwindowbd.com" target="_blank">{{ __('How to get purchase code?') }}</a></p>
 											</div>
 										</div>
 										<div class="col-lg-7">

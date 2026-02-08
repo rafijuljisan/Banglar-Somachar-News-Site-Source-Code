@@ -212,7 +212,7 @@
           <p class="copyright-text">{{$gs->copyright_text}}</p>
         </div>
         <div class="col-md-6 text-right">
-          <p class="developer-text">কারিগরি সহযোগিতায়: <a href="https://jisan.technomenia.com/" target="_blank">Md Jisan</a></p>
+          <p class="developer-text">কারিগরি সহযোগিতায়: <a href="https://jisan.openwindowbd.com/" target="_blank">Md Jisan</a></p>
         </div>
     </div>
   </div>

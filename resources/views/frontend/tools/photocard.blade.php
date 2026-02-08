@@ -81,6 +81,6 @@
             <button id="upg-photocard-back">Close</button>
             <button id="upg-photocard-download">Download</button>
         </div>
-        <div class="developer-credit">Developed by <a href="https://jisan.technomenia.com" target="_blank">Jisan Sheikh</a></div>
+        <div class="developer-credit">Developed by <a href="https://jisan.openwindowbd.com" target="_blank">Jisan Sheikh</a></div>
     </div>
 </div>
