@@ -236,6 +236,16 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="left-area">
+                                                <h4 class="heading">{{ __('Viewers Count') }}</h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <input type="number" class="input-field" name="views" placeholder="{{ __('Enter Views') }}" value="{{ $data->views }}">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

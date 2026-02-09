@@ -321,6 +321,7 @@ class FrontendController extends Controller
     $ws = WidgetSetiings::find(1);
 
     if ($data) {
+        $data->increment('views');
         $ip_address = $request->ip();
         $is_view = View::where('post_id', $id)->where('ip_address', $ip_address)->first();
         
@@ -685,100 +686,112 @@ class FrontendController extends Controller
     // =============================================================
     // END: TOOLS METHODS
     // =============================================================
-    public function socialImage($id)
-    {
-        $post = \App\Models\Post::findOrFail($id);
-        $gs = \App\Models\GeneralSettings::first();
+    public function socialShareImage($id)
+{
+    $post = DB::table('posts')->where('id', $id)->first();
 
-        // 1. Setup Paths
-        $postImagePath = public_path('assets/images/post/' . $post->image_big);
-        $bannerPath = public_path('assets/images/' . $gs->social_banner);
-
-        // 2. Define Canvas Size
-        $targetWidth = 1200;
-        $targetHeight = 630;
-
-        // 3. Create Canvas
-        $canvas = imagecreatetruecolor($targetWidth, $targetHeight);
-        $black = imagecolorallocate($canvas, 0, 0, 0);
-        imagefill($canvas, 0, 0, $black);
-
-        // 4. Process Post Image
-        if (file_exists($postImagePath) && $post->image_big) {
-            $info = getimagesize($postImagePath);
-            $mime = $info['mime'];
-
-            switch ($mime) {
-                case 'image/jpeg': $source = imagecreatefromjpeg($postImagePath); break;
-                case 'image/png':  $source = imagecreatefrompng($postImagePath); break;
-                case 'image/webp': $source = imagecreatefromwebp($postImagePath); break;
-                default: $source = null;
-            }
-
-            if ($source) {
-                $srcW = imagesx($source);
-                $srcH = imagesy($source);
-                
-                $srcAspect = $srcW / $srcH;
-                $targetAspect = $targetWidth / $targetHeight;
-
-                if ($srcAspect > $targetAspect) {
-                    $cropH = $srcH;
-                    $cropW = $srcH * $targetAspect;
-                    $cropX = ($srcW - $cropW) / 2;
-                    $cropY = 0;
-                } else {
-                    $cropW = $srcW;
-                    $cropH = $srcW / $targetAspect;
-                    $cropX = 0;
-                    $cropY = ($srcH - $cropH) / 2;
-                }
-
-                imagecopyresampled($canvas, $source, 0, 0, $cropX, $cropY, $targetWidth, $targetHeight, $cropW, $cropH);
-                imagedestroy($source);
-            }
-        }
-
-        // 5. Overlay Banner
-        if (file_exists($bannerPath) && $gs->social_banner) {
-            $bInfo = getimagesize($bannerPath);
-            $bMime = $bInfo['mime'];
-
-            switch ($bMime) {
-                case 'image/png':  $banner = imagecreatefrompng($bannerPath); break;
-                case 'image/jpeg': $banner = imagecreatefromjpeg($bannerPath); break;
-                case 'image/webp': $banner = imagecreatefromwebp($bannerPath); break;
-                default: $banner = null;
-            }
-
-            if ($banner) {
-                $banW = imagesx($banner);
-                $banH = imagesy($banner);
-                $newBanHeight = ($banH / $banW) * $targetWidth;
-
-                $resizedBanner = imagecreatetruecolor($targetWidth, $newBanHeight);
-                imagealphablending($resizedBanner, false);
-                imagesavealpha($resizedBanner, true);
-                $transparent = imagecolorallocatealpha($resizedBanner, 255, 255, 255, 127);
-                imagefilledrectangle($resizedBanner, 0, 0, $targetWidth, $newBanHeight, $transparent);
-                
-                imagecopyresampled($resizedBanner, $banner, 0, 0, 0, 0, $targetWidth, $newBanHeight, $banW, $banH);
-
-                $destY = $targetHeight - $newBanHeight;
-                imagecopy($canvas, $resizedBanner, 0, $destY, 0, 0, $targetWidth, $newBanHeight);
-
-                imagedestroy($banner);
-                imagedestroy($resizedBanner);
-            }
-        }
-
-        // 6. Output (THE FIX IS HERE)
-        // This clears any accidental spaces/text before sending the image
-        if (ob_get_length()) ob_end_clean(); 
-        
-        header('Content-Type: image/jpeg');
-        imagejpeg($canvas, null, 90);
-        imagedestroy($canvas);
-        exit;
+    if (!$post) {
+        abort(404);
     }
+
+    // 1. Load the main featured image
+    $imagePath = public_path('assets/images/post/' . $post->image_big);
+    
+    if (!file_exists($imagePath)) {
+        abort(404);
+    }
+
+    // SMART LOAD: Detect file type (Fixes WebP/JPG errors)
+    $imageInfo = getimagesize($imagePath);
+    $mimeType = $imageInfo['mime'];
+    
+    $image = null;
+
+    switch ($mimeType) {
+        case 'image/jpeg':
+        case 'image/jpg':
+            $image = imagecreatefromjpeg($imagePath);
+            break;
+        case 'image/png':
+            $image = imagecreatefrompng($imagePath);
+            break;
+        case 'image/webp': 
+            $image = imagecreatefromwebp($imagePath);
+            break;
+        case 'image/gif':
+            $image = imagecreatefromgif($imagePath);
+            break;
+        default:
+            $data = file_get_contents($imagePath);
+            $image = imagecreatefromstring($data);
+    }
+
+    if (!$image) {
+        abort(500, 'Cannot create image - Invalid format');
+    }
+
+    // Get main image dimensions
+    $width = imagesx($image);
+    $height = imagesy($image);
+
+    // --- NEW SECTION: Add Custom Banner ---
+
+    // Path to your custom banner image
+    // --- NEW SECTION: Add Custom Banner ---
+
+    // 1. Get Settings from Database
+    $gs = DB::table('generalsettings')->first();
+
+    // 2. Use the uploaded social banner, or fallback to default if missing
+    if($gs->social_banner) {
+        $bannerPath = public_path('assets/images/' . $gs->social_banner);
+    } else {
+        $bannerPath = public_path('assets/images/banner.png'); // Fallback
+    }
+
+    $banner = null;
+    if (file_exists($bannerPath)) {
+        // Smart load for Banner (Checks PNG then JPG)
+        $banner = @imagecreatefrompng($bannerPath);
+        if (!$banner) {
+            $banner = @imagecreatefromjpeg($bannerPath);
+        }
+    }
+
+    if ($banner) {
+        // Get original banner dimensions
+        $bannerOrigWidth = imagesx($banner);
+        $bannerOrigHeight = imagesy($banner);
+        
+        // CALCULATE PROPORTIONAL HEIGHT
+        // We set the banner width to match the main image width ($width)
+        // We calculate the new height to keep the aspect ratio correct (No stretching)
+        $aspectRatio = $bannerOrigHeight / $bannerOrigWidth;
+        $newBannerHeight = round($width * $aspectRatio);
+
+        // Position: Place it at the very bottom
+        $destY = $height - $newBannerHeight;
+
+        // Overlay the banner
+        // imagecopyresampled(dst_img, src_img, dst_x, dst_y, src_x, src_y, dst_w, dst_h, src_w, src_h)
+        imagecopyresampled(
+            $image, 
+            $banner, 
+            0, $destY,        // Destination X, Y
+            0, 0,             // Source X, Y
+            $width, $newBannerHeight, // Destination Width, Height (Matches main image width, calculated height)
+            $bannerOrigWidth, $bannerOrigHeight // Source Width, Height
+        );
+
+        imagedestroy($banner);
+    }
+
+    // --- NO TEXT ADDED HERE (As requested) ---
+
+    // Output image
+    header('Content-Type: image/jpeg');
+    imagejpeg($image, null, 90); // 90% quality
+    imagedestroy($image);
+    exit;
+}
 }

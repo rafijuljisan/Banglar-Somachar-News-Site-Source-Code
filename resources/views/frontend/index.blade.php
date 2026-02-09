@@ -505,93 +505,105 @@
         <div class="container custom-container">
             <div class="row custom-row">
 
+                {{-- LEFT COLUMN: SPORTS CONTENT --}}
                 <div class="col-md-9 custom-padding">
 
                     @php
-                        // Get Category 11 (Sports)
+                        // 1. SAFELY Get Category 11 (Sports)
                         $catSports = DB::table('categories')->where('parent_id', null)->skip(10)->first();
 
-                        // Get 1 Big Post
-                        $sportBig = DB::table('posts')->where('category_id', $catSports->id)->where('is_feature', 1)->orderBy('id', 'DESC')->first();
+                        // 2. Initialize variables to prevent crashes
+                        $sportBig = null;
+                        $sportList = collect([]);
+                        $sportGrid = collect([]);
 
-                        // Get Next 4 Small Posts (For Right List)
-                        $sportList = DB::table('posts')->where('category_id', $catSports->id)->where('is_feature', 1)->orderBy('id', 'DESC')->skip(1)->limit(4)->get();
-
-                        // Get Next 4 Grid Posts (For Bottom Row)
-                        $sportGrid = DB::table('posts')->where('category_id', $catSports->id)->where('is_feature', 1)->orderBy('id', 'DESC')->skip(5)->limit(4)->get();
+                        // 3. Only run queries if the category actually exists
+                        if($catSports) {
+                            $sportBig = DB::table('posts')->where('category_id', $catSports->id)->where('is_feature', 1)->orderBy('id', 'DESC')->first();
+                            $sportList = DB::table('posts')->where('category_id', $catSports->id)->where('is_feature', 1)->orderBy('id', 'DESC')->skip(1)->limit(4)->get();
+                            $sportGrid = DB::table('posts')->where('category_id', $catSports->id)->where('is_feature', 1)->orderBy('id', 'DESC')->skip(5)->limit(4)->get();
+                        }
                     @endphp
 
-                    <div class="modern-header-wrapper">
-                        <div class="modern-header-line"></div>
-                        <div class="modern-header-title">
-                            <span class="bar">|</span>
-                            <a href="{{ URL::to($catSports->slug) }}">{{ $catSports->title ?? '' }}</a>
-                        </div>
-                    </div>
-
-                    <div class="row mb-4">
-
-                        <div class="col-md-7">
-                            @if($sportBig)
-                                <div class="modern-lead-news">
-                                    <a href="{{ route('frontend.details', [$sportBig->id, $sportBig->slug]) }}">
-                                        <div class="modern-lead-img">
-                                            <img src="{{ asset('assets/images/post/' . $sportBig->image_big) }}"
-                                                alt="{{ $sportBig->title }}">
-                                            <div class="modern-lead-title-overlay">
-                                                <h2>{{ $sportBig->title }}</h2>
-                                            </div>
-                                        </div>
-                                        <div class="modern-lead-body">
-                                            <p>{{ Str::limit($sportBig->short_description, 200) }}</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            @endif
+                    {{-- 4. SAFE BLOCK: Only render HTML if category exists --}}
+                    @if($catSports)
+                        <div class="modern-header-wrapper">
+                            <div class="modern-header-line"></div>
+                            <div class="modern-header-title">
+                                <span class="bar">|</span>
+                                <a href="{{ URL::to($catSports->slug) }}">{{ $catSports->title ?? '' }}</a>
+                            </div>
                         </div>
 
-                        <div class="col-md-5">
-                            <ul class="modern-small-list">
-                                @foreach($sportList as $row)
-                                    <li>
-                                        <a href="{{ route('frontend.details', [$row->id, $row->slug]) }}">
-                                            <div class="img-thumb">
-                                                <img src="{{ asset('assets/images/post/' . $row->image_big) }}"
-                                                    alt="{{ $row->title }}">
+                        {{-- Top Section: Big News + List --}}
+                        <div class="row mb-4">
+                            <div class="col-md-7">
+                                @if($sportBig)
+                                    <div class="modern-lead-news">
+                                        <a href="{{ route('frontend.details', [$sportBig->id, $sportBig->slug]) }}">
+                                            <div class="modern-lead-img">
+                                                <img src="{{ asset('assets/images/post/' . $sportBig->image_big) }}"
+                                                    alt="{{ $sportBig->title }}">
+                                                <div class="modern-lead-title-overlay">
+                                                    <h2>{{ $sportBig->title }}</h2>
+                                                </div>
                                             </div>
-                                            <div class="text-content">
-                                                <h3>{{ $row->title }}</h3>
-                                            </div>
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row custom-row row-eq-height">
-                        @foreach($sportGrid as $row)
-                            <div class="col-md-3 custom-padding">
-                                <div class="clean-cat-wrapper h-100 border-0 p-0 mb-3">
-                                    <div class="clean-lead-news mb-0">
-                                        <a href="{{ route('frontend.details', [$row->id, $row->slug]) }}">
-                                            <div class="clean-lead-img">
-                                                <img src="{{ asset('assets/images/post/' . $row->image_big) }}"
-                                                    class="img-fluid" alt="{{ $row->title }}">
-                                            </div>
-                                            <div class="clean-lead-content mt-2">
-                                                <h3
-                                                    style="font-size: 16px; line-height: 22px; min-height: 44px; -webkit-line-clamp: 2;">
-                                                    {{ $row->title }}
-                                                </h3>
+                                            <div class="modern-lead-body">
+                                                <p>{{ Str::limit($sportBig->short_description, 200) }}</p>
                                             </div>
                                         </a>
                                     </div>
-                                </div>
+                                @endif
                             </div>
-                        @endforeach
-                    </div>
+
+                            <div class="col-md-5">
+                                <ul class="modern-small-list">
+                                    @foreach($sportList as $row)
+                                        <li>
+                                            <a href="{{ route('frontend.details', [$row->id, $row->slug]) }}">
+                                                <div class="img-thumb">
+                                                    <img src="{{ asset('assets/images/post/' . $row->image_big) }}"
+                                                        alt="{{ $row->title }}">
+                                                </div>
+                                                <div class="text-content">
+                                                    <h3>{{ $row->title }}</h3>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+
+                        {{-- Bottom Section: Grid --}}
+                        <div class="row custom-row row-eq-height">
+                            @foreach($sportGrid as $row)
+                                <div class="col-md-3 custom-padding">
+                                    <div class="clean-cat-wrapper h-100 border-0 p-0 mb-3">
+                                        <div class="clean-lead-news mb-0">
+                                            <a href="{{ route('frontend.details', [$row->id, $row->slug]) }}">
+                                                <div class="clean-lead-img">
+                                                    <img src="{{ asset('assets/images/post/' . $row->image_big) }}"
+                                                        class="img-fluid" alt="{{ $row->title }}">
+                                                </div>
+                                                <div class="clean-lead-content mt-2">
+                                                    <h3
+                                                        style="font-size: 16px; line-height: 22px; min-height: 44px; -webkit-line-clamp: 2;">
+                                                        {{ $row->title }}
+                                                    </h3>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                    {{-- END SAFE BLOCK --}}
 
                 </div>
+
+                {{-- RIGHT COLUMN: SIDEBAR ADS --}}
                 <div class="col-md-3 custom-padding">
 
                     <div class="modern-header-wrapper">

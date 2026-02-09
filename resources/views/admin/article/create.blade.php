@@ -219,7 +219,7 @@
                                                 </select>
                                             </div>
                                         </div>
-
+                                        
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="left-area">
@@ -230,6 +230,17 @@
                                                 <select name="subcategories_id" id="subcategory_id">
                                                 <option value="">{{__('Please add a subcategory(if any)')}}</option>
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="left-area">
+                                                    <h4 class="heading">{{ __('Viewers Count') }}</h4>
+                                                    <p class="sub-heading">{{ __('(Optional)') }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-7">
+                                                <input type="number" class="input-field" name="views" placeholder="{{ __('Enter Views') }}" value="0">
                                             </div>
                                         </div>
                                     </div>

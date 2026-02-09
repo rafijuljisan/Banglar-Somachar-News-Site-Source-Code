@@ -6,11 +6,14 @@
     .cat-page-wrapper * { 
         box-sizing: border-box !important;
     }
+    
+    /* Desktop Default Padding */
     .cat-page-wrapper {
-    padding-left: 30px !important;
-    padding-right: 05px !important;
-}
-    /* Override reset for Bootstrap columns to restore gaps */
+        padding-left: 30px !important;
+        padding-right: 5px !important;
+    }
+
+    /* Override reset for Bootstrap columns */
     .cat-page-wrapper .left-content-area,
     .cat-page-wrapper .right-content-area {
         margin: 0 !important;
@@ -29,7 +32,7 @@
         border-radius: 8px !important;
         overflow: hidden !important;
         box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
-        margin-bottom: 40px !important;
+        margin-bottom: 30px !important;
         transition: all 0.4s ease !important;
     }
     
@@ -120,19 +123,6 @@
         transition: all 0.3s ease !important;
     }
 
-    .featured-hero-post:hover .featured-hero-read-more {
-        background: rgba(255,255,255,0.25) !important;
-        gap: 12px !important;
-    }
-
-    .featured-hero-read-more i {
-        transition: transform 0.3s ease !important;
-    }
-
-    .featured-hero-post:hover .featured-hero-read-more i {
-        transform: translateX(4px) !important;
-    }
-
     /* === GRID POSTS === */
     .posts-grid-container {
         display: grid !important;
@@ -150,11 +140,6 @@
         height: 100% !important;
         display: flex !important;
         flex-direction: column !important;
-    }
-
-    .grid-post-card:hover {
-        box-shadow: 0 6px 25px rgba(0,0,0,0.12) !important;
-        transform: translateY(-5px) !important;
     }
 
     .grid-post-link {
@@ -205,10 +190,6 @@
         transition: color 0.3s ease !important;
     }
 
-    .grid-post-card:hover .grid-post-title {
-        color: #ff0000 !important;
-    }
-
     .grid-post-description {
         font-size: 15px !important;
         line-height: 1.6 !important;
@@ -231,10 +212,6 @@
         border-top: 1px solid #eeeeee !important;
     }
 
-    .grid-post-meta i {
-        color: #ff0000 !important;
-    }
-
     /* === PAGINATION === */
     .category-pagination {
         text-align: center !important;
@@ -242,76 +219,77 @@
         padding: 20px 0 !important;
     }
 
-    /* === RESPONSIVE === */
+    /* === RESPONSIVE TABLET === */
     @media (max-width: 992px) {
-        .posts-grid-container {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 20px !important;
-        }
-
-        .featured-hero-title {
-            font-size: 26px !important;
-        }
-
-        .featured-hero-excerpt {
-            font-size: 14px !important;
-        }
+        .featured-hero-title { font-size: 26px !important; }
     }
 
+    /* === RESPONSIVE MOBILE FIXES (THE FIX IS HERE) === */
     @media (max-width: 768px) {
-        .posts-grid-container {
-            grid-template-columns: 1fr !important;
-            gap: 20px !important;
+        /* 1. Force the Main Left Area to take 100% width and remove right padding */
+        .cat-page-wrapper .left-content-area,
+        .details-left-content-area {
+            width: 100% !important;
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+            padding-right: 0px !important;
+            margin-right: 0 !important;
         }
 
+        /* 2. Main Wrapper Padding Adjustment */
+        .cat-page-wrapper {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+        }
+
+        /* 3. Featured Hero Height */
         .featured-hero-image-container {
-            height: 280px !important;
+            height: 220px !important;
         }
-
         .featured-hero-overlay {
-            padding: 25px 20px 20px 20px !important;
+            padding: 20px 15px !important;
         }
-
-        .featured-hero-title {
-            font-size: 22px !important;
-            margin-bottom: 10px !important;
-        }
-
-        .featured-hero-excerpt {
-            font-size: 14px !important;
-            margin-bottom: 15px !important;
-            -webkit-line-clamp: 2 !important;
-        }
-
-        .featured-hero-read-more {
-            font-size: 14px !important;
-            padding: 8px 16px !important;
-        }
-
-        .grid-post-image-wrapper {
-            height: 200px !important;
-        }
-
-        .grid-post-title {
-            font-size: 18px !important;
-        }
-
-        .grid-post-description {
-            font-size: 14px !important;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .featured-hero-image-container {
-            height: 240px !important;
-        }
-
         .featured-hero-title {
             font-size: 20px !important;
+            margin-bottom: 8px !important;
+        }
+        
+        /* 4. Grid Posts - 2 Column Layout */
+        .posts-grid-container {
+            grid-template-columns: repeat(2, 1fr) !important; 
+            gap: 12px !important; 
+            margin-bottom: 30px !important;
         }
 
+        /* 5. Adjust Card Style for Mobile */
+        .grid-post-image-wrapper {
+            height: 120px !important; /* Smaller height for mobile */
+        }
         .grid-post-content {
-            padding: 15px !important;
+            padding: 10px !important; 
+        }
+        .grid-post-title {
+            font-size: 14px !important;
+            line-height: 1.3 !important;
+            margin-bottom: 5px !important;
+            -webkit-line-clamp: 3 !important; 
+        }
+        /* Hide description on mobile to save space */
+        .grid-post-description {
+            display: none !important; 
+        }
+        .grid-post-meta {
+            padding-top: 5px !important;
+            font-size: 11px !important;
+        }
+        
+        /* Sidebar Tabs Fix */
+        .modern-sb-nav .nav-item {
+            flex: 1;
+            text-align: center;
+        }
+        .modern-sb-nav .nav-link {
+            width: 100%;
         }
     }
 </style>

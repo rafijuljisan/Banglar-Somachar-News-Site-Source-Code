@@ -114,21 +114,23 @@
                         </div>
                         {{-- Social Share Banner Setting --}}
                         <div class="row justify-content-center">
-                            <div class="col-lg-3">
-                                <div class="left-area">
-                                    <h4 class="heading">{{ __('Social Share Banner') }}</h4>
-                                    <p class="sub-heading">{{ __('(Overlay for Facebook/WhatsApp shared images)') }}</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="img-upload">
-                                    <div id="image-preview" class="img-preview" style="background: url({{ $data->social_banner ? asset('assets/images/'.$data->social_banner) : asset('assets/images/noimage.png') }});">
-                                        <label for="image-upload-social" class="img-label" id="image-label"><i class="icofont-upload-alt"></i> {{ __('Upload Banner') }}</label>
-                                        <input type="file" name="social_banner" class="img-upload" id="image-upload-social">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                          <div class="col-lg-3">
+                              <div class="left-area">
+                                  <h4 class="heading">{{ __('Social Share Banner') }}</h4>
+                                  <p class="sub-heading">{{ __('(Overlay for Facebook/WhatsApp shared images)') }}</p>
+                              </div>
+                          </div>
+                          <div class="col-lg-6">
+                              <div class="img-upload">
+                                  <div id="image-preview" class="img-preview" style="background: url({{ $data->social_banner ? asset('assets/images/'.$data->social_banner) : asset('assets/images/noimage.png') }});">
+                                      <label for="image-upload-social" class="img-label" id="image-label">
+                                          <i class="icofont-upload-alt"></i> {{ __('Upload Banner') }}
+                                      </label>
+                                      <input type="file" name="social_banner" class="img-upload" id="image-upload-social">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
 
                         
 
@@ -638,5 +640,18 @@
                               }
                           }
                         </script>
+                        @push('scripts')
+                        <script>
+                        $(document).ready(function() {
+                            $('#image-upload-social').on('change', function() {
+                                var reader = new FileReader();
+                                reader.onload = function(e) {
+                                    $('#image-preview-social').css('background-image', 'url(' + e.target.result + ')');
+                                }
+                                reader.readAsDataURL(this.files[0]);
+                            });
+                        });
+                        </script>
+                        @endpush
 
 @endsection

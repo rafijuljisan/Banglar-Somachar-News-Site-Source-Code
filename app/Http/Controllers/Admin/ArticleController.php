@@ -86,10 +86,10 @@ class ArticleController extends Controller
             'language_id' => 'required',
             'title' => 'required',
             'slug' => 'required|unique:posts',
-            'image_big' => 'image|mimes:jpeg,png,jpg,gif,svg|max:15000',
+            'image_big' => 'image|mimes:jpeg,png,jpg,webp,gif,svg|max:15000',
             'description' => 'required',
             'category_id' => 'required',
-            'gallery.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'gallery.*' => 'image|mimes:jpeg,png,jpg,webp,gif,svg',
         ];
         
         $validator = Validator::make($request->all(),$rules);
@@ -195,7 +195,7 @@ class ArticleController extends Controller
             'language_id' => 'required',
             'title' => 'required',
             'slug' => 'required|unique:posts,slug,'.$id,
-            'image_big' => 'image|mimes:jpeg,png,jpg,gif,svg|max:15000',
+            'image_big' => 'image|mimes:jpeg,png,jpg,webp,gif,svg|max:15000',
             'description' => 'required',
             'category_id' => 'required',
         ];
@@ -208,6 +208,8 @@ class ArticleController extends Controller
         $admin = Auth::guard('admin')->user()->role_id; 
         $data  = Post::find($id);
         $input = $request->all();
+        // Force Laravel to respect the original creation date
+        $input['created_at'] = $data->created_at;
 
         // 2. MAIN IMAGE UPDATE - FIXED PATH
         if($file = $request->file('image_big')){

@@ -28,6 +28,9 @@ class GeneralSettings extends Model
         'live_tv',
         'facebookpage_id',
         'address',
+        'corp_address',
+        'corp_mobile',
+        'corp_email_address',
         'email_address',
 		'google_map',
         'print_logo',       // <--- ADD THIS

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ['language_id','title','slug','meta_tag','short_description','video_embed','image_caption','show_right_column','is_feature','is_video','video_link','is_slider','is_trending','is_videoGallery','tags','description','image_big','rss_image','image_small','video','audio','category_id','subcategories_id','admin_id','status','schedule_post','schedule_post_date','is_pending','post_type','slider_left','slider_right','rss_link','embed_video'];
+    protected $fillable = ['language_id','title','slug','meta_tag','short_description','video_embed','image_caption','show_right_column','is_feature','is_video','video_link','is_slider','is_trending','is_videoGallery','tags','description','image_big','rss_image','image_small','video','audio','category_id','subcategories_id','admin_id','status','schedule_post','schedule_post_date','is_pending','post_type','slider_left','slider_right','rss_link', 'views','embed_video'];
     protected $table    = 'posts'; 
 
     protected $dates = [

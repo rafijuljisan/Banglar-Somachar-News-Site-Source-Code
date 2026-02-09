@@ -14,7 +14,7 @@
                     </li>
                     <li><a href="javascript:;">{{ __('Manage Sub Categories') }}</a></li>
                     <li>
-                        <a href="{{ route('categories.index') }}">{{ __('Sub Categories') }}</a>
+                        <a href="{{ route('subcategories.index') }}">{{ __('Sub Categories') }}</a>
                     </li>
                 </ul>
             </div>
@@ -30,8 +30,14 @@
                         <table id="elitedesigntable" class="table table-hover dt-responsive" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>{{ __('Category') }}</th>
-                                    <th>{{ __('Sub Category') }}</th>
+                                    {{-- NEW HEADERS TO MATCH MAIN CATEGORY --}}
+                                    <th>{{ __('Name') }}</th>
+                                    <th>{{ __('Slug') }}</th>
+                                    <th>{{ __('Language') }}</th>
+                                    <th>{{ __('Parent') }}</th>
+                                    <th>{{ __('Menu Order') }}</th>
+                                    <th>{{ __('Color') }}</th>
+                                    <th>{{ __('Show at Homepage') }}</th>
                                     <th>{{ __('Show at Menu') }}</th>
                                     <th>{{ __('Actions') }}</th>
                                 </tr>
@@ -45,9 +51,7 @@
 </div>
 
 {{-- ADD / EDIT MODAL --}}
-
 <div class="modal fade-scale" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1" aria-hidden="true">
-
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="submit-loader">
@@ -60,7 +64,6 @@
                 </button>
             </div>
             <div class="modal-body">
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Close') }}</button>
@@ -68,52 +71,38 @@
         </div>
     </div>
 </div>
-
 {{-- ADD / EDIT MODAL ENDS --}}
 
-
-
-
 {{-- DELETE MODAL --}}
-
 <div class="modal fade-scale" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="modal1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
             <div class="modal-header d-block text-center">
                 <h4 class="modal-title d-inline-block">{{ __('Confirm Delete') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
-            <!-- Modal body -->
             <div class="modal-body">
                 <p class="text-center">
-                    {{ __('You are about to delete this Sub Category.Everything under this sub category will be deleted') }}.
+                    {{ __('You are about to delete this Sub Category. Everything under this sub category will be deleted') }}.
                 </p>
                 <p class="text-center">{{ __('Do you want to proceed?') }}</p>
             </div>
-
-            <!-- Modal footer -->
             <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('Cancel') }}</button>
                 <a class="btn btn-danger btn-ok">{{ __('Delete') }}</a>
             </div>
-
         </div>
     </div>
 </div>
-
 {{-- DELETE MODAL ENDS --}}
 
 @endsection
 
-
 @section('scripts')
 
 {{-- DATA TABLE --}}
-
 <script type="text/javascript">
     var table = $('#elitedesigntable').DataTable({
         ordering: false,
@@ -121,11 +110,16 @@
         serverSide: true,
         ajax: '{{ route('subcategories.datatables') }}',
         columns: [
-            {data: 'parent_id',name: 'parent_id'},
-            {data: 'title',name: 'title'},
-            {data: 'show_on_menu',name: 'show_on_menu'},
-            {data: 'action',searchable: false,orderable: false}
-
+            // Updated columns to match headers
+            {data: 'title', name: 'title'},
+            {data: 'slug', name: 'slug'},
+            {data: 'language_id', name: 'language_id'},
+            {data: 'parent_id', name: 'parent_id'},
+            {data: 'category_order', name: 'category_order'},
+            {data: 'color', name: 'color'},
+            {data: 'show_at_homepage', name: 'show_at_homepage'},
+            {data: 'show_on_menu', name: 'show_on_menu'},
+            {data: 'action', searchable: false, orderable: false}
         ],
         language: {
             processing: '<img src="{{asset('assets/images/'.$gs->admin_loader)}}">',
@@ -139,8 +133,6 @@
         $(".btn-area").append('<div class="col-sm-4 table-contents">' +'<a class="add-btn" data-href="{{route('subcategories.create')}}" id="add-data" data-toggle="modal" data-target="#modal1">' 
         +'<i class="fas fa-plus"></i>{{__('Add New Sub Category ')}}' +'</a>' +'</div>');
     });
-
-
 </script>
 
 @endsection

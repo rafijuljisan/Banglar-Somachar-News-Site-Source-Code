@@ -31,17 +31,20 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="left-area">
-                                    <h4 class="heading">{{ __('Parent Category') }} *</h4>
-                                    <p class="sub-heading">{{ __('In English') }}</p>
+                                    <h4 class="heading">{{ __('Parent Category') }}</h4>
+                                    <p class="sub-heading">{{ __('(Select to make this a Subcategory)') }}</p>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <select name="parent_id" id="article_parent_id">
-                                    <option value="">{{__('Please select a category')}}</option>
+                                    {{-- Value is empty to allow setting as Main Category --}}
+                                    <option value="">{{__('Set as Main Category')}}</option>
+                                    @foreach ($categories as $cat)
+                                        <option value="{{ $cat->id }}">{{ $cat->title }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
-
 
                         <div class="row">
                             <div class="col-lg-12">
@@ -51,13 +54,70 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <input type="text" class="input-field" name="title"
-                                    placeholder="{{ __('Title') }}">
+                                <input type="text" class="input-field" name="title" placeholder="{{ __('Title') }}">
                             </div>
                         </div>
 
-                        <input type="hidden" class="input-field" name="slug" placeholder="{{ __('Slug') }}">
+                        {{-- === CHANGED: Slug is now visible === --}}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="left-area">
+                                    <h4 class="heading">{{ __('Slug') }} *</h4>
+                                    <p class="sub-heading">{{ __('(In English)') }}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <input type="text" class="input-field" name="slug" placeholder="{{ __('Slug') }}">
+                            </div>
+                        </div>
 
+                        {{-- === NEW FIELD: Menu Order === --}}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="left-area">
+                                    <h4 class="heading">{{ __('Menu Order') }} *</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <input type="number" class="input-field" name="category_order" placeholder="{{ __('Menu Order') }}" value="0">
+                            </div>
+                        </div>
+
+                        {{-- === NEW FIELD: Color === --}}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="left-area">
+                                    <h4 class="heading">{{ __('Color') }} *</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div class="input-group colorpicker-component cp">
+                                        <input type="text" name="color" class="form-control input-field color-field cp" />
+                                        <span class="input-group-addon"><i></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- === NEW FIELD: Show At Homepage === --}}
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="left-area">
+                                    <h4 class="heading">{{ __('Show At Home Page') }} *</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="custom-control custom-radio d-inline-block mr-4">
+                                    <input type="radio" class="custom-control-input" id="show_at_homepage1" name="show_at_homepage" value="1">
+                                    <label class="custom-control-label" for="show_at_homepage1">{{__('Yes')}}</label>
+                                </div>
+                                <div class="custom-control custom-radio d-inline-block">
+                                    <input type="radio" class="custom-control-input" id="show_at_homepage0" name="show_at_homepage" value="0" checked> 
+                                    <label class="custom-control-label" for="show_at_homepage0">{{__('No')}}</label>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row">
                             <div class="col-lg-4">
@@ -81,12 +141,10 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="left-area">
-
                                 </div>
                             </div>
                             <div class="col-lg-7">
-                                <button class="addProductSubmit-btn"
-                                    type="submit">{{ __('Create Sub Category') }}</button>
+                                <button class="addProductSubmit-btn" type="submit">{{ __('Create Category') }}</button>
                             </div>
                         </div>
                     </form>
@@ -99,5 +157,6 @@
 @endsection
 
 @section('scripts')
+{{-- Ensure this script handles the language change logic for 'article_language_id' --}}
 <script src="{{asset('assets/admin/js/articleCreate.js')}}"></script>
 @endsection

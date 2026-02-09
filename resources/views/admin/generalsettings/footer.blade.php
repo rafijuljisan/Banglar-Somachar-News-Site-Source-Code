@@ -304,59 +304,89 @@
 							
 							
 							
-							<div class="row justify-content-center">
-							                              <div class="col-lg-12">
-                                <div class="left-area">
-                                    <h4 class="heading">
-                                      Address *
-                                        <p class="sub-heading">{{(__('In Any Language'))}}</p>
-                                    </h4>
-                                  
-                                </div>
-                              </div>
-                              <div class="col-lg-12">
-                                  <div class="tawk-area">
-                                  <textarea name="address" required="">{{$data->address}}</textarea>
-                                  </div>
-                              </div>
-                            </div>
-							
-							
-							
-														<div class="row justify-content-center">
-							                              <div class="col-lg-12">
-                                <div class="left-area">
-                                    <h4 class="heading">
-                                      Phone Number *
-                                        <p class="sub-heading">{{(__('In Any Language'))}}</p>
-                                    </h4>
-                                  
-                                </div>
-                              </div>
-                              <div class="col-lg-12">
-                                  <div class="tawk-area">
-                                  <textarea name="mobile" required="">{{$data->mobile}}</textarea>
-                                  </div>
-                              </div>
-                            </div>
-							
-							
-																					<div class="row justify-content-center">
-							                              <div class="col-lg-12">
-                                <div class="left-area">
-                                    <h4 class="heading">
-                                      Email Address *
-                                        <p class="sub-heading">{{(__('In Any Language'))}}</p>
-                                    </h4>
-                                  
-                                </div>
-                              </div>
-                              <div class="col-lg-12">
-                                  <div class="tawk-area">
-                                  <textarea name="email_address" required="">{{$data->email_address}}</textarea>
-                                  </div>
-                              </div>
-                            </div>
+							{{-- REGISTERED ADDRESS --}}
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="left-area">
+                            <h4 class="heading">Registered Address *</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="tawk-area">
+                            <textarea name="address" required="">{{$data->address}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- NEW: CORPORATE ADDRESS --}}
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="left-area">
+                            <h4 class="heading">Corporate Address (Optional)</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="tawk-area">
+                            <textarea name="corp_address">{{$data->corp_address}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- REGISTERED PHONE --}}
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="left-area">
+                            <h4 class="heading">Registered Phone *</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="tawk-area">
+                            <textarea name="mobile" required="">{{$data->mobile}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- NEW: CORPORATE PHONE --}}
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="left-area">
+                            <h4 class="heading">Corporate Phone (Optional)</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="tawk-area">
+                            <textarea name="corp_mobile">{{$data->corp_mobile}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- REGISTERED EMAIL --}}
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="left-area">
+                            <h4 class="heading">Registered Email *</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="tawk-area">
+                            <textarea name="email_address" required="">{{$data->email_address}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- NEW: CORPORATE EMAIL --}}
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="left-area">
+                            <h4 class="heading">Corporate Email (Optional)</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="tawk-area">
+                            <textarea name="corp_email_address">{{$data->corp_email_address}}</textarea>
+                        </div>
+                    </div>
+                </div>
 							
 							
 							

@@ -28,22 +28,24 @@
                                 </div>
                             </div>
 
-
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="left-area">
                                         <h4 class="heading">{{ __('Parent Category') }} *</h4>
-                                        <p class="sub-heading">{{ __('In English') }}</p>
+                                        <p class="sub-heading">{{ __('(Select to make this a Subcategory)') }}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <select name="parent_id" id="category_parent_id">
-
+                                        <option value="">{{ __('Set as Main Category') }}</option>
+                                        @foreach ($categories as $cat)
+                                            <option value="{{ $cat->id }}" {{ $cat->id == $data->parent_id ? 'selected' : '' }}>
+                                                {{ $cat->title }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
-
-
 
                             <div class="row">
                                 <div class="col-lg-12">
@@ -62,7 +64,7 @@
                                 <div class="col-lg-12">
                                     <div class="left-area">
                                         <h4 class="heading">{{ __('Slug') }} *</h4>
-                                        <p class="sub-heading">{{ __('In English') }}</p>
+                                        <p class="sub-heading">{{ __('(In English)') }}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -71,6 +73,54 @@
                                 </div>
                             </div>
 
+                            {{-- === NEW FIELD: Menu Order === --}}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="left-area">
+                                        <h4 class="heading">{{ __('Menu Order') }} *</h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="number" class="input-field" name="category_order"
+                                        placeholder="{{ __('Menu Order') }}" value="{{ $data->category_order }}">
+                                </div>
+                            </div>
+
+                            {{-- === NEW FIELD: Color === --}}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="left-area">
+                                        <h4 class="heading">{{ __('Color') }} *</h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="input-group colorpicker-component cp">
+                                            <input type="text" name="color" class="form-control input-field color-field cp" value="{{ $data->color }}" />
+                                            <span class="input-group-addon"><i></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- === NEW FIELD: Show At Homepage === --}}
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="left-area">
+                                        <h4 class="heading">{{ __('Show At Home Page') }} *</h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="custom-control custom-radio d-inline-block mr-4">
+                                        <input class="custom-control-input" type="radio" class="checklist1" id="show_at_homepage1" name="show_at_homepage" value="1" {{ $data->show_at_homepage == 1 ? 'checked' : '' }}>
+                                        <label class="custom-control-label" for="show_at_homepage1">{{__('Yes')}}</label>
+                                    </div>
+                                    <div class="custom-control custom-radio d-inline-block">
+                                        <input class="custom-control-input" type="radio" class="checklist1" id="show_at_homepage0" name="show_at_homepage" value="0" {{ $data->show_at_homepage == 0 ? 'checked' : '' }}> 
+                                        <label class="custom-control-label" for="show_at_homepage0">{{__('No')}}</label>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <div class="col-lg-4">
@@ -80,17 +130,16 @@
                                 </div>
                                 <div class="col-lg-8">
                                     <div class="custom-control custom-radio d-inline-block mr-4">
-                                        <input class="custom-control-input" type="radio" class="checklist1" id="show_at_homepage1" name="show_on_menu" value="1"  @if($data->show_on_menu ==1) checked @endif>
-                                        <label class="custom-control-label" for="show_at_homepage1">{{__('Yes')}}</label>
+                                        <input class="custom-control-input" type="radio" class="checklist2" name="show_on_menu" id="yes" value="1" @if($data->show_on_menu ==1) checked @endif>
+                                        <label class="custom-control-label" for="yes">{{__('Yes')}}</label>
                                     </div>
                                     <div class="custom-control custom-radio d-inline-block">
-                                        <input class="custom-control-input" type="radio" class="checklist1" id="show_at_homepage0" name="show_on_menu" value="0" @if($data->show_on_menu ==0) checked @endif> 
-                                        <label class="custom-control-label" for="show_at_homepage0">{{__('No')}}</label>
+                                        <input class="custom-control-input" type="radio" class="checklist2" name="show_on_menu" id="no" value="0" @if($data->show_on_menu ==0) checked @endif> 
+                                        <label class="custom-control-label" for="no">{{__('No')}}</label>
                                     </div>
-
                                 </div>
                             </div>
-                           
+                            
                             <br>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -103,7 +152,6 @@
             </div>
         </div>
     </div>
-
 
 @endsection
 

@@ -23,6 +23,17 @@
     font-size: inherit !important;
     line-height: inherit !important;
   }
+
+  /* --- UPDATED SPACING HERE --- */
+  #article-body-content p {
+      margin-bottom: 20px !important; /* Changed from 30px to 20px */
+      display: block !important;      
+  }
+   
+  /* Optional: Fix for empty paragraphs taking up space */
+  #article-body-content p:empty {
+      display: none;
+  }
 </style>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -114,7 +125,7 @@
           $str = str_replace($en, $bn, $str);
           $en = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
           $en_short = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
-          $bn = array('জানুয়ারী', 'ফেব্রুয়ারী', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'অগাস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর');
+          $bn = array('জানুয়ারী', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'অগাস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর');
           $str = str_replace($en, $bn, $str);
           $str = str_replace($en_short, $bn, $str);
           $en = array('Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday');
@@ -124,7 +135,7 @@
           $str = str_replace($en, $bn, $str);
           $str = str_replace($en_short, $bn_short, $str);
           $en = array('am', 'pm');
-          $bn = array('পূর্বাহ্ন', 'অপরাহ্ন');
+          $bn = array('এএম', 'পিএম');
           $str = str_replace($en, $bn, $str);
           $str = str_replace($en_short, $bn_short, $str);
           $en = array('১২', '২৪');
@@ -207,11 +218,11 @@
                 <div class="d-flex align-items-center mb-3 mb-md-0">
                   <img style="width: 45px; height: 45px; border-radius: 50%; margin-right: 10px; object-fit: cover;"
                     class="img-fluid" src="{{asset('assets/images/admin/' . $data->admin->photo)}}"
-                    alt="{{$data->admin->name}}">
+                    alt="{{$gs->title ?? 'Admin'}}">
 
                   <div style="line-height: 1.3;">
-                    <strong style="font-size: 15px;">{{$data->admin->name}}</strong> <br>
-                    <small style="color: #666; font-family: solaimanLipiNormal; font-size: 14px;">প্রকাশ: {{ bn_date(date('d M Y, h:i a', strtotime($data->created_at))) }}</small>
+                    <strong style="font-size: 15px;">{{$gs->title}}</strong> <br>
+                    <small style="color: #666; font-family: solaimanLipiNormal; font-size: 14px;">প্রকাশিত: {{ bn_date(date('d M Y', strtotime($data->created_at))) }}</small>
                   </div>
                 </div>
 
@@ -261,6 +272,10 @@
               {{-- Body Content --}}
               <div id="article-body-content" style="text-align: justify; font-size: 18px;" class="mt-4">
                 {!! $data->description !!}
+              </div>
+              <div class="post-meta-item">
+                  <i class="fa fa-eye"></i> 
+                  পাঠক সংখ্যা: {{ $data->views }}
               </div>
               {{-- DYNAMIC AD START --}}
               @php

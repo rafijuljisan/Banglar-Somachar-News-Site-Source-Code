@@ -176,15 +176,16 @@
           <ul class="address-list">
              <li>
               <div class="icon-box"><i class="fa fa-building"></i></div>
-              <div class="text-box">{{$gs->address}}</div>
+              {{-- Use corp_address if available, otherwise fallback to regular address --}}
+              <div class="text-box">{{ $gs->corp_address ?? $gs->address }}</div>
             </li>
             <li>
               <div class="icon-box"><i class="fa fa-phone"></i></div>
-              <div class="text-box">{{$gs->mobile}}</div>
+              <div class="text-box">{{ $gs->corp_mobile ?? $gs->mobile }}</div>
             </li>
             <li>
               <div class="icon-box"><i class="fa fa-envelope"></i></div>
-              <div class="text-box">{{$gs->email_address}}</div>
+              <div class="text-box">{{ $gs->corp_email_address ?? $gs->email_address }}</div>
             </li>
              <li>
               <div class="icon-box"><i class="fa fa-globe"></i></div>
