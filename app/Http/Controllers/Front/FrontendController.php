@@ -686,112 +686,112 @@ class FrontendController extends Controller
     // =============================================================
     // END: TOOLS METHODS
     // =============================================================
-    public function socialShareImage($id)
-{
-    $post = DB::table('posts')->where('id', $id)->first();
+        public function socialShareImage($id)
+    {
+        $post = DB::table('posts')->where('id', $id)->first();
 
-    if (!$post) {
-        abort(404);
-    }
-
-    // 1. Load the main featured image
-    $imagePath = public_path('assets/images/post/' . $post->image_big);
-    
-    if (!file_exists($imagePath)) {
-        abort(404);
-    }
-
-    // SMART LOAD: Detect file type (Fixes WebP/JPG errors)
-    $imageInfo = getimagesize($imagePath);
-    $mimeType = $imageInfo['mime'];
-    
-    $image = null;
-
-    switch ($mimeType) {
-        case 'image/jpeg':
-        case 'image/jpg':
-            $image = imagecreatefromjpeg($imagePath);
-            break;
-        case 'image/png':
-            $image = imagecreatefrompng($imagePath);
-            break;
-        case 'image/webp': 
-            $image = imagecreatefromwebp($imagePath);
-            break;
-        case 'image/gif':
-            $image = imagecreatefromgif($imagePath);
-            break;
-        default:
-            $data = file_get_contents($imagePath);
-            $image = imagecreatefromstring($data);
-    }
-
-    if (!$image) {
-        abort(500, 'Cannot create image - Invalid format');
-    }
-
-    // Get main image dimensions
-    $width = imagesx($image);
-    $height = imagesy($image);
-
-    // --- NEW SECTION: Add Custom Banner ---
-
-    // Path to your custom banner image
-    // --- NEW SECTION: Add Custom Banner ---
-
-    // 1. Get Settings from Database
-    $gs = DB::table('generalsettings')->first();
-
-    // 2. Use the uploaded social banner, or fallback to default if missing
-    if($gs->social_banner) {
-        $bannerPath = public_path('assets/images/' . $gs->social_banner);
-    } else {
-        $bannerPath = public_path('assets/images/banner.png'); // Fallback
-    }
-
-    $banner = null;
-    if (file_exists($bannerPath)) {
-        // Smart load for Banner (Checks PNG then JPG)
-        $banner = @imagecreatefrompng($bannerPath);
-        if (!$banner) {
-            $banner = @imagecreatefromjpeg($bannerPath);
+        if (!$post) {
+            abort(404);
         }
-    }
 
-    if ($banner) {
-        // Get original banner dimensions
-        $bannerOrigWidth = imagesx($banner);
-        $bannerOrigHeight = imagesy($banner);
+        // 1. Load the main featured image
+        $imagePath = public_path('assets/images/post/' . $post->image_big);
         
-        // CALCULATE PROPORTIONAL HEIGHT
-        // We set the banner width to match the main image width ($width)
-        // We calculate the new height to keep the aspect ratio correct (No stretching)
-        $aspectRatio = $bannerOrigHeight / $bannerOrigWidth;
-        $newBannerHeight = round($width * $aspectRatio);
+        if (!file_exists($imagePath)) {
+            abort(404);
+        }
 
-        // Position: Place it at the very bottom
-        $destY = $height - $newBannerHeight;
+        // SMART LOAD: Detect file type (Fixes WebP/JPG errors)
+        $imageInfo = getimagesize($imagePath);
+        $mimeType = $imageInfo['mime'];
+        
+        $image = null;
 
-        // Overlay the banner
-        // imagecopyresampled(dst_img, src_img, dst_x, dst_y, src_x, src_y, dst_w, dst_h, src_w, src_h)
-        imagecopyresampled(
-            $image, 
-            $banner, 
-            0, $destY,        // Destination X, Y
-            0, 0,             // Source X, Y
-            $width, $newBannerHeight, // Destination Width, Height (Matches main image width, calculated height)
-            $bannerOrigWidth, $bannerOrigHeight // Source Width, Height
-        );
+        switch ($mimeType) {
+            case 'image/jpeg':
+            case 'image/jpg':
+                $image = imagecreatefromjpeg($imagePath);
+                break;
+            case 'image/png':
+                $image = imagecreatefrompng($imagePath);
+                break;
+            case 'image/webp': 
+                $image = imagecreatefromwebp($imagePath);
+                break;
+            case 'image/gif':
+                $image = imagecreatefromgif($imagePath);
+                break;
+            default:
+                $data = file_get_contents($imagePath);
+                $image = imagecreatefromstring($data);
+        }
 
-        imagedestroy($banner);
+        if (!$image) {
+            abort(500, 'Cannot create image - Invalid format');
+        }
+
+        // Get main image dimensions
+        $width = imagesx($image);
+        $height = imagesy($image);
+
+        // --- NEW SECTION: Add Custom Banner ---
+
+        // Path to your custom banner image
+        // --- NEW SECTION: Add Custom Banner ---
+
+        // 1. Get Settings from Database
+        $gs = DB::table('generalsettings')->first();
+
+        // 2. Use the uploaded social banner, or fallback to default if missing
+        if($gs->social_banner) {
+            $bannerPath = public_path('assets/images/' . $gs->social_banner);
+        } else {
+            $bannerPath = public_path('assets/images/banner.png'); // Fallback
+        }
+
+        $banner = null;
+        if (file_exists($bannerPath)) {
+            // Smart load for Banner (Checks PNG then JPG)
+            $banner = @imagecreatefrompng($bannerPath);
+            if (!$banner) {
+                $banner = @imagecreatefromjpeg($bannerPath);
+            }
+        }
+
+        if ($banner) {
+            // Get original banner dimensions
+            $bannerOrigWidth = imagesx($banner);
+            $bannerOrigHeight = imagesy($banner);
+            
+            // CALCULATE PROPORTIONAL HEIGHT
+            // We set the banner width to match the main image width ($width)
+            // We calculate the new height to keep the aspect ratio correct (No stretching)
+            $aspectRatio = $bannerOrigHeight / $bannerOrigWidth;
+            $newBannerHeight = round($width * $aspectRatio);
+
+            // Position: Place it at the very bottom
+            $destY = $height - $newBannerHeight;
+
+            // Overlay the banner
+            // imagecopyresampled(dst_img, src_img, dst_x, dst_y, src_x, src_y, dst_w, dst_h, src_w, src_h)
+            imagecopyresampled(
+                $image, 
+                $banner, 
+                0, $destY,        // Destination X, Y
+                0, 0,             // Source X, Y
+                $width, $newBannerHeight, // Destination Width, Height (Matches main image width, calculated height)
+                $bannerOrigWidth, $bannerOrigHeight // Source Width, Height
+            );
+
+            imagedestroy($banner);
+        }
+
+        // --- NO TEXT ADDED HERE (As requested) ---
+
+        // Output image
+        header('Content-Type: image/jpeg');
+        imagejpeg($image, null, 90); // 90% quality
+        imagedestroy($image);
+        exit;
     }
-
-    // --- NO TEXT ADDED HERE (As requested) ---
-
-    // Output image
-    header('Content-Type: image/jpeg');
-    imagejpeg($image, null, 90); // 90% quality
-    imagedestroy($image);
-    exit;
-}
 }

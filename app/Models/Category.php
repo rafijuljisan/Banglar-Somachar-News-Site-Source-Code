@@ -40,4 +40,7 @@ class Category extends Model
     public function rss(){
         return $this->hasMany('App\Models\Rss','category_id');
     }
+    public function subcategories(){
+        return $this->hasMany('App\Models\Category', 'parent_id');
+    }
 }

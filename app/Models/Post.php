@@ -70,4 +70,11 @@ class Post extends Model
     public function sorts(){
         return $this->hasMany('App\Models\ShortList','post_id');
     }
+    public function subcategory()
+    {
+        // We use 'withDefault' so it doesn't crash if the category was deleted
+        return $this->belongsTo('App\Models\Category', 'subcategories_id')->withDefault([
+            'title' => ''
+        ]);
+    }
 }
